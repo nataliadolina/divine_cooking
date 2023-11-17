@@ -1,17 +1,13 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections.Generic;
-using System.Linq;
-using EzySlice;
 
 public class Food : MonoBehaviour
 {
-    private GameObject[] _lastSlices;
-    private int counter = 0;
+    private Slicer _slicer;
 
     private void Start()
     {
-        _lastSlices = new GameObject[1] { gameObject };
+        _slicer = new Slicer(transform.localScale, transform.rotation, gameObject);
     }
 
     public void Rotate(float rotateDegrees)
@@ -19,23 +15,8 @@ public class Food : MonoBehaviour
         transform.DORotate(new Vector3(0, 0, rotateDegrees), 0.5f);
     }
 
-    public void Slice(Vector3 planeWorldDirection)
+    public void Slice(SliceDirection direction)
     {
-        GameObject[] newSlices = new GameObject[_lastSlices.Length * 2];
-        for (int i = 0; i < _lastSlices.Length; i++)
-        {
-            _lastSlices[i].GetComponent<SpriteRenderer>().enabled = false;
-            GameObject[] slices = transform.gameObject.SliceInstantiate(transform.position, planeWorldDirection);
-            for (int j = 0; j < slices.Length; j++)
-            {
-                var slice = slices[j];
-                slice.transform.SetParent(transform);
-                slice.AddComponent<Rigidbody2D>().isKinematic = true;
-                slice.AddComponent<PolygonCollider2D>().isTrigger = true;
-                newSlices[counter] = slice;
-                counter++;
-            }
-        }
-        _lastSlices = newSlices;
+        _slicer.Slice(direction);
     }
 }

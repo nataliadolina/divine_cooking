@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2491055138240888969}
   - component: {fileID: 1790487057171122545}
   m_Layer: 0
-  m_Name: Slicer
+  m_Name: SliceTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
