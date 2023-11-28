@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum SliceDirection
 {
@@ -8,16 +9,16 @@ public enum SliceDirection
 
 public class Slicer
 {
-    private Vector3 _rootScale;
+    private float _rectRatio;
     private Quaternion _rootRotation;
     private GameObject[] _lastSlices;
     private int _counter = 0;
 
-    public Slicer(Vector3 rootScale, Quaternion rootRotation, GameObject rootGameObject)
+    public Slicer(Quaternion rootRotation, GameObject rootGameObject, bool adjustScale = true)
     {
-        _rootScale = rootScale;
         _rootRotation = rootRotation;
-        _lastSlices = new GameObject[1] { rootGameObject };
+        _rectRatio = adjustScale == true ? rootGameObject.transform.localScale.x / 2.5f : rootGameObject.transform.localScale.x;
+        _lastSlices = new GameObject[] { rootGameObject };
     }
 
     private GameObject CreateSlice(string name, SliceDirection direction, Transform parentTransform, float offset, Sprite sprite)
@@ -30,7 +31,6 @@ public class Slicer
             : new Vector3(offset, 0, 0);
         slice.transform.localPosition = localPosition;
         slice.transform.localRotation = _rootRotation;
-        //slice.transform.localScale = _rootScale;
         return slice;
     }
 
@@ -60,7 +60,7 @@ public class Slicer
 
         return new GameObject[] { hull1, hull2 };
     }
-    public void Slice(SliceDirection direction)
+    public void Slice(SliceDirection direction, List<Blade> blades)
     {
         GameObject[] newSlices = new GameObject[_lastSlices.Length * 2];
         for (int i = 0; i < _lastSlices.Length; i++)
@@ -71,10 +71,25 @@ public class Slicer
             for (int j = 0; j < slices.Length; j++)
             {
                 var slice = slices[j];
+                slice.AddComponent<Rigidbody2D>();
+                slice.transform.localScale *= _rectRatio;
+                slice.AddComponent<PolygonCollider2D>();
+                Food food = slice.AddComponent<Food>();
+
+                List<Blade> bladesCopy = new List<Blade>();
+                foreach (var b in blades)
+                {
+                    bladesCopy.Add(b);
+                }
+
+                food.Blades = bladesCopy;
+                food.AdjustScale = false;
+                slice.transform.parent = null;
                 newSlices[_counter] = slice;
                 _counter++;
             }
         }
+
         _lastSlices = newSlices;
         _counter = 0;
     }
@@ -91,7 +106,7 @@ public class Slicer
 
     private Rect CreateLeftRect(Rect rect)
     {
-        return new Rect(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.width / 2, rect.height)); ;
+        return new Rect(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.width / 2, rect.height));
     }
 
     private Rect CreateRightRect(Rect rect)
