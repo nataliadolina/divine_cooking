@@ -6,7 +6,7 @@ using DG.Tweening;
 public class Blade : MonoBehaviour
 {
     [SerializeField]
-    private SliceDirection sliceDirection;
+    private Direction sliceDirection;
     [SerializeField]
     private float rotateAngleDegrees;
 

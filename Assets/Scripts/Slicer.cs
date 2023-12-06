@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public enum SliceDirection
+public enum Direction
 {
     Up,
     Right
@@ -21,12 +21,12 @@ public class Slicer
         _lastSlices = new GameObject[] { rootGameObject };
     }
 
-    private GameObject CreateSlice(string name, SliceDirection direction, Transform parentTransform, float offset, Sprite sprite)
+    private GameObject CreateSlice(string name, Direction direction, Transform parentTransform, float offset, Sprite sprite)
     {
         GameObject slice = new GameObject(name);
         slice.transform.parent = parentTransform;
         slice.AddComponent<SpriteRenderer>().sprite = sprite;
-        Vector3 localPosition = direction == SliceDirection.Up
+        Vector3 localPosition = direction == Direction.Up
             ? new Vector3(0, offset, 0)
             : new Vector3(offset, 0, 0);
         slice.transform.localPosition = localPosition;
@@ -34,33 +34,33 @@ public class Slicer
         return slice;
     }
 
-    private GameObject[] Slice(SliceDirection direction, GameObject gm)
+    private GameObject[] Slice(Direction direction, GameObject gm)
     {
         SpriteRenderer spriteRenderer = gm.GetComponent<SpriteRenderer>();
         Sprite sprite = spriteRenderer.sprite;
         Rect rect = sprite.rect;
 
-        Rect rect1 = direction == SliceDirection.Up
+        Rect rect1 = direction == Direction.Up
             ? CreateDownRect(rect)
             : CreateLeftRect(rect);
-        Rect rect2 = direction == SliceDirection.Up
+        Rect rect2 = direction == Direction.Up
             ? CreateUpRect(rect)
             : CreateRightRect(rect);
 
         var sprite1 = Sprite.Create(sprite.texture, rect1, Vector2.one * 0.5f);
         var sprite2 = Sprite.Create(sprite.texture, rect2, Vector2.one * 0.5f);
 
-        float offset = direction == SliceDirection.Up
+        float offset = direction == Direction.Up
             ? sprite.bounds.size.y * 0.25f
             : sprite.bounds.size.x * 0.25f;
 
         
-        GameObject hull1 = CreateSlice(direction == SliceDirection.Up ? "DownHull" : "LeftHull", direction, gm.transform, -offset, sprite1);
-        GameObject hull2 = CreateSlice(direction == SliceDirection.Up ? "UpHull" : "RightHull", direction, gm.transform, offset, sprite2);
+        GameObject hull1 = CreateSlice(direction == Direction.Up ? "DownHull" : "LeftHull", direction, gm.transform, -offset, sprite1);
+        GameObject hull2 = CreateSlice(direction == Direction.Up ? "UpHull" : "RightHull", direction, gm.transform, offset, sprite2);
 
         return new GameObject[] { hull1, hull2 };
     }
-    public void Slice(SliceDirection direction, List<Blade> blades)
+    public void Slice(Direction direction, FoodArgs args)
     {
         GameObject[] newSlices = new GameObject[_lastSlices.Length * 2];
         for (int i = 0; i < _lastSlices.Length; i++)
@@ -71,19 +71,13 @@ public class Slicer
             for (int j = 0; j < slices.Length; j++)
             {
                 var slice = slices[j];
-                slice.AddComponent<Rigidbody2D>();
+                Rigidbody2D rb = slice.AddComponent<Rigidbody2D>();
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.velocity = args.Velocity;
                 slice.transform.localScale *= _rectRatio;
                 slice.AddComponent<PolygonCollider2D>();
                 Food food = slice.AddComponent<Food>();
-
-                List<Blade> bladesCopy = new List<Blade>();
-                foreach (var b in blades)
-                {
-                    bladesCopy.Add(b);
-                }
-
-                food.Blades = bladesCopy;
-                food.AdjustScale = false;
+                food.Init(args);
                 slice.transform.parent = null;
                 newSlices[_counter] = slice;
                 _counter++;
