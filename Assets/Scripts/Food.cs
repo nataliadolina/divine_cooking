@@ -37,9 +37,8 @@ public class Food : MonoBehaviour
     private FoodCookingProgressSlider _progressSlider;
 
     private int _rootInstanceId;
-
+    private Vector2 _size;
     private Rigidbody2D _rigidbody;
-
     private float CurrentScore
     {
         set
@@ -67,15 +66,16 @@ public class Food : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _currentCookingAction = cookingActions[_currentCookingIndex];
         _collider = GetComponent<Collider2D>();
         _slicer = new Slicer(transform.rotation, gameObject, adjustScale);
+        _size = GetComponent<SpriteRenderer>().sprite.rect.size;
     }
 
     public void InitOnCreate(Transform parentTransform)
     {
         transform.parent = parentTransform;
         _scorePerOneAction = 1;
+        _currentCookingAction = cookingActions[_currentCookingIndex];
         _rootInstanceId = GetInstanceID();
     }
 
@@ -98,6 +98,21 @@ public class Food : MonoBehaviour
         _rigidbody.AddForce(direction * force, ForceMode2D.Impulse);
     }
 
+    public void SetSize(Vector2 size)
+    {
+        var ratioX = size.x / _size.x;
+        var ratioY = size.y / _size.y;
+        var scale = transform.localScale;
+
+        transform.localScale = new Vector3(scale.x * ratioX, scale.y * ratioY, scale.z);
+    }
+
+    public void MakeStatic()
+    {
+        _rigidbody.bodyType = RigidbodyType2D.Static;
+        _collider.enabled = false;
+    }
+
     public void Rotate(float rotateDegrees)
     {
         if (transform == null)
@@ -110,14 +125,14 @@ public class Food : MonoBehaviour
 
     private void ToNextAction(CookingAction cookingAction)
     {
-        if (_currentCookingAction == cookingAction)
-        {
-            CurrentScore = _currentScore + _scorePerOneAction;
-        }
-
-        else if (_currentCookingAction == CookingAction.None)
+        if (_currentCookingAction == CookingAction.None)
         {
             CurrentScore = Mathf.Clamp(_currentScore - 0.5f * _scorePerOneAction, 0, _currentScore);
+        }
+
+        else if (_currentCookingAction == cookingAction)
+        {
+            CurrentScore = _currentScore + _scorePerOneAction;
         }
 
         _currentCookingAction = _currentCookingIndex >= cookingActions.Length - 1
@@ -133,12 +148,11 @@ public class Food : MonoBehaviour
             return;
         }
 
+        
         ToNextAction(CookingAction.Cut);
-
         _blades.Add(blade);
         _slicer.Slice(direction, new FoodArgs(foodType, _progressSlider, cookingActions, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _scorePerOneAction * 0.5f, RootInstanceId, _rigidbody.velocity));
         _collider.enabled = false;
-
         StartCoroutine(WaitToDestroyGameObject());
     }
 

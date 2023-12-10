@@ -39,13 +39,6 @@ public struct FoodArgs
         ScorePerOneAction = scorePerOneAction;
         RootInstanceId = rootInstanceId;
         Velocity = velocity;
-
-        List<Object> bladesCopy = new List<Object>();
-        foreach (var b in blades)
-        {
-            bladesCopy.Add(b);
-        }
-
-        Blades = bladesCopy;
+        Blades = blades;
     }
 }

@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        float maxScore = foods.Select(x => x.MaxScore).Sum();
+        FindObjectOfType<TotalScoreSlider>().SetMaxValue(maxScore);
+
         List<FoodType> _foodTypesInGame = new List<FoodType>();
 
         for (int i = 0; i < foods.Length; i++)

@@ -61,7 +61,7 @@ public class CurrentFoodCookingProgressPool : MonoBehaviour
             return _progressTypesHashMap.GetValueOrDefault(foodType);
         }
 
-        var fcps = _doubleSliderTypesMap.Where(x => x.FoodType == foodType).FirstOrDefault().DoubleSlider;
+        var fcps = _doubleSliderTypesMap.Where(x => x.FoodType == foodType).FirstOrDefault().ProgressBar;
         _progressTypesHashMap.Add(foodType, fcps);
         return fcps;
     }

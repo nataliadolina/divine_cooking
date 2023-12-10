@@ -8,7 +8,7 @@ using System;
 public struct DoubleSliderType
 {
     public FoodType FoodType;
-    public FoodCookingProgressSlider DoubleSlider;
+    public FoodCookingProgressSlider ProgressBar;
 }
 
 public class FoodCookingProgressSlider : MonoBehaviour
@@ -25,10 +25,14 @@ public class FoodCookingProgressSlider : MonoBehaviour
     [SerializeField]
     private GameObject[] cookingActions;
 
+    private TotalScoreSlider _scores;
+
     private Dictionary<int, GameObject> _currentInstructions;
 
     private void Start()
     {
+        _scores = FindObjectOfType<TotalScoreSlider>();
+
         for (int i = 0; i < cookingActions.Length; i++)
         {
             _currentInstructions.Add(i, cookingActions[i]);
@@ -46,11 +50,13 @@ public class FoodCookingProgressSlider : MonoBehaviour
     {
         successSlider.value+=value;
         failureSlider.value+=value;
+        _scores.ChangeScore(value);
     }
 
     public void SubScore(float value = 1)
     {
         successSlider.value -= value;
+        _scores.ChangeScore(-value);
     }
 
     public void Release()
