@@ -40,7 +40,6 @@ public class CurrentFoodCookingProgressPool : MonoBehaviour
         {
             FoodCookingProgressSlider prefab = GetSliderPrefabByType(food.FoodType);
             progress = Instantiate(prefab, transform);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(progress.GetComponent<RectTransform>());
         }
         else
         {
@@ -52,6 +51,7 @@ public class CurrentFoodCookingProgressPool : MonoBehaviour
         progress.transform.SetAsFirstSibling();
         progress.Init(food.MaxScore);
         _foodProgressMap.Add(food.RootInstanceId, progress);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(progress.GetComponent<RectTransform>());
     }
 
     private FoodCookingProgressSlider GetSliderPrefabByType(FoodType foodType)
