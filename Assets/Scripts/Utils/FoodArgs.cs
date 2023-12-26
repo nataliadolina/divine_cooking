@@ -14,6 +14,7 @@ public struct FoodArgs
     public float ScorePerOneAction;
     public int RootInstanceId;
     public Vector2 Velocity;
+    public Color SplashColor;
 
     public FoodArgs(
         FoodType foodType,
@@ -26,6 +27,7 @@ public struct FoodArgs
         float scorePerOneAction,
         int rootInstanceId,
         Vector2 velocity,
+        Color splashColor,
         bool adjustScale = false
         )
     {
@@ -40,5 +42,6 @@ public struct FoodArgs
         RootInstanceId = rootInstanceId;
         Velocity = velocity;
         Blades = blades;
+        SplashColor = splashColor;
     }
 }

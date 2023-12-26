@@ -15,9 +15,9 @@ public class CurrentFoodCookingProgressPool : MonoBehaviour
     private Dictionary<int, FoodCookingProgressSlider> _foodProgressMap = new Dictionary<int, FoodCookingProgressSlider>();
     private Dictionary<FoodType, List<FoodCookingProgressSlider>> _freeProgress = new Dictionary<FoodType, List<FoodCookingProgressSlider>>();
 
-    public void FillPool(List<FoodType> food)
+    public void FillPool(List<FoodType> foodTypes)
     {
-        foreach (FoodType foodType in food)
+        foreach (FoodType foodType in foodTypes)
         {
             _freeProgress.Add(foodType, new List<FoodCookingProgressSlider>());
             for (int i = 0; i < poolSize; i++)
@@ -32,7 +32,7 @@ public class CurrentFoodCookingProgressPool : MonoBehaviour
         }
     }
 
-    public void ShowProgressSliderForFood(Food food)
+    public void ShowProgressSliderForFood(IFood food)
     {
         FoodCookingProgressSlider progress;
         List<FoodCookingProgressSlider> value;

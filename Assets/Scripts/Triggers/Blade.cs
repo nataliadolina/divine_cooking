@@ -7,32 +7,10 @@ public class Blade : MonoBehaviour
 {
     [SerializeField]
     private Direction sliceDirection;
-    [SerializeField]
-    private float rotateAngleDegrees;
 
-    private Tween _sliceAnimation;
-    private Collider2D _collider;
     private void Start()
     {
-        _collider = GetComponent<Collider2D>();
-        _collider.enabled = false;
-        _sliceAnimation = transform.DORotate(new Vector3(0, 0, transform.rotation.eulerAngles.z + rotateAngleDegrees), 0.5f)
-            .SetLoops(2, LoopType.Yoyo)
-            .SetEase(Ease.InOutQuad)
-            .Pause()
-            .SetAutoKill(false)
-            .OnPlay(OnStart)
-            .OnComplete(OnComplete);
-    }
-
-    private void OnStart()
-    {
-        _collider.enabled = true;
-    }
-
-    private void OnComplete()
-    {
-        _collider.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,11 +20,5 @@ public class Blade : MonoBehaviour
         {
             food.Slice(sliceDirection, this);
         }
-    }
-
-    public void Cut()
-    {
-        _sliceAnimation.Rewind();
-        _sliceAnimation.Play();
     }
 }
