@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UniRx;
 using System;
+using Zenject;
+using System.Linq;
 
 [Serializable]
-public struct ActorWaitTime
+public struct ActorSpawnerWaitTime
 {
-    public Actor Actor;
+    public ActorType ActorType;
+    public SpawnSpotType SpawnSpotType;
     public float WaitTimeSeconds;
 
-    public ActorWaitTime(Actor actor, float waitTimeSeconds)
+    public ActorSpawnerWaitTime(ActorType actorType, SpawnSpotType spawnSpotType, float waitTimeSeconds)
     {
-        Actor = actor;
+        ActorType = actorType;
         WaitTimeSeconds = waitTimeSeconds;
+        SpawnSpotType = spawnSpotType;
     }
 }
 
@@ -24,68 +26,48 @@ public class GameManager : MonoBehaviour
     private float waitToStartTime;
 
     [SerializeField]
-    private ActorWaitTime[] actorsWaitTimeMap;
+    private ActorSpawnerWaitTime[] actorsSpawnerWaitTimeMap;
 
     [SerializeField]
-    private SpawnerTypesMap[] spawners;
+    private SpawnSpotTypeMap[] spawnSpots;
 
-    private CurrentFoodCookingProgressPool _foodProgress;
-
-    private Queue<ActorWaitTime> _currentActorsPool = new Queue<ActorWaitTime>();
-    private Queue<IFood> _currentFoodsPool = new Queue<IFood>();
-
-    private void Start()
+    private Dictionary<SpawnSpotType, Vector3> _spawnPositionsMap = new Dictionary<SpawnSpotType, Vector3>();
+    private Dictionary<ActorGroupType, IActorPoolSpawner> _spawnersMap = new Dictionary<ActorGroupType, IActorPoolSpawner>();
+    
+    [Inject]
+    private void Construct(ActorPoolFactory actorPoolFactory, TotalScoreSlider totalScore)
     {
-        List<FoodType> _foodTypesInGame = new List<FoodType>();
-
-        for (int i = 0; i < actorsWaitTimeMap.Length; i++)
+        foreach (ActorGroupType actorGroup in Enum.GetValues(typeof(ActorGroupType)))
         {
-            ActorWaitTime actorWaitTime = actorsWaitTimeMap[i];
-            Actor currentActor = actorWaitTime.Actor;
-            SpawnerType st = currentActor.AvailableSpawnerTypes[UnityEngine.Random.Range(0, currentActor.AvailableSpawnerTypes.Length)];
-            Transform spawner = spawners.Where(x => x.Key == st).FirstOrDefault().Value;
-            Actor actor = Instantiate(currentActor, spawner.position, Quaternion.identity);
-            actor.gameObject.SetActive(false);
-            _currentActorsPool.Enqueue(new ActorWaitTime(actor, actorWaitTime.WaitTimeSeconds));
-
-            if (actor.ActorType == ActorType.Food)
-            {
-                IFood food = actor.gameObject.GetComponent<IFood>();
-                _currentFoodsPool.Enqueue(food);
-                food.InitOnCreate(spawner);
-                
-                FoodType type = food.FoodType;
-                if (!_foodTypesInGame.Contains(type))
-                {
-                    _foodTypesInGame.Add(type);
-                }
-            }
+            _spawnersMap.Add(actorGroup, actorPoolFactory.CreateSpawner(actorGroup));
         }
 
-        float maxScore = _currentFoodsPool.Select(x => x.MaxScore).Sum();
-        FindObjectOfType<TotalScoreSlider>().SetMaxValue(maxScore);
+        foreach (SpawnSpotTypeMap spawnSpot in spawnSpots)
+        {
+            _spawnPositionsMap.Add(spawnSpot.Key, spawnSpot.Value.position);
+        }
 
-        _foodProgress = FindObjectOfType<CurrentFoodCookingProgressPool>();
-        _foodProgress.FillPool(_foodTypesInGame);
+        foreach (ActorSpawnerWaitTime actorSpawnerWaitTime in new HashSet<ActorSpawnerWaitTime>(actorsSpawnerWaitTimeMap))
+        {
+            ActorType actorType = actorSpawnerWaitTime.ActorType;
+            ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
+            _spawnersMap[actorGroupType].FillPool(actorType, 2);
+        }
 
+        totalScore.SetMaxScore(actorsSpawnerWaitTimeMap.Where(x => x.ActorType != ActorType.Bomb).Count());
         StartCoroutine(WaitToSpawnNewPrefab());
     }
 
     private IEnumerator WaitToSpawnNewPrefab()
     {
         yield return new WaitForSeconds(waitToStartTime);
-
-        while (_currentActorsPool.Count > 0)
+        foreach (var actorWaitTime in actorsSpawnerWaitTimeMap)
         {
-            ActorWaitTime actorWaitTime = _currentActorsPool.Dequeue();
-            Actor currentActor = actorWaitTime.Actor;
+            ActorType actorType = actorWaitTime.ActorType;
+            ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
+            Vector3 spawnPosition = _spawnPositionsMap[actorWaitTime.SpawnSpotType];
+            _spawnersMap[actorGroupType].Spawn(actorType, spawnPosition);
             float waitTime = actorWaitTime.WaitTimeSeconds;
-            currentActor.gameObject.SetActive(true);
-            if (currentActor.ActorType == ActorType.Food)
-            {
-                IFood food = _currentFoodsPool.Dequeue();
-                _foodProgress.ShowProgressSliderForFood(food);
-            }
 
             yield return new WaitForSeconds(waitTime);
         }

@@ -1,29 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using System;
 
 public class SoundManager : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource cutSound;
+    private AudioSource _cutSound;
     [SerializeField]
-    private AudioSource swordSound;
+    private AudioSource _swordSound;
     [SerializeField]
-    private AudioSource explosionSound;
+    private AudioSource _explosionSound;
 
     public void PlayCutSound()
     {
-        cutSound.Play();
+        _cutSound.Play();
     }
 
     public void PlaySwordSound()
     {
-        swordSound.Play();
+        _swordSound.Play();
     }
 
     public void PlayExplosionSound()
     {
-        explosionSound.Play();
+        _explosionSound.Play();
     }
-
 }

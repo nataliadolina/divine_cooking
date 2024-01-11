@@ -2,12 +2,12 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public struct SpawnerTypesMap
+public struct SpawnSpotTypeMap
 {
-    public SpawnerType Key;
+    public SpawnSpotType Key;
     public Transform Value;
 
-    public SpawnerTypesMap(SpawnerType spawnerType, Transform spawnerTransform)
+    public SpawnSpotTypeMap(SpawnSpotType spawnerType, Transform spawnerTransform)
     {
         Key = spawnerType;
         Value = spawnerTransform;

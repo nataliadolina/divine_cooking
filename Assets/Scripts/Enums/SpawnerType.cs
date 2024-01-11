@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpawnerType
+public enum SpawnSpotType
 {
-    Spawner1,
-    Spawner2,
+    SpawnSpot1,
+    SpawnSpot2,
 }

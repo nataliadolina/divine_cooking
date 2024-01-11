@@ -6,18 +6,17 @@ using UnityEngine.UI;
 public class LivesManager : MonoBehaviour
 {
     [SerializeField]
-    private Slider _slider;
-    [SerializeField]
-    private int _livesCount;
+    private int livesCount;
 
+    private Slider _slider;
     private int _currentLives;
     private bool _gameOver = false;
     private void Start()
     {
         _slider = GetComponent<Slider>();
-        _slider.maxValue = _livesCount;
-        _slider.value = _livesCount;
-        _currentLives = _livesCount;
+        _slider.maxValue = livesCount;
+        _slider.value = livesCount;
+        _currentLives = livesCount;
     }
 
     public void SubLife()

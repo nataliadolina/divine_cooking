@@ -7,14 +7,14 @@ using System;
 [Serializable]
 public struct DoubleSliderType
 {
-    public FoodType FoodType;
+    public ActorType ActorType;
     public FoodCookingProgressSlider ProgressBar;
 }
 
 public class FoodCookingProgressSlider : MonoBehaviour
 {
     [SerializeField]
-    private FoodType foodType;
+    private ActorType foodType;
 
     [SerializeField]
     private Slider successSlider;

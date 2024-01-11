@@ -15,6 +15,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------
 
 using UnityEngine;
+using Zenject;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -43,7 +44,8 @@ namespace CartoonFX
 		{
 			None,
 			Disable,
-			Destroy
+			Destroy, 
+			Despawn
 		}
 
 		[System.Serializable]
@@ -459,6 +461,17 @@ namespace CartoonFX
 
 		// ================================================================================================================================
 
+		private IDespawnable _despawnable;
+
+		[Inject]
+		private void Construct(IDespawnable despawnable)
+		{
+			if (clearBehavior == ClearBehavior.Despawn)
+            {
+				_despawnable = despawnable;
+			}
+		}
+
 		public void ResetState()
 		{
 			time = 0f;
@@ -557,9 +570,13 @@ namespace CartoonFX
 						{
 							GameObject.Destroy(this.gameObject);
 						}
-						else
+						else if (clearBehavior == ClearBehavior.Disable)
 						{
 							this.gameObject.SetActive(false);
+						}
+						else if (clearBehavior == ClearBehavior.Despawn)
+                        {
+							_despawnable.Despawn();
 						}
 					}
 				}

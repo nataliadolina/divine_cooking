@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class TotalScoreSlider : MonoBehaviour
 {
     private Slider _slider;
 
-    private void Start()
+    [Inject]
+    private void Construct()
     {
         _slider = GetComponent<Slider>();
+        _slider.value = 0;
     }
 
-    public void SetMaxValue(float maxValue)
+    public void SetMaxScore(float score)
     {
-        _slider.maxValue = maxValue;
+        _slider.maxValue = score;
     }
 
     public void ChangeScore(float value)

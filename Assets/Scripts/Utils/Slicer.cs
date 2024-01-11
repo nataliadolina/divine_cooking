@@ -68,16 +68,19 @@ public class Slicer
         {
             var lastSlice = _lastSlices[i];
             lastSlice.GetComponent<SpriteRenderer>().enabled = false;
+            Vector2 velocity = lastSlice.GetComponent<Rigidbody2D>().velocity;
             GameObject[] slices = Slice(direction, lastSlice);
             for (int j = 0; j < slices.Length; j++)
             {
                 var slice = slices[j];
                 Rigidbody2D rb = slice.AddComponent<Rigidbody2D>();
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rb.velocity = args.Velocity;
+                rb.velocity = velocity;
+                
                 slice.transform.localScale *= _rectRatio;
                 slice.AddComponent<PolygonCollider2D>();
                 Food food = slice.AddComponent<Food>();
+                food.Rigidbody = rb;
 
                 List<Object> bladesCopy = new List<Object>();
                 foreach (var b in args.Blades)

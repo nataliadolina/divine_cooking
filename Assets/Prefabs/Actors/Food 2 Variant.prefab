@@ -36,6 +36,18 @@ PrefabInstance:
       propertyPath: cookingActions.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: actorType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: splashColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: cookingActions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8308183198715292536, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.35686275

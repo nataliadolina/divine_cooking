@@ -3,7 +3,7 @@ using UnityEngine;
 
 public struct FoodArgs
 {
-    public FoodType FoodType;
+    public ActorType ActorType;
     public FoodCookingProgressSlider FoodCookingProgressSlider;
     public CookingAction[] CookingActions;
     public CookingAction CurrentCookingAction;
@@ -13,11 +13,12 @@ public struct FoodArgs
     public bool AdjustScale;
     public float ScorePerOneAction;
     public int RootInstanceId;
-    public Vector2 Velocity;
     public Color SplashColor;
+    public SoundManager FruitSoundManager;
+    public SplashParticles.Pool SplashParticlesPool;
 
     public FoodArgs(
-        FoodType foodType,
+        ActorType actorType,
         FoodCookingProgressSlider foodCookingProgressSlider,
         CookingAction[] cookingActions,
         CookingAction currentCookingAction,
@@ -26,12 +27,13 @@ public struct FoodArgs
         List<Object> blades,
         float scorePerOneAction,
         int rootInstanceId,
-        Vector2 velocity,
         Color splashColor,
+        SoundManager fruitSoundManager,
+        SplashParticles.Pool splashParticlesPool,
         bool adjustScale = false
         )
     {
-        FoodType = foodType;
+        ActorType = actorType;
         FoodCookingProgressSlider = foodCookingProgressSlider;
         CookingActions = cookingActions;
         CurrentCookingAction = currentCookingAction;
@@ -40,8 +42,9 @@ public struct FoodArgs
         AdjustScale = adjustScale;
         ScorePerOneAction = scorePerOneAction;
         RootInstanceId = rootInstanceId;
-        Velocity = velocity;
         Blades = blades;
         SplashColor = splashColor;
+        FruitSoundManager = fruitSoundManager;
+        SplashParticlesPool = splashParticlesPool;
     }
 }

@@ -116,8 +116,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 0348016ee30ccb449a1107e9b2873be3
   m_FloatValues:
-    efd04587032063742be953e9d70e9388: -17.29471
-    dc2c8a7a72a35ae4f94f7042fe08e03d: 15.912739
+    efd04587032063742be953e9d70e9388: -5.9
+    dc2c8a7a72a35ae4f94f7042fe08e03d: -10.3
   m_TransitionOverrides: {}
 --- !u!243 &9194124241678151426
 AudioMixerGroupController:
@@ -125,7 +125,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fruit sound
+  m_Name: Sounds
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 2a94d9f6334c23e4b96efb2bf8220a66
   m_Children: []

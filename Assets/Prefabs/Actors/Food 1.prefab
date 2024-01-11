@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8990309984619860770}
   - component: {fileID: 4332817545893349419}
-  - component: {fileID: 5992876100018110353}
   - component: {fileID: 7348649664149247904}
   - component: {fileID: 8110221078406887210}
+  - component: {fileID: 6846738382772065871}
+  - component: {fileID: 3867265628602193801}
+  - component: {fileID: 1056077445980169055}
   m_Layer: 0
   m_Name: Food 1
   m_TagString: Untagged
@@ -87,24 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5992876100018110353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823412118147059299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82aa90aad39b7b544ba6f7c658459134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actorType: 1
-  availableSpawnerTypes: 00000000
-  foodType: 0
-  cookingActions: 00000000
-  adjustScale: 0
-  splashColor: {r: 1, g: 0.25882354, b: 0.34901962, a: 1}
 --- !u!50 &7348649664149247904
 Rigidbody2D:
   serializedVersion: 4
@@ -167,3 +151,51 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.95
+--- !u!114 &6846738382772065871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823412118147059299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82aa90aad39b7b544ba6f7c658459134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorType: 1
+  cookingActions: 00000000
+  adjustScale: 0
+  splashColor: {r: 0.5283019, g: 0.056817338, b: 0.056817338, a: 1}
+--- !u!114 &3867265628602193801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823412118147059299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 8e23bd8d74737cc4e9aa7fb6828a08ac, type: 2}
+  _monoInstallers:
+  - {fileID: 1056077445980169055}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &1056077445980169055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823412118147059299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76889c27376686643bfa7be16ed2b729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actor: {fileID: 6846738382772065871}

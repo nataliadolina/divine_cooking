@@ -5,5 +5,5 @@ using UnityEngine;
 public enum CookingAction
 {
     Cut,
-    None
+    Empty
 }
