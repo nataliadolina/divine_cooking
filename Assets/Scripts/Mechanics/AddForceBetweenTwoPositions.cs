@@ -10,19 +10,12 @@ public class AddForceBetweenTwoPositions : MonoBehaviour
     [SerializeField]
     private Transform aimTransform;
 
-    private Vector2 _aimPosition;
-
-    private void Start()
-    {
-        _aimPosition = aimTransform.position;
-    }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        ISpringy actor;
+        IActor actor;
         if (collision.TryGetComponent(out actor))
         {
-            actor.MoveToAim(_aimPosition, speed);
+            actor.ActorPhysicsMap[PhysicsType.Springy].MoveToAim(aimTransform.position, speed);
         }
     }
 }

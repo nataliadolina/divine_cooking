@@ -8,11 +8,6 @@ public class Blade : MonoBehaviour
     [SerializeField]
     private Direction sliceDirection;
 
-    private void Start()
-    {
-        GetComponent<Collider2D>().enabled = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Food food;

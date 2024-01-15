@@ -28,7 +28,7 @@ public class DictionaryPool<TKey, TValue, TFactory>
     public TValue Spawn(TKey key)
     {
         List<TValue> valueList;
-        TValue value = _freeObjects.TryGetValue(key, out valueList) ? valueList[0] : Create(key);
+        TValue value = _freeObjects.TryGetValue(key, out valueList) ? valueList.Count > 0 ? valueList[0] : Create(key) : Create(key);
         value.gameObject.SetActive(true);
         _freeObjects[key].Remove(value);
         value.OnSpawn();

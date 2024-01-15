@@ -5,7 +5,7 @@ using Zenject;
 public class ActorSettingsInstaller : ScriptableObjectInstaller<ActorSettingsInstaller>
 {
     [SerializeField]
-    private ActorInstaller.Settings settings;
+    private Actor.Settings settings;
 
     public override void InstallBindings()
     {

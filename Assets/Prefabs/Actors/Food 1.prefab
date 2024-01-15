@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8110221078406887210}
   - component: {fileID: 6846738382772065871}
   - component: {fileID: 3867265628602193801}
-  - component: {fileID: 1056077445980169055}
+  - component: {fileID: 6713765655371976334}
+  - component: {fileID: -8002365535891530515}
   m_Layer: 0
   m_Name: Food 1
   m_TagString: Untagged
@@ -179,14 +180,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers:
-  - {fileID: 11400000, guid: 8e23bd8d74737cc4e9aa7fb6828a08ac, type: 2}
+  _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 1056077445980169055}
+  - {fileID: -8002365535891530515}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &1056077445980169055
+--- !u!114 &6713765655371976334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823412118147059299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 6846738382772065871}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 3867265628602193801}
+  _bindType: 1
+--- !u!114 &-8002365535891530515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,4 +216,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76889c27376686643bfa7be16ed2b729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actor: {fileID: 6846738382772065871}

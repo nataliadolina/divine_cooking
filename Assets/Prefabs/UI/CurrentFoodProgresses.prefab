@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7035885670360400219}
   - component: {fileID: 5113526964886420065}
   - component: {fileID: 5867202012986303306}
+  - component: {fileID: 6232252768607710634}
   m_Layer: 5
   m_Name: CurrentFoodProgresses
   m_TagString: Untagged
@@ -95,3 +96,21 @@ MonoBehaviour:
     ProgressBar: {fileID: 5896716137008281751, guid: 2190a06a00f6eb747b71fb50d843a9bc, type: 3}
   - ActorType: 5
     ProgressBar: {fileID: 5896716137008281751, guid: 2c366d6dca0795d4bab0891aab89702c, type: 3}
+--- !u!114 &6232252768607710634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795069323045784330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 5867202012986303306}
+  _identifier: 
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0

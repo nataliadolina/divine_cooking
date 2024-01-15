@@ -23,16 +23,17 @@ public class SliceZone : MonoBehaviour
     private Tween _rotateTween;
     private void Start()
     {
+        _bladeCollider.enabled = false;
         _rotateTween = gearWheel.DORotate(new Vector3(0, 0, gearWheel.rotation.eulerAngles.z + rotateAngleDegrees), rotateTime)
             .SetLoops(2, LoopType.Yoyo)
             .SetEase(Ease.InOutQuad)
             .Pause()
             .SetAutoKill(false)
-            .OnPlay(OnStart)
+            .OnPlay(OnPlay)
             .OnComplete(OnComplete);
     }
 
-    private void OnStart()
+    private void OnPlay()
     {
         _bladeCollider.enabled = true;
     }

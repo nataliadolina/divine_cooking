@@ -4,25 +4,19 @@ using UnityEngine;
 using Zenject;
 using System;
 
-public enum PhysicsType
-{
-    Standart,
-    Springy
-}
-
 public class ActorInstaller : MonoInstaller
 {
-    [SerializeField]
-    private Actor actor;
-
+    [Inject]
+    private Actor.Settings _actorSettings;
     public override void InstallBindings()
     {
+        if (_actorSettings.PhysicsType.HasFlag(PhysicsType.Springy))
+        {
+            Container.BindFactory<ActorSpringyPhysics, ActorSpringyPhysics.Factory>()
+            .AsCached()
+            .NonLazy();
+        }
 
-    }
-
-    [Serializable]
-    public struct Settings
-    {
-        public PhysicsType PhysicsType;
+        Container.Bind<ActorPhysicsFactory>().AsSingle().NonLazy();
     }
 }

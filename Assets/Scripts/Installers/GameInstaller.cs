@@ -55,7 +55,6 @@ public class GameInstaller : MonoInstaller
             .AsCached()
             .WithArguments(_foodTypesMap)
             .NonLazy();
-        
     }
 
     private void InstallSpawners()

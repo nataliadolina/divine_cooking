@@ -31,7 +31,6 @@ public class Food : Actor, IFood, IPoolObject
 
     private List<UnityEngine.Object> _blades = new List<UnityEngine.Object>();
     private Slicer _slicer;
-    private Collider2D _collider;
 
     private FoodCookingProgressSlider _progressSlider;
 
@@ -79,6 +78,11 @@ public class Food : Actor, IFood, IPoolObject
         _scorePerOneAction = 1;
         _currentCookingAction = cookingActions[_currentCookingIndex];
         _rootInstanceId = Extensions.GetUniqueId();
+
+        foreach (var physics in _actorPhysics)
+        {
+            physics.OnStart();
+        }
     }
 
     public void OnDespawn()

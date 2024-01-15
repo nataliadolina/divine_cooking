@@ -9,12 +9,14 @@ public class Ricochet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ISpringy springy;
-        if (collision.collider.TryGetComponent(out springy))
+        IActor actor;
+        if (collision.collider.TryGetComponent(out actor))
         {
             Vector3 contactPoint = collision.GetContact(0).point;
             Vector3 direction = new Vector3(contactPoint.x - transform.position.x, contactPoint.y - transform.position.y, 0).normalized;
-            springy.Ricochet(direction);
+            actor.ActorPhysicsMap[PhysicsType.Springy].Ricochet(direction);
+            actor.Rigidbody.isKinematic = true;
+            actor.Collider.isTrigger = true;
         }
     }
 }

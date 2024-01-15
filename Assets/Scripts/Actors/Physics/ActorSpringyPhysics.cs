@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ActorSpringyPhysics : MonoBehaviour, ISpringy
+public class ActorSpringyPhysics : ActorPhysicsBase
 {
     private bool _canRicochet = true;
     private bool _canMoveToAim = true;
@@ -10,45 +10,39 @@ public class ActorSpringyPhysics : MonoBehaviour, ISpringy
     private IActor _actor;
     private Transform _transform;
 
-    [Inject]
-    private void Construct(IActor actor)
+    private ActorSpringyPhysics(IActor actor)
     {
-        _actor = actor;  
-    }
-
-    private void Start()
-    {
-        _actor.Rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;
+        _actor = actor;
         _transform = _actor.Transform;
     }
 
-    public void Ricochet(Vector3 ricochetDirection)
+    public override void OnStart()
     {
-        if (!_canRicochet)
-        {
-            return;
-        }
+        _actor.Rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;
+    }
 
+    public override void Ricochet(Vector3 ricochetDirection)
+    {
         _canRicochet = false;
         _transform.RotateAround(_transform.position, Vector3.forward, 360 - _transform.eulerAngles.z * 2);
         _direction += ricochetDirection;
         _direction = _direction.normalized;
     }
 
-    public void MoveToAim(Vector3 aimPosition, float speed)
+    public override void MoveToAim(Vector3 aimPosition, float speed)
     {
-        if (!_canMoveToAim)
-        {
-            return;
-        }
-
         _speed = speed;
         _direction = new Vector3(aimPosition.x - _transform.position.x, aimPosition.y - _transform.position.y, 0).normalized;
         _canMoveToAim = false;
     }
 
-    private void Update()
+    public override void OnUpdate()
     {
         _transform.position += _direction * Time.deltaTime * _speed;
+    }
+
+    public class Factory : PlaceholderFactory<ActorSpringyPhysics>
+    {
+
     }
 }
