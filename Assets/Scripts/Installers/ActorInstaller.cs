@@ -6,17 +6,15 @@ using System;
 
 public class ActorInstaller : MonoInstaller
 {
-    [Inject]
-    private Actor.Settings _actorSettings;
     public override void InstallBindings()
     {
-        if (_actorSettings.PhysicsType.HasFlag(PhysicsType.Springy))
-        {
-            Container.BindFactory<ActorSpringyPhysics, ActorSpringyPhysics.Factory>()
+        Container.BindFactory<ActorSpringyPhysics, ActorSpringyPhysics.Factory>()
+        .AsCached()
+        .NonLazy();
+
+        Container.BindFactory<ActorTransparentPhysics, ActorTransparentPhysics.Factory>()
             .AsCached()
             .NonLazy();
-        }
-
         Container.Bind<ActorPhysicsFactory>().AsSingle().NonLazy();
     }
 }

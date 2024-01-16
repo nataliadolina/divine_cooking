@@ -3,8 +3,6 @@ using Zenject;
 
 public class ActorSpringyPhysics : ActorPhysicsBase
 {
-    private bool _canRicochet = true;
-    private bool _canMoveToAim = true;
     private float _speed = 0;
     private Vector3 _direction = Vector3.zero;
     private IActor _actor;
@@ -23,7 +21,6 @@ public class ActorSpringyPhysics : ActorPhysicsBase
 
     public override void Ricochet(Vector3 ricochetDirection)
     {
-        _canRicochet = false;
         _transform.RotateAround(_transform.position, Vector3.forward, 360 - _transform.eulerAngles.z * 2);
         _direction += ricochetDirection;
         _direction = _direction.normalized;
@@ -33,7 +30,6 @@ public class ActorSpringyPhysics : ActorPhysicsBase
     {
         _speed = speed;
         _direction = new Vector3(aimPosition.x - _transform.position.x, aimPosition.y - _transform.position.y, 0).normalized;
-        _canMoveToAim = false;
     }
 
     public override void OnUpdate()

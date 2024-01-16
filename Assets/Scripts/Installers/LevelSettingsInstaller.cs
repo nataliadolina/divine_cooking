@@ -1,8 +1,8 @@
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "ActorSettingsInstaller", menuName = "Installers/ActorSettingsInstaller")]
-public class ActorSettingsInstaller : ScriptableObjectInstaller<ActorSettingsInstaller>
+[CreateAssetMenu(fileName = "LevelSettingsInstaller", menuName = "Installers/LevelSettingsInstaller")]
+public class LevelSettingsInstaller : ScriptableObjectInstaller<LevelSettingsInstaller>
 {
     [SerializeField]
     private Actor.Settings settings;

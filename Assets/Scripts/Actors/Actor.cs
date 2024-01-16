@@ -4,10 +4,11 @@ using UnityEngine;
 using Zenject;
 using System;
 
+[Flags]
 public enum PhysicsType
 {
-    None = 1,
-    Springy = 2
+    Springy = 1,
+    Transperant = 2
 }
 
 public abstract class Actor : MonoBehaviour, IActor
@@ -20,7 +21,6 @@ public abstract class Actor : MonoBehaviour, IActor
     protected Collider2D _collider;
 
     protected List<IActorPhysics> _actorPhysics = new List<IActorPhysics>();
-    private bool _firstEnable = true;
 
     [Inject]
     private ActorPhysicsFactory _actorPhysicsFactory;

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Food 7 Variant 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3867265628602193801, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: _scriptableObjectInstallers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c92ad36830661549b2764611c78a4e0, type: 2}
     - target: {fileID: 4332817545893349419, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -46,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.g
-      value: 0.43427733
+      value: 0.43940943
       objectReference: {fileID: 0}
     - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.r

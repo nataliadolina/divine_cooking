@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Food 4 Variant 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3867265628602193801, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: _scriptableObjectInstallers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2270ede8e20c18a4491b9df023595409, type: 2}
     - target: {fileID: 4332817545893349419, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: m_Sprite
       value: 

@@ -683,6 +683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 83c8f071824723147930077876beecfc, type: 2}
+  - {fileID: 11400000, guid: 11092db8ae0b03445bbca8839f58336b, type: 2}
   _monoInstallers:
   - {fileID: 497222763}
   _installerPrefabs: []
@@ -1960,40 +1961,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1358617406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1869301945 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8795069323045784330, guid: 7a0e66b4e003ae84c9e6bb1b0e8005c7, type: 3}
-  m_PrefabInstance: {fileID: 5825634587467044351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1869301946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5867202012986303306, guid: 7a0e66b4e003ae84c9e6bb1b0e8005c7, type: 3}
-  m_PrefabInstance: {fileID: 5825634587467044351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869301945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef06f920cfe7e94484902bc48a4d966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1869301948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869301945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 1869301946}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 0
 --- !u!1 &1893852383
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,10 +3172,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8795069323045784330, guid: 7a0e66b4e003ae84c9e6bb1b0e8005c7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1869301948}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a0e66b4e003ae84c9e6bb1b0e8005c7, type: 3}
 --- !u!224 &8948901164709914378 stripped
 RectTransform:

@@ -3,18 +3,15 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
 using Zenject;
-
+using System;
 
 public class Food : Actor, IFood, IPoolObject
 {
     [SerializeField]
-    private CookingAction[] cookingActions;
-
-    [SerializeField]
     private bool adjustScale;
 
-    [SerializeField]
-    private Color splashColor;
+    private Color _splashColor;
+    private CookingAction[] _cookingActions;
 
     [Inject]
     private SoundManager _soundManager;
@@ -55,8 +52,8 @@ public class Food : Actor, IFood, IPoolObject
     }
 
     public int RootInstanceId { get => _rootInstanceId; }
-    public int MaxScore { get => cookingActions.Length; }
-    public CookingAction[] CookingActions { get => cookingActions; }
+    public int MaxScore { get => _cookingActions.Length; }
+    public CookingAction[] CookingActions { get => _cookingActions; }
     public FoodCookingProgressSlider ProgressSlider { set => _progressSlider = value; }
 
     private void Start()
@@ -64,6 +61,13 @@ public class Food : Actor, IFood, IPoolObject
         _collider = GetComponent<Collider2D>();
         _slicer = new Slicer(transform.rotation, gameObject, adjustScale);
         _size = GetComponent<SpriteRenderer>().sprite.rect.size;
+    }
+
+    [Inject]
+    private void Construct(FoodSettings foodSettings)
+    {
+        _splashColor = foodSettings.SplashColor;
+        _cookingActions = foodSettings.CookingActions;
     }
 
 #region IPoolObject
@@ -76,7 +80,7 @@ public class Food : Actor, IFood, IPoolObject
     public void OnSpawn()
     {
         _scorePerOneAction = 1;
-        _currentCookingAction = cookingActions[_currentCookingIndex];
+        _currentCookingAction = _cookingActions[_currentCookingIndex];
         _rootInstanceId = Extensions.GetUniqueId();
 
         foreach (var physics in _actorPhysics)
@@ -96,14 +100,14 @@ public class Food : Actor, IFood, IPoolObject
     {
         actorType = foodArgs.ActorType;
         _progressSlider = foodArgs.FoodCookingProgressSlider;
-        cookingActions = foodArgs.CookingActions;
+        _cookingActions = foodArgs.CookingActions;
         _currentCookingAction = foodArgs.CurrentCookingAction;
         _currentCookingIndex = foodArgs.CurrentCookingIndex;
         _currentScore = foodArgs.CurrentScore;
         _blades = foodArgs.Blades;
         _scorePerOneAction = foodArgs.ScorePerOneAction;
         _rootInstanceId = foodArgs.RootInstanceId;
-        splashColor = foodArgs.SplashColor;
+        _splashColor = foodArgs.SplashColor;
         adjustScale = foodArgs.AdjustScale;
         _soundManager = foodArgs.FruitSoundManager;
         _splashParticlesPool = foodArgs.SplashParticlesPool;
@@ -151,10 +155,10 @@ public class Food : Actor, IFood, IPoolObject
             CurrentScore = _currentScore + _scorePerOneAction;
         }
 
-        _currentCookingAction = _currentCookingIndex >= cookingActions.Length - 1
+        _currentCookingAction = _currentCookingIndex >= _cookingActions.Length - 1
             ? CookingAction.Empty
-            : cookingActions[_currentCookingIndex + 1];
-        _currentCookingIndex = Mathf.Clamp(_currentCookingIndex + 1, 0, cookingActions.Length - 1);
+            : _cookingActions[_currentCookingIndex + 1];
+        _currentCookingIndex = Mathf.Clamp(_currentCookingIndex + 1, 0, _cookingActions.Length - 1);
     }
 
     public void Slice(Direction direction, UnityEngine.Object blade)
@@ -164,14 +168,14 @@ public class Food : Actor, IFood, IPoolObject
             return;
         }
 
-        var splash = _splashParticlesPool.Spawn(splashColor);
-        splash.SetColor(splashColor);
+        var splash = _splashParticlesPool.Spawn(_splashColor);
+        splash.SetColor(_splashColor);
         splash.transform.position = transform.position;
 
         _soundManager.PlayCutSound();
         ToNextAction(CookingAction.Cut);
         _blades.Add(blade);
-        _slicer.Slice(direction, new FoodArgs(actorType, _progressSlider, cookingActions, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _scorePerOneAction * 0.5f, RootInstanceId, splashColor, _soundManager, _splashParticlesPool));
+        _slicer.Slice(direction, new FoodArgs(actorType, _progressSlider, _cookingActions, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _scorePerOneAction * 0.5f, RootInstanceId, _splashColor, _soundManager, _splashParticlesPool));
         _collider.enabled = false;
 
         if (_scorePerOneAction == 1)
@@ -193,5 +197,12 @@ public class Food : Actor, IFood, IPoolObject
     public class Factory : PlaceholderFactory<UnityEngine.Object, Food>
     {
 
+    }
+
+    [Serializable]
+    public struct FoodSettings
+    {
+        public CookingAction[] CookingActions;
+        public Color SplashColor;
     }
 }
