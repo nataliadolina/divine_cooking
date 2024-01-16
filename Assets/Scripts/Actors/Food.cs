@@ -111,6 +111,7 @@ public class Food : Actor, IFood, IPoolObject
         adjustScale = foodArgs.AdjustScale;
         _soundManager = foodArgs.FruitSoundManager;
         _splashParticlesPool = foodArgs.SplashParticlesPool;
+        _isSlice = true;
     }
 
     public void AddForce(Vector3 direction, float force)

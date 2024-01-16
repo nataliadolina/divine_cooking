@@ -20,6 +20,8 @@ public abstract class Actor : MonoBehaviour, IActor
     protected Transform _transform;
     protected Collider2D _collider;
 
+    protected bool _isSlice = false;
+
     protected List<IActorPhysics> _actorPhysics = new List<IActorPhysics>();
 
     [Inject]
@@ -39,10 +41,11 @@ public abstract class Actor : MonoBehaviour, IActor
         _collider = GetComponent<Collider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         ActorPhysicsMap = new Dictionary<PhysicsType, IActorPhysics>();
+        PhysicsType targetPhysicsType = !_isSlice ? settings.PhysicsType : settings.PhysicsTypeAfterCut; 
 
         foreach (var actorPhysics in (PhysicsType[])Enum.GetValues(typeof(PhysicsType)))
         {
-            if (settings.PhysicsType.HasFlag(actorPhysics))
+            if (targetPhysicsType.HasFlag(actorPhysics))
             {
                 IActorPhysics state = _actorPhysicsFactory.CreatePhysics(actorPhysics);
                 _actorPhysics.Add(state);
@@ -63,5 +66,6 @@ public abstract class Actor : MonoBehaviour, IActor
     public struct Settings
     {
         public PhysicsType PhysicsType;
+        public PhysicsType PhysicsTypeAfterCut;
     }
 }
