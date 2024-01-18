@@ -35,20 +35,6 @@ public class Bomb : Actor
         }
     }
 
-    public void Reinitialize()
-    {
-        _rigidbody.isKinematic = false;
-        _collider.isTrigger = false;
-    }
-
-    public void InitPhysics()
-    {
-        foreach (var physics in _actorPhysics)
-        {
-            physics.OnStart();
-        }
-    }
-
     public class Pool : MemoryPool<Bomb>
     {
         protected override void OnCreated(Bomb item)
@@ -56,15 +42,10 @@ public class Bomb : Actor
             item.gameObject.SetActive(false);
         }
 
-        protected override void Reinitialize(Bomb item)
-        {
-            item.Reinitialize();
-        }
         protected override void OnSpawned(Bomb item)
         {
             item.ZeroVelocity();
             item.gameObject.SetActive(true);
-            item.InitPhysics();
         }
 
         protected override void OnDespawned(Bomb item)

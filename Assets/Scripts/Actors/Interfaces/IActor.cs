@@ -10,4 +10,6 @@ public interface IActor
     public ActorType ActorType { get; }
     public Collider2D Collider { get; }
     public Dictionary<PhysicsType, IActorPhysics> ActorPhysicsMap { get; }
+
+    public int RootInstanceId { get; }
 }

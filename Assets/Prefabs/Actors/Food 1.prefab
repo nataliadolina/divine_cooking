@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3867265628602193801}
   - component: {fileID: 6713765655371976334}
   - component: {fileID: -8002365535891530515}
+  - component: {fileID: 5003834876883302751}
   m_Layer: 0
   m_Name: Food 1
   m_TagString: Untagged
@@ -165,9 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorType: 1
-  cookingActions: 00000000
   adjustScale: 0
-  splashColor: {r: 0.5283019, g: 0.056817338, b: 0.056817338, a: 1}
 --- !u!114 &3867265628602193801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +183,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: addfe95f0ca3d974cb3d50aa12c95196, type: 2}
   _monoInstallers:
   - {fileID: -8002365535891530515}
+  - {fileID: 5003834876883302751}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -217,3 +217,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76889c27376686643bfa7be16ed2b729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5003834876883302751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823412118147059299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1198665c692d643b012a5dd2d23cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorType: 1

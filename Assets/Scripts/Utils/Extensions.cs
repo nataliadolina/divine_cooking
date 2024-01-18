@@ -20,4 +20,15 @@ public static class Extensions
 
         dictionary[key].Add(value);
     }
+
+    public static List<T> Copy<T>(this List<T> lst)
+    {
+        List<T> newList = new List<T>();
+        foreach (var l in lst)
+        {
+            newList.Add(l);
+        }
+
+        return newList;
+    }
 }

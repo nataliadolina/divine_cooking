@@ -16,11 +16,20 @@ MonoBehaviour:
     SplashParticles: {fileID: 8810491647080790718, guid: 85562635684215c489d236f8ab23f41a, type: 3}
     ExplosionParticles: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
     Bomb: {fileID: 8932810021912131694, guid: b9cdf096bc48a8546b3f5853577535fe, type: 3}
-    Food1: {fileID: 823412118147059299, guid: 2e8164035c01b8045ac925b228636767, type: 3}
-    Food2: {fileID: 3076123566413744772, guid: fec7077ff42b2f14c9290ecd8b288818, type: 3}
-    Food3: {fileID: 3076123566413744772, guid: 615b35f756602364f8d6f0bc6da57584, type: 3}
-    Food4: {fileID: 3076123566413744772, guid: 8e146eba52cbb6a41b4bd637b4e847ac, type: 3}
-    Food5: {fileID: 3076123566413744772, guid: 96a968b302a7c914a9dc8bcc7f78c5cc, type: 3}
-    Food6: {fileID: 3076123566413744772, guid: 3303e6e5c98f9084aa2ff9ba88063587, type: 3}
-    Food7: {fileID: 3076123566413744772, guid: c9cc9ceef75143648bae4abfad5b1bec, type: 3}
-    Food8: {fileID: 3076123566413744772, guid: 207c7d820b6a6c041afd0225895bac07, type: 3}
+    FoodActorTypeMap:
+    - ActorType: 1
+      FoodPrefab: {fileID: 823412118147059299, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+    - ActorType: 2
+      FoodPrefab: {fileID: 3076123566413744772, guid: fec7077ff42b2f14c9290ecd8b288818, type: 3}
+    - ActorType: 3
+      FoodPrefab: {fileID: 3076123566413744772, guid: 615b35f756602364f8d6f0bc6da57584, type: 3}
+    - ActorType: 4
+      FoodPrefab: {fileID: 3076123566413744772, guid: 8e146eba52cbb6a41b4bd637b4e847ac, type: 3}
+    - ActorType: 5
+      FoodPrefab: {fileID: 3076123566413744772, guid: 96a968b302a7c914a9dc8bcc7f78c5cc, type: 3}
+    - ActorType: 6
+      FoodPrefab: {fileID: 3076123566413744772, guid: 3303e6e5c98f9084aa2ff9ba88063587, type: 3}
+    - ActorType: 7
+      FoodPrefab: {fileID: 3076123566413744772, guid: c9cc9ceef75143648bae4abfad5b1bec, type: 3}
+    - ActorType: 8
+      FoodPrefab: {fileID: 3076123566413744772, guid: 207c7d820b6a6c041afd0225895bac07, type: 3}

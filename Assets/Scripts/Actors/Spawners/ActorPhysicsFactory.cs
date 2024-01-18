@@ -26,7 +26,6 @@ public class ActorPhysicsFactory
 
             case PhysicsType.Transperant:
                 return _transperantFactory.Create();
-
         }
 
         throw Assert.CreateException();

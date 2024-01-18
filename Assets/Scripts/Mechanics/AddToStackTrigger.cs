@@ -43,7 +43,7 @@ public class AddToStackTrigger : MonoBehaviour
         foodTransform.localPosition = position;
 
         food.SetSize(blockInStackSizePixels);
-        food.MakeStatic();
+        food. MakeStatic();
 
         _blocksCount++;
     }

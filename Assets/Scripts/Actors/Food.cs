@@ -7,9 +7,6 @@ using System;
 
 public class Food : Actor, IFood, IPoolObject
 {
-    [SerializeField]
-    private bool adjustScale;
-
     private Color _splashColor;
     private CookingAction[] _cookingActions;
 
@@ -19,6 +16,8 @@ public class Food : Actor, IFood, IPoolObject
     private SplashParticles.Pool _splashParticlesPool;
     [Inject]
     private DictionaryPool<ActorType, Food, Food.Factory> _pool;
+    [Inject]
+    private SlicesSpawner _slicesSpawner;
 
     private CookingAction _currentCookingAction;
     private int _currentCookingIndex = 0;
@@ -27,11 +26,9 @@ public class Food : Actor, IFood, IPoolObject
     private float _scorePerOneAction;
 
     private List<UnityEngine.Object> _blades = new List<UnityEngine.Object>();
-    private Slicer _slicer;
 
     private FoodCookingProgressSlider _progressSlider;
 
-    private int _rootInstanceId;
     private Vector2 _size;
 
     private float CurrentScore
@@ -51,23 +48,17 @@ public class Food : Actor, IFood, IPoolObject
         }
     }
 
-    public int RootInstanceId { get => _rootInstanceId; }
+    
     public int MaxScore { get => _cookingActions.Length; }
     public CookingAction[] CookingActions { get => _cookingActions; }
     public FoodCookingProgressSlider ProgressSlider { set => _progressSlider = value; }
-
-    private void Start()
-    {
-        _collider = GetComponent<Collider2D>();
-        _slicer = new Slicer(transform.rotation, gameObject, adjustScale);
-        _size = GetComponent<SpriteRenderer>().sprite.rect.size;
-    }
 
     [Inject]
     private void Construct(FoodSettings foodSettings)
     {
         _splashColor = foodSettings.SplashColor;
         _cookingActions = foodSettings.CookingActions;
+        _size = GetComponent<SpriteRenderer>().sprite.bounds.size;
     }
 
 #region IPoolObject
@@ -82,36 +73,27 @@ public class Food : Actor, IFood, IPoolObject
         _scorePerOneAction = 1;
         _currentCookingAction = _cookingActions[_currentCookingIndex];
         _rootInstanceId = Extensions.GetUniqueId();
-
-        foreach (var physics in _actorPhysics)
-        {
-            physics.OnStart();
-        }
     }
 
     public void OnDespawn()
     {
         _currentCookingIndex = 0;
+        Dispose();
     }
 
 #endregion
 
     public void Init(FoodArgs foodArgs)
     {
-        actorType = foodArgs.ActorType;
         _progressSlider = foodArgs.FoodCookingProgressSlider;
-        _cookingActions = foodArgs.CookingActions;
         _currentCookingAction = foodArgs.CurrentCookingAction;
         _currentCookingIndex = foodArgs.CurrentCookingIndex;
         _currentScore = foodArgs.CurrentScore;
-        _blades = foodArgs.Blades;
+        _blades = foodArgs.Blades.Copy();
         _scorePerOneAction = foodArgs.ScorePerOneAction;
         _rootInstanceId = foodArgs.RootInstanceId;
-        _splashColor = foodArgs.SplashColor;
-        adjustScale = foodArgs.AdjustScale;
-        _soundManager = foodArgs.FruitSoundManager;
-        _splashParticlesPool = foodArgs.SplashParticlesPool;
         _isSlice = true;
+        _rigidbody.velocity = foodArgs.Velocity;
     }
 
     public void AddForce(Vector3 direction, float force)
@@ -176,8 +158,9 @@ public class Food : Actor, IFood, IPoolObject
         _soundManager.PlayCutSound();
         ToNextAction(CookingAction.Cut);
         _blades.Add(blade);
-        _slicer.Slice(direction, new FoodArgs(actorType, _progressSlider, _cookingActions, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _scorePerOneAction * 0.5f, RootInstanceId, _splashColor, _soundManager, _splashParticlesPool));
         _collider.enabled = false;
+
+        _slicesSpawner.Spawn(direction, transform.position, _size, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _scorePerOneAction * 0.5f, _rigidbody.velocity, _rootInstanceId));
 
         if (_scorePerOneAction == 1)
         {

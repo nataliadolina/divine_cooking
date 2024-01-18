@@ -8,7 +8,7 @@ public interface IActorPhysics
     public void OnDispose();
     
     public void OnUpdate();
-
+    public void OnDestroy();
     public void MoveToAim(Vector3 aimPosition, float speed);
 
     public void Ricochet(Vector3 ricochetDirection);

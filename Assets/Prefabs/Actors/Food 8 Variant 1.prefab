@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 546ed4f82865ea047ad7197297e11b10, type: 3}
+    - target: {fileID: 5003834876883302751, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: actorType
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: foodType
       value: 7

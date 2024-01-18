@@ -7,39 +7,26 @@ public enum Direction
     Right
 }
 
+public enum SlicePart
+{
+    Up,
+    Down,
+    Right,
+    Left
+}
+
 public class Slicer
 {
-    private float _rectRatio;
-    private Quaternion _rootRotation;
-    private GameObject[] _lastSlices;
-    private int _counter = 0;
+    private Sprite _sprite;
 
-    public Slicer(Quaternion rootRotation, GameObject rootGameObject, bool adjustScale = true)
+    public Slicer(Sprite sprite)
     {
-        _rootRotation = rootRotation;
-        _rectRatio = adjustScale == true ? rootGameObject.transform.localScale.x / 2.5f : rootGameObject.transform.localScale.x;
-        _lastSlices = new GameObject[] { rootGameObject };
+        _sprite = sprite;
     }
 
-    private GameObject CreateSlice(string name, Direction direction, Transform parentTransform, float offset, Sprite sprite)
+    public Sprite[] CreateSliceSprites(Direction direction)
     {
-        GameObject slice = new GameObject(name);
-        slice.transform.parent = parentTransform;
-        slice.AddComponent<SpriteRenderer>().sprite = sprite;
-        Vector3 localPosition = direction == Direction.Up
-            ? new Vector3(0, offset, 0)
-            : new Vector3(offset, 0, 0);
-        slice.transform.localPosition = localPosition;
-        slice.transform.localRotation = _rootRotation;
-        return slice;
-    }
-
-    private GameObject[] Slice(Direction direction, GameObject gm)
-    {
-        SpriteRenderer spriteRenderer = gm.GetComponent<SpriteRenderer>();
-        Sprite sprite = spriteRenderer.sprite;
-        Rect rect = sprite.rect;
-
+        Rect rect = _sprite.rect;
         Rect rect1 = direction == Direction.Up
             ? CreateDownRect(rect)
             : CreateLeftRect(rect);
@@ -47,61 +34,49 @@ public class Slicer
             ? CreateUpRect(rect)
             : CreateRightRect(rect);
 
-        var sprite1 = Sprite.Create(sprite.texture, rect1, Vector2.one * 0.5f);
-        var sprite2 = Sprite.Create(sprite.texture, rect2, Vector2.one * 0.5f);
+        var sprite1 = Sprite.Create(_sprite.texture, rect1, Vector2.one * 0.5f);
+        var sprite2 = Sprite.Create(_sprite.texture, rect2, Vector2.one * 0.5f);
 
-        float offset = direction == Direction.Up
-            ? sprite.bounds.size.y * 0.25f
-            : sprite.bounds.size.x * 0.25f;
-
-        
-        GameObject hull1 = CreateSlice(direction == Direction.Up ? "DownHull" : "LeftHull", direction, gm.transform, -offset, sprite1);
-        GameObject hull2 = CreateSlice(direction == Direction.Up ? "UpHull" : "RightHull", direction, gm.transform, offset, sprite2);
-
-        return new GameObject[] { hull1, hull2 };
+        return new Sprite[] {sprite1, sprite2 };
     }
-    public void Slice(Direction direction, FoodArgs args)
+
+    public Sprite CreateSprite(SlicePart slicePart)
     {
-        GameObject[] newSlices = new GameObject[2];
-       
-        for (int i = 0; i < _lastSlices.Length; i++)
+        Rect rect = _sprite.rect;
+        Rect newRect = rect;
+        switch (slicePart)
         {
-            var lastSlice = _lastSlices[i];
-            lastSlice.GetComponent<SpriteRenderer>().enabled = false;
-            Rigidbody2D oldRb = lastSlice.GetComponent<Rigidbody2D>();
-            bool isKinematic = oldRb.isKinematic;
-            bool colliderIsTrigger = lastSlice.GetComponent<Collider2D>().isTrigger;
-            Vector2 velocity = oldRb.velocity;
-            GameObject[] slices = Slice(direction, lastSlice);
-            for (int j = 0; j < slices.Length; j++)
-            {
-                var slice = slices[j];
-                Rigidbody2D rb = slice.AddComponent<Rigidbody2D>();
-                //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rb.velocity = velocity;
-                rb.isKinematic = isKinematic;
-                
-                slice.transform.localScale *= _rectRatio;
-                slice.AddComponent<PolygonCollider2D>().isTrigger = colliderIsTrigger;
-                Food food = slice.AddComponent<Food>();
-                food.Rigidbody = rb;
-
-                List<Object> bladesCopy = new List<Object>();
-                foreach (var b in args.Blades)
-                {
-                    bladesCopy.Add(b);
-                }
-                args.Blades = bladesCopy;
-
-                food.Init(args);
-                slice.transform.parent = null;
-                newSlices[_counter] = slice;
-                _counter++;
-            }
+            case SlicePart.Left:
+                newRect = CreateLeftRect(rect);
+                break;
+            case SlicePart.Right:
+                newRect = CreateRightRect(rect);
+                break;
+            case SlicePart.Down:
+                newRect = CreateDownRect(rect);
+                break;
+            case SlicePart.Up:
+                newRect = CreateUpRect(rect);
+                break;
         }
 
-        _lastSlices = newSlices;
-        _counter = 0;
+        return Sprite.Create(_sprite.texture, newRect, Vector2.one * 0.5f);
+    }
+
+    public static Vector3 GetLocalPositionOffset(Vector2 size, SlicePart slicePart)
+    {
+        switch (slicePart)
+        {
+            case SlicePart.Up:
+                return new Vector3(0, size.y * 0.5f, 0);
+            case SlicePart.Down:
+                return new Vector3(0, -size.y * 0.5f, 0);
+            case SlicePart.Left:
+                return new Vector3(-size.x * 0.5f, 0, 0);
+            case SlicePart.Right:
+                return new Vector3(size.x * 0.5f, 0, 0);
+        }
+        return Vector3.zero;
     }
 
     private Rect CreateDownRect(Rect rect)

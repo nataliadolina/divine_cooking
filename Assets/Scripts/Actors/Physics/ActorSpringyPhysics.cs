@@ -17,6 +17,9 @@ public class ActorSpringyPhysics : ActorPhysicsBase
     public override void OnStart()
     {
         _actor.Rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;
+        Settings settings = ActorPhysicsSettings.GetSpringyPhysicsSettingsById(_actor.RootInstanceId);
+        _direction = settings.Direction;
+        _speed = settings.Speed;
     }
 
     public override void Ricochet(Vector3 ricochetDirection)
@@ -35,6 +38,23 @@ public class ActorSpringyPhysics : ActorPhysicsBase
     public override void OnUpdate()
     {
         _transform.position += _direction * Time.deltaTime * _speed;
+    }
+
+    public override void OnDispose()
+    {
+        ActorPhysicsSettings.SetSpringyPhysicsSettings(_actor.RootInstanceId, new Settings(_direction, _speed));
+    }
+
+    public struct Settings
+    {
+        public Vector3 Direction;
+        public float Speed;
+
+        public Settings(Vector3 direction, float speed)
+        {
+            Direction = direction;
+            Speed = speed;
+        }
     }
 
     public class Factory : PlaceholderFactory<ActorSpringyPhysics>

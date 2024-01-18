@@ -2,12 +2,18 @@ using UnityEngine;
 using Zenject;
 using System;
 using System.Collections.Generic;
+
+[Serializable]
+public struct FoodActorType
+{
+    public ActorType ActorType;
+    public GameObject FoodPrefab;
+}
+
 public class GameInstaller : MonoInstaller
 {
     [Inject]
     private Settings _settings;
-
-    private Dictionary<ActorType, UnityEngine.Object> _foodTypesMap;
 
     public override void InstallBindings()
     {
@@ -36,24 +42,19 @@ public class GameInstaller : MonoInstaller
 
     private void InstallFoodPool()
     {
-        _foodTypesMap = new Dictionary<ActorType, UnityEngine.Object>()
+        Dictionary<ActorType, UnityEngine.Object> foodTypesMap = new Dictionary<ActorType, UnityEngine.Object>();
+        
+        foreach (var foodActorType in _settings.FoodActorTypeMap)
         {
-            { ActorType.Food1, _settings.Food1 },
-            { ActorType.Food2, _settings.Food2 },
-            { ActorType.Food3, _settings.Food3 },
-            { ActorType.Food4, _settings.Food4 },
-            { ActorType.Food5, _settings.Food5 },
-            { ActorType.Food6, _settings.Food6 },
-            { ActorType.Food7, _settings.Food7 },
-            { ActorType.Food8, _settings.Food8 },
-        };
+            foodTypesMap.Add(foodActorType.ActorType, foodActorType.FoodPrefab);
+        }
 
         Container.BindFactory<UnityEngine.Object, Food, Food.Factory>()
             .FromFactory<PrefabFactory<Food>>().NonLazy();
 
         Container.Bind<DictionaryPool<ActorType, Food, Food.Factory>>()
             .AsCached()
-            .WithArguments(_foodTypesMap)
+            .WithArguments(foodTypesMap)
             .NonLazy();
     }
 
@@ -70,13 +71,6 @@ public class GameInstaller : MonoInstaller
         public GameObject SplashParticles;
         public GameObject ExplosionParticles;
         public GameObject Bomb;
-        public GameObject Food1;
-        public GameObject Food2;
-        public GameObject Food3;
-        public GameObject Food4;
-        public GameObject Food5;
-        public GameObject Food6;
-        public GameObject Food7;
-        public GameObject Food8;
+        public FoodActorType[] FoodActorTypeMap;
     }
 }

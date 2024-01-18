@@ -15,8 +15,6 @@ public class Ricochet : MonoBehaviour
             Vector3 contactPoint = collision.GetContact(0).point;
             Vector3 direction = new Vector3(contactPoint.x - transform.position.x, contactPoint.y - transform.position.y, 0).normalized;
             actor.ActorPhysicsMap[PhysicsType.Springy].Ricochet(direction);
-            actor.Rigidbody.isKinematic = true;
-            actor.Collider.isTrigger = true;
         }
     }
 }
