@@ -11,6 +11,8 @@ public struct FoodArgs
     public float ScorePerOneAction;
     public int RootInstanceId;
     public Vector2 Velocity;
+    public Vector3 Direction;
+    public float Speed;
 
     public FoodArgs(
         FoodCookingProgressSlider foodCookingProgressSlider,
@@ -20,7 +22,9 @@ public struct FoodArgs
         List<Object> blades,
         float scorePerOneAction,
         Vector2 velocity,
-        int rootInstanceId
+        int rootInstanceId,
+        Vector3 direction,
+        float speed
         )
     {
         FoodCookingProgressSlider = foodCookingProgressSlider;
@@ -31,5 +35,7 @@ public struct FoodArgs
         RootInstanceId = rootInstanceId;
         Blades = blades;
         Velocity = velocity;
+        Direction = direction;
+        Speed = speed;
     }
 }

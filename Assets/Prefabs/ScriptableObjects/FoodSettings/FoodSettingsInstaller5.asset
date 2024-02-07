@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: FoodSettingsInstaller5
   m_EditorClassIdentifier: 
   _foodSettings:
+    ActorType: 5
     CookingActions: 0000000000000000
     SplashColor: {r: 0.48235294, g: 0.5294118, b: 0.05490196, a: 1}

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public static class Extensions
 {
@@ -30,5 +32,10 @@ public static class Extensions
         }
 
         return newList;
+    }
+
+    public static T[] EnumToArray<T>(this T _enum, T[] enumValues) where T : Enum
+    {
+        return enumValues.Where(x => _enum.HasFlag(x)).ToArray();
     }
 }
