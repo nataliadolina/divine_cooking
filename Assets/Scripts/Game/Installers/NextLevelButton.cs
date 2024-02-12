@@ -11,6 +11,7 @@ public class NextLevelButton : ButtonBase
 
     protected override void OnClick()
     {
-        SceneManager.LoadScene($"Level {_gameData.CurrentLevel + 1}");
+        _gameData.CurrentLevel++;
+        SceneManager.LoadScene($"Level {_gameData.CurrentLevel}");
     }
 }
