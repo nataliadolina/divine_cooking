@@ -36,6 +36,7 @@ public static class Extensions
 
     public static T[] EnumToArray<T>(this T _enum, T[] enumValues) where T : Enum
     {
+        var result = enumValues.Where(x => _enum.HasFlag(x)).ToArray();
         return enumValues.Where(x => _enum.HasFlag(x)).ToArray();
     }
 }

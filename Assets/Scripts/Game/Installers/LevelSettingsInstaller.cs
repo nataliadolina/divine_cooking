@@ -20,5 +20,6 @@ public class LevelSettingsInstaller : ScriptableObjectInstaller<LevelSettingsIns
     public struct Settings
     {
         public int NumLevel;
+        public float ActorScale;
     }
 }

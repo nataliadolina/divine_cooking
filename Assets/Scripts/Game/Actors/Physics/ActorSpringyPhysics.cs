@@ -25,7 +25,6 @@ public class ActorSpringyPhysics : ActorPhysicsBase
 
     public override void Ricochet(Vector3 ricochetDirection)
     {
-        _transform.RotateAround(_transform.position, Vector3.forward, 360 - _transform.eulerAngles.z * 2);
         _direction += ricochetDirection;
         _direction = _direction.normalized;
         _actor.Direction = _direction;
@@ -38,7 +37,6 @@ public class ActorSpringyPhysics : ActorPhysicsBase
         _direction = new Vector3(aimPosition.x - _transform.position.x, aimPosition.y - _transform.position.y, 0).normalized;
         _actor.Speed = speed;
         _actor.Direction = _direction;
-        _actor.Transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg);
     }
 
     public override void OnUpdate()

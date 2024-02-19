@@ -24,8 +24,6 @@ public class Food : Actor, IFood, IPoolObject
     private int _currentCookingIndex = 0;
     private float _currentScore;
 
-    private float _scorePerOneAction;
-
     private List<UnityEngine.Object> _blades = new List<UnityEngine.Object>();
 
     private FoodCookingProgressSlider _progressSlider;
@@ -72,7 +70,7 @@ public class Food : Actor, IFood, IPoolObject
 
     public void OnSpawn()
     {
-        _scorePerOneAction = 1;
+        _partOfOne = 1;
         _currentCookingAction = _cookingActions[_currentCookingIndex];
         _rootInstanceId = Extensions.GetUniqueId();
     }
@@ -94,17 +92,12 @@ public class Food : Actor, IFood, IPoolObject
         _currentCookingIndex = foodArgs.CurrentCookingIndex;
         _currentScore = foodArgs.CurrentScore;
         _blades = foodArgs.Blades.Copy();
-        _scorePerOneAction = foodArgs.ScorePerOneAction;
+        _partOfOne = foodArgs.PartOfOne;
         _rootInstanceId = foodArgs.RootInstanceId;
         _isSlice = true;
-        _rigidbody.velocity = foodArgs.Velocity;
+        _rigidbody.velocity = foodArgs.Velocity * _partOfOne;
         Direction = foodArgs.Direction;
         Speed = foodArgs.Speed;
-    }
-
-    public void AddForce(Vector3 direction, float force)
-    {
-        _rigidbody.AddForce(direction * force, ForceMode2D.Impulse);
     }
 
     public void SetSize(Vector2 size)
@@ -136,12 +129,12 @@ public class Food : Actor, IFood, IPoolObject
     {
         if (_currentCookingAction == CookingAction.Empty)
         {
-            CurrentScore = Mathf.Clamp(_currentScore - 0.5f * _scorePerOneAction, 0, _currentScore);
+            CurrentScore = Mathf.Clamp(_currentScore - 0.5f * _partOfOne, 0, _currentScore);
         }
 
         else if (_currentCookingAction == cookingAction)
         {
-            CurrentScore = _currentScore + _scorePerOneAction;
+            CurrentScore = _currentScore + _partOfOne;
         }
 
         _currentCookingAction = _currentCookingIndex >= _cookingActions.Length - 1
@@ -166,9 +159,9 @@ public class Food : Actor, IFood, IPoolObject
         _blades.Add(blade);
         _collider.enabled = false;
 
-        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _scorePerOneAction * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed));
+        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed));
 
-        if (_scorePerOneAction == 1)
+        if (_partOfOne == 1)
         {
             _pool.Despawn(actorType, this);
         }

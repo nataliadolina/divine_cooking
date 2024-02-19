@@ -36,7 +36,23 @@ public class GameManager : MonoBehaviour
 
     private TotalScoreSlider _totalScoreSlider;
     private UIManager _uiManager;
-    
+
+    private int _numStars = 0;
+    private int _numFoodTotal = 0;
+    private float _numFoodReleased = 0;
+    public float AddNumFoodReleased
+    { 
+        set 
+        {
+            if (_numFoodReleased + value >= (float)_numFoodTotal)
+            {
+                EndGameLoseOrWin();
+            }
+
+            _numFoodReleased+=value;
+        }
+    }
+
     [Inject]
     private void Construct(ActorPoolFactory actorPoolFactory, UIManager uiManager, TotalScoreSlider totalScore, Food.FoodSettings[] foodSettings)
     {
@@ -57,6 +73,8 @@ public class GameManager : MonoBehaviour
 
         foreach (ActorSpawnerWaitTime actorSpawnerWaitTime in actorsSpawnerWaitTimeMap)
         {
+            _numFoodTotal++;
+
             ActorType actorType = actorSpawnerWaitTime.ActorType;
             
             ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
@@ -96,11 +114,13 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
 
-        int numStars = _totalScoreSlider.GetNumStars();
-        _totalScoreSlider.SaveScore(numStars);
+        _numStars = _totalScoreSlider.GetNumStars();
+        _totalScoreSlider.SaveScore(_numStars);
+    }
 
-        yield return new WaitForSeconds(1f);
-        _uiManager.ChangeGroupType(numStars == 0 ? UIGroupType.Lose : UIGroupType.Win);
+    private void EndGameLoseOrWin()
+    {
+        _uiManager.ChangeGroupType(_numStars == 0 ? UIGroupType.Lose : UIGroupType.Win);
         StopAllCoroutines();
     }
 

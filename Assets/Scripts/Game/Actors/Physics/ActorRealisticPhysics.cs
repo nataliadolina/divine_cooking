@@ -21,6 +21,18 @@ public class ActorRealisticPhysics : ActorPhysicsBase
         _actor.Collider.isTrigger = false;
     }
 
+    public override void MoveToAim(Vector3 aimPosition, float speed)
+    {
+        Vector3 currentPosition = _actor.Transform.position;
+        Vector3 direction = aimPosition - currentPosition;
+        _actor.Rigidbody.AddForceAtPosition(direction.normalized * speed, currentPosition, ForceMode2D.Impulse);
+    }
+
+    public override void AddForce(Vector3 direction, float force)
+    {
+        _actor.Rigidbody.velocity = direction * force;
+    }
+
     public class Factory : PlaceholderFactory<ActorRealisticPhysics>
     {
 

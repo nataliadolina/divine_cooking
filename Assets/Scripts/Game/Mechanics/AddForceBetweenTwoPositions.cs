@@ -5,6 +5,9 @@ using UnityEngine;
 public class AddForceBetweenTwoPositions : MonoBehaviour
 {
     [SerializeField]
+    private PhysicsType targetType;
+
+    [SerializeField]
     private float speed;
 
     [SerializeField]
@@ -15,7 +18,18 @@ public class AddForceBetweenTwoPositions : MonoBehaviour
         IActor actor;
         if (collision.TryGetComponent(out actor))
         {
-            actor.ActorPhysicsMap[PhysicsType.Springy].MoveToAim(aimTransform.position, speed);
+            if (targetType == 0)
+            {
+                foreach (var physics in actor.CurrentActorPhysics)
+                {
+                    physics.MoveToAim(aimTransform.position, speed);
+                }
+            }
+
+            else
+            {
+                actor.ActorPhysicsMap[targetType].MoveToAim(aimTransform.position, speed);
+            }
         }
     }
 }

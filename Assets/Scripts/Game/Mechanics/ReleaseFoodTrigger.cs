@@ -8,12 +8,16 @@ public class ReleaseFoodTrigger : MonoBehaviour
     [Inject]
     private CurrentFoodCookingProgressPool _currentFoodProgress;
 
+    [Inject]
+    private GameManager _gameManager;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IFood food;
         if (collision.TryGetComponent(out food))
         {
             _currentFoodProgress.ReleaseDoubleSlider(food);
+            _gameManager.AddNumFoodReleased = food.PartOfOne;
         }
     }
 }

@@ -8,7 +8,7 @@ public struct FoodArgs
     public int CurrentCookingIndex;
     public float CurrentScore;
     public List<Object> Blades;
-    public float ScorePerOneAction;
+    public float PartOfOne;
     public int RootInstanceId;
     public Vector2 Velocity;
     public Vector3 Direction;
@@ -20,7 +20,7 @@ public struct FoodArgs
         int currentCookingIndex,
         float currentScore,
         List<Object> blades,
-        float scorePerOneAction,
+        float partOfOne,
         Vector2 velocity,
         int rootInstanceId,
         Vector3 direction,
@@ -31,7 +31,7 @@ public struct FoodArgs
         CurrentCookingAction = currentCookingAction;
         CurrentCookingIndex = currentCookingIndex;
         CurrentScore = currentScore;
-        ScorePerOneAction = scorePerOneAction;
+        PartOfOne = partOfOne;
         RootInstanceId = rootInstanceId;
         Blades = blades;
         Velocity = velocity;

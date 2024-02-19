@@ -10,7 +10,8 @@ public enum PhysicsType
 {
     Springy = 1,
     Transperant = 2,
-    Realistic = 4
+    Realistic = 4,
+    FreezeRotation = 8,
 }
 
 public abstract class Actor : MonoBehaviour, IActor
@@ -36,31 +37,44 @@ public abstract class Actor : MonoBehaviour, IActor
     [Inject]
     private ActorPhysicsFactory _actorPhysicsFactory;
 
+    protected float _partOfOne = 1;
+
     public ActorType ActorType { get => actorType; }
     public Rigidbody2D Rigidbody { get => _rigidbody; set => _rigidbody = value; }
     public Transform Transform => transform;
     public float Speed { get => _speed; set => _speed = value; }
     public Vector3 Direction { get => _direction; set => _direction = value; }
     public Dictionary<PhysicsType, IActorPhysics> ActorPhysicsMap { get; private set; }
-    
+
     public int RootInstanceId { get => _rootInstanceId; }
+    public HashSet<IActorPhysics> CurrentActorPhysics { get => _currentActorPhysics; }
 
     public Collider2D Collider => _collider;
 
+    public float PartOfOne => _partOfOne;
+    private float _scale = 1;
+
     [Inject]
-    private void Construct(Settings settings)
+    private void Construct(Settings settings, LevelSettingsInstaller.Settings levelSettings)
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         ActorPhysicsMap = new Dictionary<PhysicsType, IActorPhysics>();
         _settings = settings;
         _physicsTypes = (PhysicsType[])Enum.GetValues(typeof(PhysicsType));
+        _scale = levelSettings.ActorScale;
+        
     }
 
     private void Start()
     {
         _collider = GetComponent<Collider2D>();
 
-        PhysicsType targetInitialPhysicsType = !_isSlice ? _settings.InitialPhysicsType : _settings.PhysicsTypeAfterCut;
+        if (!_isSlice)
+        {
+            transform.localScale = new Vector3(_scale, _scale, 1);
+        }
+
+        PhysicsType targetInitialPhysicsType = !_isSlice ? _settings.InitialPhysicsType : _settings.InitialPhysicsTypeAfterCut;
         PhysicsType targetPhysicsType = !_isSlice ? _settings.PhysicsType : _settings.PhysicsTypeAfterCut;
         foreach (var actorPhysics in targetPhysicsType.EnumToArray(_physicsTypes))
         {
@@ -115,12 +129,12 @@ public abstract class Actor : MonoBehaviour, IActor
         {
             if (_currentActorPhysics.Where(x => x.PhysicsType == actorPhysics).ToArray().Count() == 0)
             {
-                if (!ActorPhysicsMap.ContainsKey(physicsType))
+                if (!ActorPhysicsMap.ContainsKey(actorPhysics))
                 {
-                    ActorPhysicsMap.Add(physicsType, _actorPhysicsFactory.CreatePhysics(physicsType));
+                    ActorPhysicsMap.Add(actorPhysics, _actorPhysicsFactory.CreatePhysics(actorPhysics));
                 }
 
-                IActorPhysics physics = ActorPhysicsMap[physicsType];
+                IActorPhysics physics = ActorPhysicsMap[actorPhysics];
                 physics.OnStart();
                 _currentActorPhysics.Add(physics);
             }
@@ -133,5 +147,6 @@ public abstract class Actor : MonoBehaviour, IActor
         public PhysicsType PhysicsType;
         public PhysicsType PhysicsTypeAfterCut;
         public PhysicsType InitialPhysicsType;
+        public PhysicsType InitialPhysicsTypeAfterCut;
     }
 }

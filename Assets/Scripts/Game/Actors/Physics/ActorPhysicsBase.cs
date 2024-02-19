@@ -14,4 +14,6 @@ public abstract class ActorPhysicsBase : IActorPhysics
 
     public virtual void MoveToAim(Vector3 aimPosition, float speed) { }
     public virtual void Ricochet(Vector3 ricochetDirection) { }
+
+    public virtual void AddForce(Vector3 direction, float force) { }
 }

@@ -18,10 +18,13 @@ public class AddForceTrigger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Food food;
-        if (collision.TryGetComponent(out food))
+        IActor actor;
+        if (collision.TryGetComponent(out actor))
         {
-            food.AddForce(_directionVector3Map[direction], force);
+            foreach (var physics in actor.CurrentActorPhysics)
+            {
+                physics.AddForce(_directionVector3Map[direction], force);
+            }
         }
     }
 }
