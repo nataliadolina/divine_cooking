@@ -19,3 +19,4 @@ MonoBehaviour:
     InitialPhysicsTypeAfterCut: 8
   levelSettings:
     NumLevel: 4
+    ActorScale: 1

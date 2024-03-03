@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96053bc7aa7e7f34f97a7a80e289d6d3, type: 3}
-  m_Name: LevelSettingsInstaller1
+  m_Name: LevelSettingsInstaller6
   m_EditorClassIdentifier: 
   settings:
-    PhysicsType: 0
-    PhysicsTypeAfterCut: 0
-    InitialPhysicsType: 0
-    InitialPhysicsTypeAfterCut: 0
+    PhysicsType: 7
+    PhysicsTypeAfterCut: 11
+    InitialPhysicsType: 4
+    InitialPhysicsTypeAfterCut: 8
   levelSettings:
-    NumLevel: 1
-    ActorScale: 1
+    NumLevel: 6
+    ActorScale: 0.7

@@ -31,15 +31,15 @@ public class Draggable : MonoBehaviour
 
         if (dragType.HasFlag(DragType.Vertical) && dragType.HasFlag(DragType.Horizontal))
         {
-            newPosition = mousePosition + offset;
+            newPosition = dragZone.ClampPosition(dragType, mousePosition + offset);
         }
         if (dragType.HasFlag(DragType.Horizontal))
         {
-            newPosition = new Vector3(mousePosition.x, position.y, position.z) + new Vector3(offset.x, 0, 0);
+            newPosition = dragZone.ClampPosition(dragType, new Vector3(mousePosition.x, position.y, position.z) + new Vector3(offset.x, 0, 0));
         }
         else if (dragType.HasFlag(DragType.Vertical))
         {
-            newPosition = new Vector3(position.x, mousePosition.y, position.z) + new Vector3(0, offset.y, 0);
+            newPosition = dragZone.ClampPosition(dragType, new Vector3(position.x, mousePosition.y, position.z) + new Vector3(0, offset.y, 0));
         }
 
         if (dragZone.IsPositionInsideZone(newPosition))

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -14,59 +12,63 @@ public class TotalScoreSlider : MonoBehaviour
     private float _maxScore;
     private float _currentScore = 0;
 
+    private int _currentLevel;
+
+    public int NumStars = 0;
+
     [Inject]
     private GameData _gameData;
 
     [Inject]
-    private void Construct()
+    private void Construct(LevelSettingsInstaller.Settings levelSettings)
     {
-        _slider = GetComponent<Slider>();
-        _slider.value = 0;
-        _slider.maxValue = 1;
+        _currentLevel = levelSettings.NumLevel;
     }
 
     public void SetMaxScore(float score)
     {
         _maxScore = score;
-        _oneStarScore = 1 / 6f;
-        _twoStarsScore = 2 / 3f;
-        _threeStarsScore = 5 / 6f;
+        _slider = GetComponent<Slider>();
+        _slider.value = 0;
+        _slider.maxValue = score;
+        _oneStarScore = score * 0.5f;
+        _twoStarsScore = score * 2 / 3f;
+        _threeStarsScore = score * 5 / 6f;
     }
 
     public void ChangeScore(float value)
     {
-        float addScore = value / _maxScore;
-        _currentScore += addScore;
-        _slider.value += addScore;
+        _currentScore += value;
+        _slider.value += value;
     }
 
     public int GetNumStars()
     {
         if (_currentScore < _oneStarScore)
         {
-            return 0;
+            NumStars = 0;
         }
 
         if (_currentScore >= _oneStarScore && _currentScore < _twoStarsScore)
         {
-            return 1;
+            NumStars = 1;
         }
 
         if (_currentScore >= _twoStarsScore && _currentScore < _threeStarsScore)
         {
-            return 2;
+            NumStars = 2;
         }
 
         if (_currentScore >= _threeStarsScore)
         {
-            return 3;
+            NumStars = 3;
         }
 
-        return 0;
+        return NumStars;
     }
 
     public void SaveScore(int numStars)
     {
-        _gameData.UpdateLevelData(_currentScore, numStars);
+        _gameData.UpdateLevelData(_currentScore, numStars, _currentLevel);
     }
 }

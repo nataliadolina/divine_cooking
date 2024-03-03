@@ -20,17 +20,19 @@ public class StarsManager : MonoBehaviour
     private StarUI.Pool _starUIPool;
 
     [Inject]
-    private GameData _gameData;
+    private TotalScoreSlider _totalScoreSlider;
 
     private Vector3 _startPos;
 
     private Sprite _uiStarSprite;
+    private int _currentLevel;
 
     [Inject]
-    private void Construct(Settings settings)
+    private void Construct(Settings settings, LevelSettingsInstaller.Settings levelSettings)
     {
         _startPos = startStarPositionAnimation.position;
         _uiStarSprite = settings.UIStarSprite;
+        _currentLevel = levelSettings.NumLevel;
     }
 
     private void Start()
@@ -55,7 +57,7 @@ public class StarsManager : MonoBehaviour
     {
         float currentTime = 0;
         int currentStarCount = 0;
-        while (currentStarCount < _gameData.GetLevelStarsCount(_gameData.CurrentLevel))
+        while (currentStarCount < _totalScoreSlider.NumStars)
         {
             currentTime += Time.deltaTime;
             if (currentTime >= timeBetweenStars)

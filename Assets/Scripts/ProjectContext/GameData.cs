@@ -32,20 +32,21 @@ public class GameData
         LevelDatasMap.Add(1, new LevelData(1, 0, 0));
     }
 
-    public void UpdateLevelData(float score, int numStars)
+    public void UpdateLevelData(float score, int numStars, int? level = null)
     {
-        if (!LevelDatasMap.ContainsKey(CurrentLevel))
+        int _level = level ?? CurrentLevel;
+        if (!LevelDatasMap.ContainsKey(_level))
         {
-            LevelDatasMap.Add(CurrentLevel, new LevelData(CurrentLevel, score, numStars));
+            LevelDatasMap.Add(_level, new LevelData(_level, score, numStars));
         }
-        else if (LevelDatasMap[CurrentLevel].Score < score)
+        else if (LevelDatasMap[_level].Score < score)
         {
-            LevelDatasMap[CurrentLevel] = new LevelData(CurrentLevel, score, numStars);
+            LevelDatasMap[_level] = new LevelData(_level, score, numStars);
         }
 
-        if (!LevelDatasMap.ContainsKey(CurrentLevel + 1) && numStars > 0)
+        if (!LevelDatasMap.ContainsKey(_level + 1) && numStars > 0)
         {
-            LevelDatasMap.Add(CurrentLevel + 1, new LevelData(CurrentLevel + 1, 0, 0));
+            LevelDatasMap.Add(_level + 1, new LevelData(_level + 1, 0, 0));
         }
     }
 

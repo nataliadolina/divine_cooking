@@ -80,6 +80,7 @@ public class Food : Actor, IFood, IPoolObject
         _currentCookingIndex = 0;
         _collider.enabled = true;
         _blades.Clear();
+        ChangePhysics(_initialPhysicsType);
         Dispose();
     }
 
@@ -159,7 +160,7 @@ public class Food : Actor, IFood, IPoolObject
         _blades.Add(blade);
         _collider.enabled = false;
 
-        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed));
+        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size * transform.localScale, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed));
 
         if (_partOfOne == 1)
         {

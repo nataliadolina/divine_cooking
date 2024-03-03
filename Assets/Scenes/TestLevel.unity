@@ -1616,6 +1616,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7671439106187214209, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.291573
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671439106187214209, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.12
       objectReference: {fileID: 0}
@@ -1681,6 +1685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragType: 1
+  dragZone: {fileID: 0}
 --- !u!1 &1014711267
 GameObject:
   m_ObjectHideFlags: 0

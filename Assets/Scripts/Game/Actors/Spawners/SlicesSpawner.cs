@@ -19,9 +19,10 @@ public class SlicesSpawner
         {
             Food foodPart = _sliceSpawner.Create(part);
             foodPart.Init(args);
-            foodPart.transform.position = position + Slicer.GetLocalPositionOffset(size * 0.5f, part);
             foodPart.transform.rotation = rotation;
             foodPart.transform.parent = null;
+            foodPart.transform.position = position + rotation * Slicer.GetLocalPositionOffset(size * 0.5f, part);
+            
             foodPart.gameObject.SetActive(true);
         }
     }

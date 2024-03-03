@@ -9,8 +9,16 @@ public class ReplayButton : ButtonBase
     [Inject]
     private GameData _gameData;
 
+    private int _currentLevel;
+
+    [Inject]
+    private void Construct(LevelSettingsInstaller.Settings settings)
+    {
+        _currentLevel = settings.NumLevel;
+    }
+
     protected override void OnClick()
     {
-        SceneManager.LoadScene($"Level {_gameData.CurrentLevel}");
+        SceneManager.LoadScene($"Level {_currentLevel}");
     }
 }

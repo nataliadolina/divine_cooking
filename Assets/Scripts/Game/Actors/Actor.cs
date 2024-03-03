@@ -54,6 +54,8 @@ public abstract class Actor : MonoBehaviour, IActor
     public float PartOfOne => _partOfOne;
     private float _scale = 1;
 
+    protected PhysicsType _initialPhysicsType;
+
     [Inject]
     private void Construct(Settings settings, LevelSettingsInstaller.Settings levelSettings)
     {
@@ -61,7 +63,7 @@ public abstract class Actor : MonoBehaviour, IActor
         ActorPhysicsMap = new Dictionary<PhysicsType, IActorPhysics>();
         _settings = settings;
         _physicsTypes = (PhysicsType[])Enum.GetValues(typeof(PhysicsType));
-        _scale = levelSettings.ActorScale;
+        _scale = transform.localScale.x * levelSettings.ActorScale;
         
     }
 
@@ -74,13 +76,13 @@ public abstract class Actor : MonoBehaviour, IActor
             transform.localScale = new Vector3(_scale, _scale, 1);
         }
 
-        PhysicsType targetInitialPhysicsType = !_isSlice ? _settings.InitialPhysicsType : _settings.InitialPhysicsTypeAfterCut;
+        _initialPhysicsType = !_isSlice ? _settings.InitialPhysicsType : _settings.InitialPhysicsTypeAfterCut;
         PhysicsType targetPhysicsType = !_isSlice ? _settings.PhysicsType : _settings.PhysicsTypeAfterCut;
         foreach (var actorPhysics in targetPhysicsType.EnumToArray(_physicsTypes))
         {
             IActorPhysics state = _actorPhysicsFactory.CreatePhysics(actorPhysics);
             ActorPhysicsMap.Add(actorPhysics, state);
-            if (targetInitialPhysicsType.HasFlag(actorPhysics))
+            if (_initialPhysicsType.HasFlag(actorPhysics))
             {
                 _currentActorPhysics.Add(state);
                 state.OnStart();

@@ -73,8 +73,6 @@ public class GameManager : MonoBehaviour
 
         foreach (ActorSpawnerWaitTime actorSpawnerWaitTime in actorsSpawnerWaitTimeMap)
         {
-            _numFoodTotal++;
-
             ActorType actorType = actorSpawnerWaitTime.ActorType;
             
             ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
@@ -87,6 +85,7 @@ public class GameManager : MonoBehaviour
             
             if (actorGroupType == ActorGroupType.Food)
             {
+                _numFoodTotal++;
                 maxScore += foodSettings.Where(x => x.ActorType == actorType).FirstOrDefault().CookingActions.Length;
             }
         }
@@ -113,13 +112,12 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
         }
-
-        _numStars = _totalScoreSlider.GetNumStars();
-        _totalScoreSlider.SaveScore(_numStars);
     }
 
     private void EndGameLoseOrWin()
     {
+        _numStars = _totalScoreSlider.GetNumStars();
+        _totalScoreSlider.SaveScore(_numStars);
         _uiManager.ChangeGroupType(_numStars == 0 ? UIGroupType.Lose : UIGroupType.Win);
         StopAllCoroutines();
     }
