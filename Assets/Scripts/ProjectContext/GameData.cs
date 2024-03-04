@@ -26,6 +26,7 @@ public class GameData
 {
     public int CurrentLevel = 1;
     public Dictionary<int, LevelData> LevelDatasMap = new Dictionary<int, LevelData>();
+    public bool MuteSound = false;
 
     private GameData()
     {

@@ -30,8 +30,12 @@ public class Food : Actor, IFood, IPoolObject
 
     private Vector2 _size;
 
-    private float CurrentScore
+    public float CurrentScore
     {
+        get
+        {
+            return _currentScore * _partOfOne;
+        }
         set
         {
             if (value >= _currentScore)
@@ -73,6 +77,7 @@ public class Food : Actor, IFood, IPoolObject
         _partOfOne = 1;
         _currentCookingAction = _cookingActions[_currentCookingIndex];
         _rootInstanceId = Extensions.GetUniqueId();
+        _currentScore = 0;
     }
 
     public void OnDespawn()

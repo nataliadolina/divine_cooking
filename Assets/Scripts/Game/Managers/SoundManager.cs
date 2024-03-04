@@ -12,6 +12,36 @@ public class SoundManager : MonoBehaviour
     private AudioSource _swordSound;
     [SerializeField]
     private AudioSource _explosionSound;
+    [SerializeField]
+    private AudioSource _music;
+
+    [Inject]
+    private GameData _gameData;
+
+    private bool _muteSound;
+
+    public bool MuteSound
+    {
+        get
+        {
+            return _muteSound;
+        }
+
+        set
+        {
+            _cutSound.mute = value;
+            _swordSound.mute = value;
+            _explosionSound.mute = value;
+            _music.mute = value;
+            _muteSound = value;
+            _gameData.MuteSound = value;
+        }
+    }
+
+    private void Start()
+    {
+        MuteSound = _gameData.MuteSound;
+    }
 
     public void PlayCutSound()
     {

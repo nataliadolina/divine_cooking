@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6225583703453344524}
   - component: {fileID: 6203930490671780329}
   - component: {fileID: 2887249830863634465}
-  - component: {fileID: 1344542213134509601}
-  - component: {fileID: 4845884553766921234}
+  - component: {fileID: 197643292506930021}
   m_Layer: 0
   m_Name: Vase
   m_TagString: Untagged
@@ -133,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14.252852, y: 10.32725}
   m_EdgeRadius: 0
---- !u!114 &1344542213134509601
+--- !u!114 &197643292506930021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,19 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6420033167154117496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f161bdc2cb1029344bfe6c4a06b9033b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4845884553766921234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6420033167154117496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda3a07ba0f59c94b8899f9e6d1876e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d8c2ec193f300c40a2d46cdb8b44dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7861048311776225574

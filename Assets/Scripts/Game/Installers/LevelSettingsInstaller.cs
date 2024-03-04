@@ -10,8 +10,12 @@ public class LevelSettingsInstaller : ScriptableObjectInstaller<LevelSettingsIns
     [SerializeField]
     private Settings levelSettings;
 
+    [Inject]
+    private GameData _gameData;
+
     public override void InstallBindings()
     {
+        _gameData.CurrentLevel = levelSettings.NumLevel;
         Container.BindInstance(settings);
         Container.BindInstance(levelSettings);
     }

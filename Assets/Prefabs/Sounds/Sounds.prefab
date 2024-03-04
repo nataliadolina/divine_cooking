@@ -436,6 +436,7 @@ MonoBehaviour:
   _cutSound: {fileID: 4856439303859349044}
   _swordSound: {fileID: 3383230356810654266}
   _explosionSound: {fileID: 4121334661447506633}
+  _music: {fileID: 2882658737033354282}
 --- !u!114 &8679057367820751885
 MonoBehaviour:
   m_ObjectHideFlags: 0

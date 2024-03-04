@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum PauseButtonState
-{
-    Pause,
-    Play
-}
+
 public class GameStateButton : ButtonBase
 {
+    private enum PauseButtonState
+    {
+        Pause,
+        Play
+    }
+
     [SerializeField]
     private Sprite stopIcon;
     [SerializeField]

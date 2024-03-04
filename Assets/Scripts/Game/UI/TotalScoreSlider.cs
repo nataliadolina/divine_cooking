@@ -9,11 +9,8 @@ public class TotalScoreSlider : MonoBehaviour
     private float _twoStarsScore;
     private float _threeStarsScore;
 
-    private float _maxScore;
     private float _currentScore = 0;
-
     private int _currentLevel;
-
     public int NumStars = 0;
 
     [Inject]
@@ -27,7 +24,6 @@ public class TotalScoreSlider : MonoBehaviour
 
     public void SetMaxScore(float score)
     {
-        _maxScore = score;
         _slider = GetComponent<Slider>();
         _slider.value = 0;
         _slider.maxValue = score;

@@ -17,6 +17,7 @@ public class GameInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        Time.timeScale = 1;
         Container.BindMemoryPool<SplashParticles, SplashParticles.Pool>()
             .FromComponentInNewPrefab(_settings.SplashParticles)
             .UnderTransformGroup("Splashes")

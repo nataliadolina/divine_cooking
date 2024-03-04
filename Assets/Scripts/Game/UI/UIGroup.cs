@@ -6,7 +6,8 @@ public enum UIGroupType
 {
     Play,
     Win,
-    Lose
+    Lose,
+    Pause
 }
 
 public class UIGroup : MonoBehaviour
