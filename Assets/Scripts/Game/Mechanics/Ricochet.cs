@@ -19,11 +19,5 @@ public class Ricochet : MonoBehaviour
                 actor.ActorPhysicsMap[PhysicsType.Springy].Ricochet(direction);
             }
         }
-
-        IBomb bomb;
-        if (collision.collider.TryGetComponent(out bomb))
-        {
-            bomb.Explode();
-        }
     }
 }

@@ -24,6 +24,7 @@ public class AddForceTrigger : MonoBehaviour
             foreach (var physics in actor.CurrentActorPhysics)
             {
                 physics.AddForce(_directionVector3Map[direction], force);
+                actor.Ricochets.Add(this);
             }
         }
     }

@@ -5,15 +5,13 @@ public class ActorSpringyPhysics : ActorPhysicsBase
 {
     private float _speed = 0;
     private Vector3 _direction = Vector3.zero;
-    private IActor _actor;
     private Transform _transform;
 
     public override PhysicsType PhysicsType { get => PhysicsType.Springy; }
 
-    private ActorSpringyPhysics(IActor actor)
+    private ActorSpringyPhysics(IActor actor) : base(actor)
     {
-        _actor = actor;
-        _transform = _actor.Transform;
+        _transform = actor.Transform;
     }
 
     public override void OnStart()
@@ -23,16 +21,26 @@ public class ActorSpringyPhysics : ActorPhysicsBase
         _speed = _actor.Speed;
     }
 
-    public override void Ricochet(Vector3 ricochetDirection)
+    public override void Ricochet(Vector3 ricochetDirection, UnityEngine.Object ricochet = null)
     {
+        if (ricochet != null && _actor.Ricochets.Contains(ricochet))
+        {
+            return;
+        }
+
         _direction += ricochetDirection;
         _direction = _direction.normalized;
         _actor.Direction = _direction;
         _actor.Transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg);
     }
 
-    public override void MoveToAim(Vector3 aimPosition, float speed)
+    public override void MoveToAim(Vector3 aimPosition, float speed, UnityEngine.Object ricochet=null)
     {
+        if (ricochet != null && _actor.Ricochets.Contains(ricochet))
+        {
+            return;
+        }
+
         _speed = speed;
         _direction = new Vector3(aimPosition.x - _transform.position.x, aimPosition.y - _transform.position.y, 0).normalized;
         _actor.Speed = speed;

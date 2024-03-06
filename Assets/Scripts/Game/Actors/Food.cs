@@ -100,6 +100,7 @@ public class Food : Actor, IFood, IPoolObject
         _currentCookingIndex = 0;
         _collider.enabled = true;
         _blades.Clear();
+        _ricochets.Clear();
         Dispose();
         ChangePhysics(_initialPhysicsType);
     }
@@ -114,6 +115,7 @@ public class Food : Actor, IFood, IPoolObject
         _currentScore = foodArgs.CurrentScore;
 
         _blades = foodArgs.Blades.Copy();
+        _ricochets = foodArgs.Ricochets.Copy();
         _partOfOne = foodArgs.PartOfOne;
         _rootInstanceId = foodArgs.RootInstanceId;
         _isSlice = true;
@@ -184,7 +186,7 @@ public class Food : Actor, IFood, IPoolObject
         _blades.Add(blade);
         _collider.enabled = false;
 
-        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size * transform.localScale, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed, _currentTotalScore));
+        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size * transform.localScale, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed, _currentTotalScore, Ricochets));
 
         if (_partOfOne == 1)
         {

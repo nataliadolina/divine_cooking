@@ -27,7 +27,7 @@ public abstract class Actor : MonoBehaviour, IActor
     protected int _rootInstanceId;
     protected Vector3 _direction;
     protected float _speed;
-
+    protected List<UnityEngine.Object> _ricochets = new List<UnityEngine.Object>();
     protected bool _isSlice = false;
 
     protected HashSet<IActorPhysics> _currentActorPhysics = new HashSet<IActorPhysics>();
@@ -52,6 +52,9 @@ public abstract class Actor : MonoBehaviour, IActor
     public Collider2D Collider => _collider;
 
     public float PartOfOne => _partOfOne;
+
+    public List<UnityEngine.Object> Ricochets { get => _ricochets; }
+
     private float _scale = 1;
 
     protected PhysicsType _initialPhysicsType;

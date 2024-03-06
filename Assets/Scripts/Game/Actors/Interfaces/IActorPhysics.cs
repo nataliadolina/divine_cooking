@@ -10,7 +10,7 @@ public interface IActorPhysics
     
     public void OnUpdate();
     public void OnDestroy();
-    public void MoveToAim(Vector3 aimPosition, float speed);
+    public void MoveToAim(Vector3 aimPosition, float speed, UnityEngine.Object ricochet = null);
     public void AddForce(Vector3 direction, float force);
-    public void Ricochet(Vector3 ricochetDirection);
+    public void Ricochet(Vector3 ricochetDirection, UnityEngine.Object ricochet = null);
 }

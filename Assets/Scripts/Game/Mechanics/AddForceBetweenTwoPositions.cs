@@ -22,14 +22,16 @@ public class AddForceBetweenTwoPositions : MonoBehaviour
             {
                 foreach (var physics in actor.CurrentActorPhysics)
                 {
-                    physics.MoveToAim(aimTransform.position, speed);
+                    physics.MoveToAim(aimTransform.position, speed, this);
                 }
             }
 
             else
             {
-                actor.ActorPhysicsMap[targetType].MoveToAim(aimTransform.position, speed);
+                actor.ActorPhysicsMap[targetType].MoveToAim(aimTransform.position, speed, this);
             }
+
+            actor.Ricochets.Add(this);
         }
     }
 }

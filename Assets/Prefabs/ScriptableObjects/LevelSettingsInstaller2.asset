@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LevelSettingsInstaller2
   m_EditorClassIdentifier: 
   settings:
-    PhysicsType: 8
-    PhysicsTypeAfterCut: 8
+    PhysicsType: 9
+    PhysicsTypeAfterCut: 9
     InitialPhysicsType: 8
     InitialPhysicsTypeAfterCut: 8
   levelSettings:

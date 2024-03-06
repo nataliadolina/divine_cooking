@@ -1166,6 +1166,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toType: 1
+  changeTypeOnlyOnce: 0
+  changeTypeOnlyForFood: 1
 --- !u!1 &203552621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,7 +4557,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 979514684317406687, guid: 6857382e93bdac245807ce3f434e74ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 979514684317406687, guid: 6857382e93bdac245807ce3f434e74ec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13590,18 +13592,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2625593559928893058, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
+    - target: {fileID: 1018515640310485121, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: aimTransform
+      value: 
+      objectReference: {fileID: 1334104447}
     - target: {fileID: 6158271316257017265, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_Name
       value: DraggableShieldVertical
       objectReference: {fileID: 0}
-    - target: {fileID: 6551016347397518708, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
-      propertyPath: aimTransform
-      value: 
-      objectReference: {fileID: 1334104447}
+    - target: {fileID: 6158271316257017265, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.21
@@ -13643,28 +13645,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
-      propertyPath: m_Size.x
-      value: 9.774011
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_Size.y
-      value: 10.53958
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
-      propertyPath: m_Offset.x
-      value: -2.587933
+      value: 5.5267873
       objectReference: {fileID: 0}
     - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_Offset.y
-      value: 1.9187263
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+      value: 2.9137008
       objectReference: {fileID: 0}
     - target: {fileID: 9210591214721468966, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: dragZone

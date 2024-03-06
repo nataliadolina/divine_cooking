@@ -10854,11 +10854,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 979514684317406687, guid: 6857382e93bdac245807ce3f434e74ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 979514684317406687, guid: 6857382e93bdac245807ce3f434e74ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -21
+      value: -19.1
       objectReference: {fileID: 0}
     - target: {fileID: 979514684317406687, guid: 6857382e93bdac245807ce3f434e74ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11300,6 +11300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toType: 1
+  changeTypeOnlyOnce: 0
+  changeTypeOnlyForFood: 1
 --- !u!1 &1927957635
 GameObject:
   m_ObjectHideFlags: 0

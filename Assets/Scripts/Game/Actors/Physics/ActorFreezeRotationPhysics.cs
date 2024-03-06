@@ -7,10 +7,9 @@ public class ActorFreezeRotationPhysics : ActorPhysicsBase
 {
     public override PhysicsType PhysicsType => PhysicsType.FreezeRotation;
 
-    private IActor _actor;
-    public ActorFreezeRotationPhysics(IActor actor)
+    public ActorFreezeRotationPhysics(IActor actor) : base(actor)
     {
-        _actor = actor;
+
     }
 
     public override void OnStart()
@@ -21,8 +20,13 @@ public class ActorFreezeRotationPhysics : ActorPhysicsBase
         }
     }
 
-    public override void MoveToAim(Vector3 aimPosition, float speed)
+    public override void MoveToAim(Vector3 aimPosition, float speed, UnityEngine.Object ricochet = null)
     {
+        if (ricochet != null && _actor.Ricochets.Contains(ricochet))
+        {
+            return;
+        }
+
         Vector3 currentPosition = _actor.Transform.position;
         Vector3 direction = aimPosition - currentPosition;
         _actor.Rigidbody.AddForceAtPosition(direction.normalized * speed, currentPosition, ForceMode2D.Impulse);

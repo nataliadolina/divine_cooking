@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 6668173483326634114}
   - component: {fileID: 9210591214721468966}
   - component: {fileID: 8695115484955815432}
+  - component: {fileID: 1018515640310485121}
   m_Layer: 0
   m_Name: DraggableShieldVertical
   m_TagString: Untagged
@@ -250,7 +251,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.689808, y: 1.4433122}
+  m_Offset: {x: -1.0307102, y: 1.4836192}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -261,8 +262,23 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.347769, y: 7.8229294}
+  m_Size: {x: 6.659567, y: 8.3869505}
   m_EdgeRadius: 0
+--- !u!114 &1018515640310485121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6158271316257017265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c8213b645f1444dadbfec150f6b160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 0
+  speed: 10
+  aimTransform: {fileID: 0}
 --- !u!1 &7659659855884692699
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RicochetShield
       objectReference: {fileID: 0}
+    - target: {fileID: 1416248125534315117, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 5219797822388165482, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -438,33 +458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2747155464147517624, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
+    - {fileID: 5219797822388165482, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1416248125534315117, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6551016347397518708}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
---- !u!1 &2625593559928893058 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1416248125534315117, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
-  m_PrefabInstance: {fileID: 4019600399183138031}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6551016347397518708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2625593559928893058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c8213b645f1444dadbfec150f6b160, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetType: 0
-  speed: 10
-  aimTransform: {fileID: 0}
 --- !u!4 &6754854619957981550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7671439106187214209, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}

@@ -9,7 +9,7 @@ public interface IActor
     public Rigidbody2D Rigidbody { get; set; }
     public Transform Transform { get; }
     public Collider2D Collider { get; }
-
+    public List<UnityEngine.Object> Ricochets { get; }
     public Vector3 Direction { get; set; }
     public float Speed { get; set; }
 

@@ -5,18 +5,23 @@ using Zenject;
 
 public class ActorTransparentPhysics: ActorPhysicsBase
 {
-    private IActor _actor;
     public override PhysicsType PhysicsType { get => PhysicsType.Transperant; }
 
-    public ActorTransparentPhysics(IActor actor)
+    public ActorTransparentPhysics(IActor actor) : base(actor)
     {
-        _actor = actor;
+
     }
 
     public override void OnStart()
     {
         _actor.Rigidbody.isKinematic = true;
         _actor.Collider.isTrigger = true;
+    }
+
+    public override void OnDispose()
+    {
+        _actor.Rigidbody.isKinematic = false;
+        _actor.Collider.isTrigger = false;
     }
 
     public class Factory : PlaceholderFactory<ActorTransparentPhysics>

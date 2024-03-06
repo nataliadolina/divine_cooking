@@ -14,6 +14,7 @@ public struct FoodArgs
     public Vector3 Direction;
     public float Speed;
     public float CurrentTotalScore;
+    public List<UnityEngine.Object> Ricochets;
 
     public FoodArgs(
         FoodCookingProgressSlider foodCookingProgressSlider,
@@ -26,7 +27,8 @@ public struct FoodArgs
         int rootInstanceId,
         Vector3 direction,
         float speed,
-        float currentTotalScore
+        float currentTotalScore,
+        List<UnityEngine.Object> ricochets
         )
     {
         FoodCookingProgressSlider = foodCookingProgressSlider;
@@ -40,5 +42,6 @@ public struct FoodArgs
         Direction = direction;
         Speed = speed;
         CurrentTotalScore = currentTotalScore;
+        Ricochets = ricochets;
     }
 }
