@@ -23,6 +23,7 @@ public class Food : Actor, IFood, IPoolObject
     private CookingAction _currentCookingAction;
     private int _currentCookingIndex = 0;
     private float _currentScore;
+    private float _currentTotalScore;
 
     private List<UnityEngine.Object> _blades = new List<UnityEngine.Object>();
 
@@ -34,8 +35,10 @@ public class Food : Actor, IFood, IPoolObject
     {
         get
         {
-            return _currentScore * _partOfOne;
+            
+            return _currentScore;
         }
+
         set
         {
             if (value >= _currentScore)
@@ -51,6 +54,17 @@ public class Food : Actor, IFood, IPoolObject
         }
     }
 
+    public float CurrentTotalScore
+    {
+        get
+        {
+            return _currentTotalScore * _partOfOne;
+        }
+        private set
+        {
+            _currentTotalScore = value;
+        }
+    }
     
     public int MaxScore { get => _cookingActions.Length; }
     public CookingAction[] CookingActions { get => _cookingActions; }
@@ -78,6 +92,7 @@ public class Food : Actor, IFood, IPoolObject
         _currentCookingAction = _cookingActions[_currentCookingIndex];
         _rootInstanceId = Extensions.GetUniqueId();
         _currentScore = 0;
+        CurrentTotalScore = 0;
     }
 
     public void OnDespawn()
@@ -85,8 +100,8 @@ public class Food : Actor, IFood, IPoolObject
         _currentCookingIndex = 0;
         _collider.enabled = true;
         _blades.Clear();
-        ChangePhysics(_initialPhysicsType);
         Dispose();
+        ChangePhysics(_initialPhysicsType);
     }
 
 #endregion
@@ -97,6 +112,7 @@ public class Food : Actor, IFood, IPoolObject
         _currentCookingAction = foodArgs.CurrentCookingAction;
         _currentCookingIndex = foodArgs.CurrentCookingIndex;
         _currentScore = foodArgs.CurrentScore;
+
         _blades = foodArgs.Blades.Copy();
         _partOfOne = foodArgs.PartOfOne;
         _rootInstanceId = foodArgs.RootInstanceId;
@@ -104,6 +120,7 @@ public class Food : Actor, IFood, IPoolObject
         _rigidbody.velocity = foodArgs.Velocity * _partOfOne;
         Direction = foodArgs.Direction;
         Speed = foodArgs.Speed;
+        CurrentTotalScore = foodArgs.CurrentTotalScore;
     }
 
     public void SetSize(Vector2 size)
@@ -136,11 +153,13 @@ public class Food : Actor, IFood, IPoolObject
         if (_currentCookingAction == CookingAction.Empty)
         {
             CurrentScore = Mathf.Clamp(_currentScore - 0.5f * _partOfOne, 0, _currentScore);
+            CurrentTotalScore = Mathf.Clamp(_currentTotalScore - 0.5f, 0, CurrentScore);
         }
 
         else if (_currentCookingAction == cookingAction)
         {
             CurrentScore = _currentScore + _partOfOne;
+            CurrentTotalScore = _currentTotalScore + 1;
         }
 
         _currentCookingAction = _currentCookingIndex >= _cookingActions.Length - 1
@@ -165,7 +184,7 @@ public class Food : Actor, IFood, IPoolObject
         _blades.Add(blade);
         _collider.enabled = false;
 
-        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size * transform.localScale, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed));
+        _slicesSpawner.Spawn(direction, transform.position, transform.rotation, _size * transform.localScale, new FoodArgs(_progressSlider, _currentCookingAction, _currentCookingIndex, _currentScore, _blades, _partOfOne * 0.5f, _rigidbody.velocity, _rootInstanceId, Direction, Speed, _currentTotalScore));
 
         if (_partOfOne == 1)
         {

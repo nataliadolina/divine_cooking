@@ -49,6 +49,7 @@ public class ActorSpringyPhysics : ActorPhysicsBase
         _actor.Speed = 0f;
         _actor.Direction = Vector3.zero;
         _speed = 0;
+        _actor.Rigidbody.constraints = RigidbodyConstraints2D.None;
         _direction = Vector3.zero;
 }
 

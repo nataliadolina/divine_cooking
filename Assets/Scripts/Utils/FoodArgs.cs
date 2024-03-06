@@ -13,6 +13,7 @@ public struct FoodArgs
     public Vector2 Velocity;
     public Vector3 Direction;
     public float Speed;
+    public float CurrentTotalScore;
 
     public FoodArgs(
         FoodCookingProgressSlider foodCookingProgressSlider,
@@ -24,7 +25,8 @@ public struct FoodArgs
         Vector2 velocity,
         int rootInstanceId,
         Vector3 direction,
-        float speed
+        float speed,
+        float currentTotalScore
         )
     {
         FoodCookingProgressSlider = foodCookingProgressSlider;
@@ -37,5 +39,6 @@ public struct FoodArgs
         Velocity = velocity;
         Direction = direction;
         Speed = speed;
+        CurrentTotalScore = currentTotalScore;
     }
 }

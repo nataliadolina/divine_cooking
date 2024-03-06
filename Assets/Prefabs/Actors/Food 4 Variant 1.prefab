@@ -10,35 +10,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 823412118147059299, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: m_Name
-      value: Food 7 Variant 1
+      value: Food 4 Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 3867265628602193801, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: _scriptableObjectInstallers.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 1c92ad36830661549b2764611c78a4e0, type: 2}
+      objectReference: {fileID: 11400000, guid: 2f62ff2838600c14b855484b0344f03e, type: 2}
     - target: {fileID: 4332817545893349419, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 03007ffec0694074ca3b3e69b4277be9, type: 3}
+      objectReference: {fileID: 21300000, guid: 4f1b70ed479dbe449ba7e219a91aac20, type: 3}
     - target: {fileID: 5003834876883302751, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: actorType
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: foodType
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.b
-      value: 0.19624421
+      value: 0.09779279
       objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.g
-      value: 0.62177867
+      value: 0.4467631
       objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.r
-      value: 0.7075472
+      value: 0.7735849
       objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: cookingActions.Array.size
@@ -46,19 +46,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: actorType
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.b
-      value: 0.05490195
+      value: 0.070630096
       objectReference: {fileID: 0}
     - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.g
-      value: 0.43940943
+      value: 0.37786868
       objectReference: {fileID: 0}
     - target: {fileID: 6846738382772065871, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: splashColor.r
-      value: 0.5294118
+      value: 0.6037736
       objectReference: {fileID: 0}
     - target: {fileID: 8308183198715292536, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b

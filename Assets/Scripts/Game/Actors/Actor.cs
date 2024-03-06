@@ -118,6 +118,11 @@ public abstract class Actor : MonoBehaviour, IActor
         }
     }
 
+    public void SetInitialPhysicsType()
+    {
+        ChangePhysics(_initialPhysicsType);
+    }
+
     public void ChangePhysics(PhysicsType physicsType)
     {
         IActorPhysics[] physicsToDelete = _currentActorPhysics.Where(x => !physicsType.HasFlag(x.PhysicsType)).ToArray();

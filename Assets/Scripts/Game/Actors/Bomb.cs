@@ -34,7 +34,7 @@ public class Bomb : Actor, IBomb
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.GetComponent<Blade>())
+        if (collider.GetComponent<Blade>() || collider.CompareTag("Shield"))
         {
             Explode();
         }
@@ -56,6 +56,8 @@ public class Bomb : Actor, IBomb
         protected override void OnDespawned(Bomb item)
         {
             item.gameObject.SetActive(false);
+            item.Dispose();
+            item.SetInitialPhysicsType();
         }
     }
 }

@@ -16,10 +16,10 @@ public class Vase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IFood food;
+        Food food;
         if (collision.TryGetComponent(out food))
         {
-            _totalScoreSlider.ChangeScore(food.CurrentScore);
+            _totalScoreSlider.ChangeScore(food.CurrentTotalScore);
             _currentFoodProgress.ReleaseDoubleSlider(food);
             _gameManager.AddNumFoodReleased = food.PartOfOne;
             Destroy(collision.gameObject);

@@ -28,8 +28,8 @@ public class TotalScoreSlider : MonoBehaviour
         _slider.value = 0;
         _slider.maxValue = score;
         _oneStarScore = score * 0.5f;
-        _twoStarsScore = score * 2 / 3f;
-        _threeStarsScore = score * 5 / 6f;
+        _twoStarsScore = score * 5 / 6f;
+        _threeStarsScore = score * 9 / 10f;
     }
 
     public void ChangeScore(float value)

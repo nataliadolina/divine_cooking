@@ -56,9 +56,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 15
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_Spacing: -62.2
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -78,24 +78,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSize: 3
   _doubleSliderTypesMap:
-  - ActorType: 1
-    ProgressBar: {fileID: 1400454877581325329, guid: e4191f7cfaf7fa84a9525424221eec8c, type: 3}
   - ActorType: 2
     ProgressBar: {fileID: 5896716137008281751, guid: eddf879fa6c251e40a6074c0d4474446, type: 3}
   - ActorType: 3
     ProgressBar: {fileID: 5896716137008281751, guid: b238541282ec1bc449d1a434cfa43093, type: 3}
   - ActorType: 4
-    ProgressBar: {fileID: 5896716137008281751, guid: 22449e92bbf2018448c18a28887c12ab, type: 3}
-  - ActorType: 0
-    ProgressBar: {fileID: 5896716137008281751, guid: 2c366d6dca0795d4bab0891aab89702c, type: 3}
-  - ActorType: 6
     ProgressBar: {fileID: 5896716137008281751, guid: a9e22b568139ed04b8a5c27d7b75f547, type: 3}
-  - ActorType: 7
-    ProgressBar: {fileID: 5896716137008281751, guid: 0f43be0f7d434364286e0595db5f0ecd, type: 3}
-  - ActorType: 8
-    ProgressBar: {fileID: 5896716137008281751, guid: 2190a06a00f6eb747b71fb50d843a9bc, type: 3}
   - ActorType: 5
-    ProgressBar: {fileID: 5896716137008281751, guid: 2c366d6dca0795d4bab0891aab89702c, type: 3}
+    ProgressBar: {fileID: 5896716137008281751, guid: 0f43be0f7d434364286e0595db5f0ecd, type: 3}
+  - ActorType: 6
+    ProgressBar: {fileID: 5896716137008281751, guid: 2190a06a00f6eb747b71fb50d843a9bc, type: 3}
+  - ActorType: 1
+    ProgressBar: {fileID: 1400454877581325329, guid: e4191f7cfaf7fa84a9525424221eec8c, type: 3}
 --- !u!114 &6232252768607710634
 MonoBehaviour:
   m_ObjectHideFlags: 0

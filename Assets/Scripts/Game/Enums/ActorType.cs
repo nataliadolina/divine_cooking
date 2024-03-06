@@ -11,6 +11,4 @@ public enum ActorType
     Food4,
     Food5,
     Food6,
-    Food7,
-    Food8,
 }

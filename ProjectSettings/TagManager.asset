@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Silent
+  - Shield
   layers:
   - Default
   - TransparentFX
