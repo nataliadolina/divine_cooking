@@ -35,5 +35,6 @@ public class SoundManagerButtonMenu : ButtonBase
     {
         _isMute = !_isMute;
         _image.sprite = _iconMap[_isMute];
+        _gameData.MuteSound = _isMute;
     }
 }

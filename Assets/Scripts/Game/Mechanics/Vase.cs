@@ -22,7 +22,16 @@ public class Vase : MonoBehaviour
             _totalScoreSlider.ChangeScore(food.CurrentTotalScore);
             _currentFoodProgress.ReleaseDoubleSlider(food);
             _gameManager.AddNumFoodReleased = food.PartOfOne;
-            Destroy(collision.gameObject);
+
+            if (food.PartOfOne == 1)
+            {
+                food.Despawn();
+            }
+
+            else
+            {
+                Destroy(food.gameObject);
+            }
         }
     }
 }
