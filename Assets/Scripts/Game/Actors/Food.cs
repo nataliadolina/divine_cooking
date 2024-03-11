@@ -190,12 +190,17 @@ public class Food : Actor, IFood, IPoolObject
 
         if (_partOfOne == 1)
         {
-            _pool.Despawn(actorType, this);
+            Despawn();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Despawn()
+    {
+        _pool.Despawn(actorType, this);
     }
 
     private IEnumerator WaitToDestroyGameObject()

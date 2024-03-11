@@ -18,6 +18,15 @@ public class ReleaseFoodTrigger : MonoBehaviour
         {
             _currentFoodProgress.ReleaseDoubleSlider(food);
             _gameManager.AddNumFoodReleased = food.PartOfOne;
+            if (food.PartOfOne == 1)
+            {
+                food.Despawn();
+            }
+
+            else
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 979514684317406687}
   - component: {fileID: 8967113746782272188}
   - component: {fileID: 5991165495749982352}
+  - component: {fileID: 8831669418696757499}
   m_Layer: 0
-  m_Name: DespawnBombTrigger
+  m_Name: DespawnBombAndReleaseFoodTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +77,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 35.861015, y: 3.1158419}
+  m_Size: {x: 63.25, y: 3.1158419}
   m_EdgeRadius: 0
 --- !u!114 &5991165495749982352
 MonoBehaviour:
@@ -88,5 +89,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 275c2c9133616f24b9313abc2862532b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8831669418696757499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208670298798654838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f161bdc2cb1029344bfe6c4a06b9033b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
