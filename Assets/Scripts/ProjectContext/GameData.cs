@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
+[System.Serializable]
 public struct LevelData
 {
     public int LevelNum;
@@ -11,12 +13,6 @@ public struct LevelData
     public LevelData(int levelNum, float score, int numStars)
     {
         LevelNum = levelNum;
-        Score = score;
-        NumStars = numStars;
-    }
-
-    public void UpdateData(float score, int numStars)
-    {
         Score = score;
         NumStars = numStars;
     }
