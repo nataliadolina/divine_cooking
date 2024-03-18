@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 522097872131315829}
   - component: {fileID: -4759554461816439873}
   - component: {fileID: 5099204043853447319}
+  - component: {fileID: 8941513991314803697}
+  - component: {fileID: 5781007112708260655}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -76,6 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 5099204043853447319}
+  yandex: {fileID: 8941513991314803697}
+  language: {fileID: 5781007112708260655}
 --- !u!114 &5099204043853447319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,4 +93,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLevel: 1
-  MuteSound: 0
+--- !u!114 &8941513991314803697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675077542643662160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19efc20622545a41a149e9e34ea8d70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5781007112708260655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675077542643662160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35346abbd1f0ee342908f88b9d63031e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLanguage: 

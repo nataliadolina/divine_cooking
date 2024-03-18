@@ -443,6 +443,7 @@ GameObject:
   - component: {fileID: 6464088087431852138}
   - component: {fileID: 4463219491130076720}
   - component: {fileID: 1315706944363757756}
+  - component: {fileID: 6559334556566919536}
   m_Layer: 5
   m_Name: ResultText
   m_TagString: Untagged
@@ -566,6 +567,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6559334556566919536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947544995522428353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8899e5d683f904ba79abaff432649d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  en: You win
+  ru: "\u0422\u044B \u0432\u044B\u0438\u0433\u0440\u0430\u043B"
 --- !u!1 &7332655030260427006
 GameObject:
   m_ObjectHideFlags: 0

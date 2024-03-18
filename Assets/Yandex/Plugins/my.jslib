@@ -1,9 +1,4 @@
 mergeInto(LibraryManager.library, {
-  GetPlayerData: function () {
-    myGameInstance.SendMessage('Yandex', 'SetName', player.getName());
-    myGameInstance.SendMessage('Yandex', 'SetPhoto', player.getPhoto("medium"));
-  },
-
   RateGame : function () {
     ysdk.feedback.canReview()
       .then(({value, reason}) => {
@@ -19,7 +14,6 @@ mergeInto(LibraryManager.library, {
   },
 
   SaveExtern: function (date) {
-    console.log(date);
     var dateString = UTF8ToString(date);
     var myObj = JSON.parse(dateString);
     player.setData(myObj).then(() => console.log("data is set"));
@@ -30,6 +24,15 @@ mergeInto(LibraryManager.library, {
       const myJSON = JSON.stringify(_date);
       myGameInstance.SendMessage("ProjectContext(Clone)", "SetPlayerInfo", myJSON);
     });
-      
   },
+
+  GetLang : function () {
+      var lang = ysdk.environment.i18n.lang;
+      var bufferSize = lengthBytesUTF8(lang) + 1;
+      var buffer = _malloc(bufferSize);
+      stringToUTF8(lang, buffer, bufferSize);
+      console.log(buffer);
+      return buffer;
+  },
+
 });

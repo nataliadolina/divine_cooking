@@ -98,17 +98,20 @@ public class GameData : MonoBehaviour
     public void UpdateLevelData(float score, int numStars, int? level = null)
     {
         int _level = level ?? CurrentLevel;
+        bool shouldSave = false;
         if (!LevelDatasMap.ContainsKey(_level))
         {
             LevelData newLevelData = new LevelData(_level, score, numStars);
             _gameData.LevelDatas.Add(newLevelData);
             LevelDatasMap.Add(_level, newLevelData);
+            shouldSave = true;
         }
         else if (LevelDatasMap[_level].Score < score)
         {
             LevelData levelData = LevelDatasMap[_level];
             levelData.Score = score;
             levelData.NumStars = numStars;
+            shouldSave = true;
         }
 
         if (!LevelDatasMap.ContainsKey(_level + 1) && numStars > 0)
@@ -116,10 +119,16 @@ public class GameData : MonoBehaviour
             LevelData nextLevelData = new LevelData(_level + 1, 0, 0);
             _gameData.LevelDatas.Add(nextLevelData);
             LevelDatasMap.Add(_level + 1, nextLevelData);
+            shouldSave = true;
         }
 
 #if UNITY_WEBGL
-        Save();
+
+        if (shouldSave)
+        {
+            Save();
+        }
+        
 #endif
     }
 
