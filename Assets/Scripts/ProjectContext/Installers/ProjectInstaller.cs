@@ -3,8 +3,11 @@ using Zenject;
 
 public class ProjectInstaller : MonoInstaller
 {
+    [SerializeField]
+    private GameData gameData;
+
     public override void InstallBindings()
     {
-        Container.Bind<GameData>().AsSingle().NonLazy();
+        Container.BindInstance(gameData).AsSingle().NonLazy();
     }
 }

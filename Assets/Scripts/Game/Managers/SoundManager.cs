@@ -38,7 +38,23 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    [Inject]
+    private void Construct()
+    {
+        _gameData.onGameDataLoaded += SetMuteSound;
+    }
+
+    private void OnDestroy()
+    {
+        _gameData.onGameDataLoaded -= SetMuteSound;
+    }
+
     private void Start()
+    {
+        SetMuteSound();
+    }
+
+    private void SetMuteSound()
     {
         MuteSound = _gameData.MuteSound;
     }

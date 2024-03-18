@@ -18,7 +18,8 @@ public class SoundManagerButtonMenu : ButtonBase
     private bool _isMute;
     private Dictionary<bool, Sprite> _iconMap;
 
-    private void Start()
+    [Inject]
+    private void Construct()
     {
         _image = GetComponent<Image>();
         _iconMap = new Dictionary<bool, Sprite>()
@@ -27,6 +28,21 @@ public class SoundManagerButtonMenu : ButtonBase
             { false, unmuteIcon}
         };
 
+        _gameData.onGameDataLoaded += SetMuteSound;
+    }
+
+    private void OnDestroy()
+    {
+        _gameData.onGameDataLoaded -= SetMuteSound;
+    }
+
+    private void Start()
+    {
+        SetMuteSound();
+    }
+
+    private void SetMuteSound()
+    {
         _isMute = _gameData.MuteSound;
         _image.sprite = _iconMap[_isMute];
     }

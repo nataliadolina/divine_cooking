@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using System;
+using System.Linq;
 
-public struct LevelData
+[System.Serializable]
+public class LevelData
 {
     public int LevelNum;
     public float Score;
@@ -14,23 +18,81 @@ public struct LevelData
         Score = score;
         NumStars = numStars;
     }
+}
 
-    public void UpdateData(float score, int numStars)
+[Serializable]
+public class GameDataList
+{
+    public bool MuteSound;
+    public List<LevelData> LevelDatas;
+    public GameDataList()
     {
-        Score = score;
-        NumStars = numStars;
+        MuteSound = false;
+        LevelDatas = new List<LevelData>();
     }
 }
 
-public class GameData
+public class GameData : MonoBehaviour
 {
-    public int CurrentLevel = 1;
-    public Dictionary<int, LevelData> LevelDatasMap = new Dictionary<int, LevelData>();
-    public bool MuteSound = false;
+    public event Action onGameDataLoaded;
 
-    private GameData()
+    public int CurrentLevel = 1;
+    private Dictionary<int, LevelData> LevelDatasMap = new Dictionary<int, LevelData>();
+    private GameDataList _gameData = new GameDataList();
+    private bool _muteSound = false;
+    public bool MuteSound { get => _muteSound;
+        set
+        { 
+            if (_muteSound != value)
+            {
+                _muteSound = value;
+                _gameData.MuteSound = value;
+
+#if UNITY_WEBGL
+                Save();
+#endif
+            }
+        }
+    }
+
+    [DllImport("__Internal")]
+    private static extern void SaveExtern(string date);
+    [DllImport("__Internal")]
+    private static extern void LoadExtern();
+
+    private void Start()
     {
-        LevelDatasMap.Add(1, new LevelData(1, 0, 0));
+#if UNITY_WEBGL
+        LoadExtern();
+#endif
+#if UNITY_EDITOR
+        LevelData levelData = new LevelData(1, 0, 0);
+        _gameData.LevelDatas.Add(levelData);
+        LevelDatasMap.Add(1, levelData);
+#endif
+    }
+
+    private void Save()
+    {
+        string jsonString = JsonUtility.ToJson(_gameData);
+        SaveExtern(jsonString);
+    }
+
+    public void SetPlayerInfo(string value)
+    {
+        _gameData = JsonUtility.FromJson<GameDataList>(value);
+        _muteSound = _gameData.MuteSound;
+        if (_gameData.LevelDatas.Where(x => x.LevelNum == 1).Count() == 0)
+        {
+            _gameData.LevelDatas.Add(new LevelData(1, 0, 0));
+        }
+
+        foreach (var levelData in _gameData.LevelDatas)
+        {
+            LevelDatasMap.Add(levelData.LevelNum, levelData);
+        }
+
+        onGameDataLoaded?.Invoke();
     }
 
     public void UpdateLevelData(float score, int numStars, int? level = null)
@@ -38,17 +100,27 @@ public class GameData
         int _level = level ?? CurrentLevel;
         if (!LevelDatasMap.ContainsKey(_level))
         {
-            LevelDatasMap.Add(_level, new LevelData(_level, score, numStars));
+            LevelData newLevelData = new LevelData(_level, score, numStars);
+            _gameData.LevelDatas.Add(newLevelData);
+            LevelDatasMap.Add(_level, newLevelData);
         }
         else if (LevelDatasMap[_level].Score < score)
         {
-            LevelDatasMap[_level] = new LevelData(_level, score, numStars);
+            LevelData levelData = LevelDatasMap[_level];
+            levelData.Score = score;
+            levelData.NumStars = numStars;
         }
 
         if (!LevelDatasMap.ContainsKey(_level + 1) && numStars > 0)
         {
-            LevelDatasMap.Add(_level + 1, new LevelData(_level + 1, 0, 0));
+            LevelData nextLevelData = new LevelData(_level + 1, 0, 0);
+            _gameData.LevelDatas.Add(nextLevelData);
+            LevelDatasMap.Add(_level + 1, nextLevelData);
         }
+
+#if UNITY_WEBGL
+        Save();
+#endif
     }
 
     public int GetLevelStarsCount(int level)

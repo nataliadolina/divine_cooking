@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ReplayButton : ButtonBase
 {
-    [Inject]
-    private GameData _gameData;
-
     private int _currentLevel;
 
     [Inject]

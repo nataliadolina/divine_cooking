@@ -19,9 +19,12 @@ public class LevelImage : MonoBehaviour
     private Button _button;
     private TMP_Text _text;
 
+    private Image _image;
+
     [Inject]
     private void Construct(Settings settings)
     {
+        _image = GetComponent<Image>();
         _levelImageMap = new Dictionary<int, Sprite>
         {
             { -1, settings.LockedLevelImage},
@@ -30,16 +33,29 @@ public class LevelImage : MonoBehaviour
             { 2, settings.TwoStarsImage},
             { 3, settings.ThreeStarsImage}
         };
+
+        _text = GetComponentInChildren<TMP_Text>();
+        _text.text = levelNum.ToString();
+        _button = GetComponent<Button>();
+
+        _gameData.onGameDataLoaded += SetStarsCount;
+    }
+
+    private void OnDestroy()
+    {
+        _gameData.onGameDataLoaded -= SetStarsCount;
     }
 
     private void Start()
     {
-        _text = GetComponentInChildren<TMP_Text>();
-        _text.text = levelNum.ToString();
+        SetStarsCount();
+    }
 
+    private void SetStarsCount()
+    {
         int starsCount = _gameData.GetLevelStarsCount(levelNum);
-        GetComponent<Image>().sprite = _levelImageMap[starsCount];
-        _button = GetComponent<Button>();
+        _image.sprite = _levelImageMap[starsCount];
+
         if (starsCount == -1)
         {
             _button.interactable = false;
@@ -47,6 +63,7 @@ public class LevelImage : MonoBehaviour
         }
         else
         {
+            _button.interactable = true;
             _text.gameObject.SetActive(true);
             _button.onClick.AddListener(LoadLevel);
         }
