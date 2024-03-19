@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -34,12 +33,21 @@ public class GameDataList
 
 public class GameData : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void SaveExtern(string date);
+    [DllImport("__Internal")]
+    private static extern void LoadExtern();
+
     public event Action onGameDataLoaded;
 
     public int CurrentLevel = 1;
     private Dictionary<int, LevelData> LevelDatasMap = new Dictionary<int, LevelData>();
     private GameDataList _gameData = new GameDataList();
     private bool _muteSound = false;
+
+    public float LastAdvShowTime = 0f;
+    public int NumSwitchedLevelsAfterAdvWasShown = 0;
+
     public bool MuteSound { get => _muteSound;
         set
         { 
@@ -54,11 +62,6 @@ public class GameData : MonoBehaviour
             }
         }
     }
-
-    [DllImport("__Internal")]
-    private static extern void SaveExtern(string date);
-    [DllImport("__Internal")]
-    private static extern void LoadExtern();
 
     private void Start()
     {

@@ -15,6 +15,8 @@ public class Language : MonoBehaviour
     [Inject]
     private void Construct()
     {
+#if UNITY_WEBGL
         CurrentLanguage = GetLang();
+#endif
     }
 }

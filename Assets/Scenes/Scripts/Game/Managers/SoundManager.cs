@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using System;
 
 public class SoundManager : MonoBehaviour
 {
@@ -47,6 +44,16 @@ public class SoundManager : MonoBehaviour
     private void OnDestroy()
     {
         _gameData.onGameDataLoaded -= SetMuteSound;
+    }
+
+    public void PauseMusic()
+    {
+        _music.Pause();
+    }
+
+    public void UnPauseMusic()
+    {
+        _music.UnPause(); 
     }
 
     private void Start()

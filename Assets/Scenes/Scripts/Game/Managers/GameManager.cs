@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Zenject;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 [Serializable]
 public struct ActorSpawnerWaitTime
@@ -22,6 +23,9 @@ public struct ActorSpawnerWaitTime
 
 public class GameManager : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void ShowAdv();
+
     [SerializeField]
     private float waitToStartTime;
 
@@ -30,6 +34,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private SpawnSpotTypeMap[] spawnSpots;
+
+    [Inject]
+    private GameData gameData;
+
+    [Inject]
+    private SoundManager soundManager;
 
     private Dictionary<SpawnSpotType, Vector3> _spawnPositionsMap = new Dictionary<SpawnSpotType, Vector3>();
     private Dictionary<ActorGroupType, IActorPoolSpawner> _spawnersMap = new Dictionary<ActorGroupType, IActorPoolSpawner>();
@@ -94,6 +104,27 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
+    {
+#if UNITY_WEBGL
+        if (Time.time - gameData.LastAdvShowTime > 60f && gameData.NumSwitchedLevelsAfterAdvWasShown >= 1)
+        {
+            gameData.LastAdvShowTime = Time.time;
+            gameData.NumSwitchedLevelsAfterAdvWasShown = 0;
+            soundManager.PauseMusic();
+            ShowAdv();
+        }
+        else
+        {
+            gameData.NumSwitchedLevelsAfterAdvWasShown++;
+            StartCoroutine(WaitToSpawnNewPrefab());
+        }
+#endif
+#if UNITY_EDITOR
+        StartCoroutine(WaitToSpawnNewPrefab());
+#endif
+    }
+
+    public void StartGame()
     {
         StartCoroutine(WaitToSpawnNewPrefab());
     }

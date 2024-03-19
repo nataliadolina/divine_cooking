@@ -31,8 +31,24 @@ mergeInto(LibraryManager.library, {
       var bufferSize = lengthBytesUTF8(lang) + 1;
       var buffer = _malloc(bufferSize);
       stringToUTF8(lang, buffer, bufferSize);
-      console.log(buffer);
       return buffer;
+  },
+
+  ShowAdv : function(){
+    ysdk.adv.showFullscreenAdv({
+    callbacks: {
+        onClose: function(wasShown) {
+          myGameInstance.SendMessage("Sounds", "UnPauseMusic");
+          myGameInstance.SendMessage("GameManager", "StartGame");
+          console.log("----adv closed----")
+        },
+        onError: function(error) {
+          myGameInstance.SendMessage("Sounds", "UnPauseMusic");
+          myGameInstance.SendMessage("GameManager", "StartGame");
+          console.log("-----adv error----")
+        }
+      }
+    })
   },
 
 });
