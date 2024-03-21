@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelData
 {
@@ -26,14 +25,35 @@ public class GameData
 {
     public int CurrentLevel = 1;
     public Dictionary<int, LevelData> LevelDatasMap = new Dictionary<int, LevelData>();
-    public bool MuteSound = false;
+    private bool _muteSound = false;
+    public bool MuteSound { get => _muteSound;
+        set
+        {
+            if (_muteSound != value)
+            {
+                _muteSound = value;
+                PlayerPrefs.SetInt("MuteSound", value ? 1 : 0);
+                PlayerPrefs.Save();
+            }
+        }
+    }
+
 
     private GameData(Setting setting)
     {
         LoadProgressFromFile(setting.LevelCount);
+        LoadMuteSettingsFromFile();
         if (!LevelDatasMap.ContainsKey(1))
         {
             LevelDatasMap.Add(1, new LevelData(1, 0, 0));
+        }
+    }
+
+    private void LoadMuteSettingsFromFile()
+    {
+        if (PlayerPrefs.HasKey("MuteSound"))
+        {
+            MuteSound = PlayerPrefs.GetInt("MuteSound") == 1 ? true : false;
         }
     }
 
