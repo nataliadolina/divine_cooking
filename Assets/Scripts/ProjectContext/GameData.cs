@@ -17,6 +17,11 @@ public class LevelData
         Score = score;
         NumStars = numStars;
     }
+
+    public override string ToString()
+    {
+        return $"{Score} {NumStars}";
+    }
 }
 
 [Serializable]
@@ -55,7 +60,8 @@ public class GameData : MonoBehaviour
             {
                 _muteSound = value;
                 _gameData.MuteSound = value;
-
+                PlayerPrefs.SetInt("MuteSound", value ? 1 : 0);
+                PlayerPrefs.Save();
 #if UNITY_WEBGL
                 Save();
 #endif
@@ -68,11 +74,15 @@ public class GameData : MonoBehaviour
 #if UNITY_WEBGL
         LoadExtern();
 #endif
-#if UNITY_EDITOR
-        LevelData levelData = new LevelData(1, 0, 0);
-        _gameData.LevelDatas.Add(levelData);
-        LevelDatasMap.Add(1, levelData);
-#endif
+        LoadProgressFromFile(setting.LevelCount);
+        LoadMuteSettingsFromFile();
+
+        if (!LevelDatasMap.ContainsKey(1))
+        {
+            LevelData levelData = new LevelData(1, 0, 0);
+            _gameData.LevelDatas.Add(levelData);
+            LevelDatasMap.Add(1, levelData);
+        }
     }
 
     private void Save()
@@ -98,31 +108,74 @@ public class GameData : MonoBehaviour
         onGameDataLoaded?.Invoke();
     }
 
+    private void LoadMuteSettingsFromFile()
+    {
+        if (PlayerPrefs.HasKey("MuteSound"))
+        {
+            MuteSound = PlayerPrefs.GetInt("MuteSound") == 1 ? true : false;
+        }
+    }
+
+    private void LoadProgressFromFile(int levelCount)
+    {
+        for (int i = 1; i <= levelCount; i++)
+        {
+            string levelNum = i.ToString();
+            if (PlayerPrefs.HasKey(levelNum))
+            {
+                string[] value = PlayerPrefs.GetString(levelNum).Split();
+                LevelData levelData = new LevelData(i, float.Parse(value[0]), int.Parse(value[1]));
+                LevelDatasMap.Add(i, levelData);
+            }
+        }
+    }
+
     public void UpdateLevelData(float score, int numStars, int? level = null)
     {
         int _level = level ?? CurrentLevel;
         bool shouldSave = false;
+        bool needToSavePlayerPrefs = false;
+
         if (!LevelDatasMap.ContainsKey(_level))
         {
             LevelData newLevelData = new LevelData(_level, score, numStars);
             _gameData.LevelDatas.Add(newLevelData);
             LevelDatasMap.Add(_level, newLevelData);
+
+            PlayerPrefs.SetString(_level.ToString(), newLevelData.ToString());
+
             shouldSave = true;
+            needToSavePlayerPrefs = true;
         }
+
         else if (LevelDatasMap[_level].Score < score)
         {
             LevelData levelData = LevelDatasMap[_level];
             levelData.Score = score;
             levelData.NumStars = numStars;
+            
+            PlayerPrefs.SetString(_level.ToString(), levelData.ToString());
+            needToSavePlayerPrefs = true;
             shouldSave = true;
         }
 
         if (!LevelDatasMap.ContainsKey(_level + 1) && numStars > 0)
         {
-            LevelData nextLevelData = new LevelData(_level + 1, 0, 0);
+            int nextLevel = _level + 1;
+            LevelData nextLevelData = new LevelData(nextLevel, 0, 0);
             _gameData.LevelDatas.Add(nextLevelData);
-            LevelDatasMap.Add(_level + 1, nextLevelData);
+            
+            LevelDatasMap.Add(nextLevel, nextLevelData);
+
+            PlayerPrefs.SetString(nextLevel.ToString(), nextLevelData.ToString());
+
+            needToSavePlayerPrefs = true;
             shouldSave = true;
+        }
+
+        if (needToSavePlayerPrefs)
+        {
+            PlayerPrefs.Save();
         }
 
 #if UNITY_WEBGL
@@ -143,5 +196,11 @@ public class GameData : MonoBehaviour
         }
 
         return LevelDatasMap[level].NumStars;
+    }
+
+    [System.Serializable]
+    public class Setting
+    {
+        public int LevelCount;
     }
 }
