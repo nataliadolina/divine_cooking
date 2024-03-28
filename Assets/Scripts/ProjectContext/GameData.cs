@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using System;
 using System.Linq;
+using Zenject;
 
 [System.Serializable]
 public class LevelData
@@ -53,6 +54,9 @@ public class GameData : MonoBehaviour
     public float LastAdvShowTime = 0f;
     public int NumSwitchedLevelsAfterAdvWasShown = 0;
 
+    [Inject]
+    private Settings _settings;
+
     public bool MuteSound { get => _muteSound;
         set
         { 
@@ -71,18 +75,12 @@ public class GameData : MonoBehaviour
 
     private void Start()
     {
+        LoadProgressFromFile(_settings.LevelCount);
+        LoadMuteSettingsFromFile();
+
 #if UNITY_WEBGL
         LoadExtern();
 #endif
-        LoadProgressFromFile(setting.LevelCount);
-        LoadMuteSettingsFromFile();
-
-        if (!LevelDatasMap.ContainsKey(1))
-        {
-            LevelData levelData = new LevelData(1, 0, 0);
-            _gameData.LevelDatas.Add(levelData);
-            LevelDatasMap.Add(1, levelData);
-        }
     }
 
     private void Save()
@@ -93,17 +91,53 @@ public class GameData : MonoBehaviour
 
     public void SetPlayerInfo(string value)
     {
-        _gameData = JsonUtility.FromJson<GameDataList>(value);
+        GameDataList newGameData = JsonUtility.FromJson<GameDataList>(value);
         _muteSound = _gameData.MuteSound;
-        if (_gameData.LevelDatas.Where(x => x.LevelNum == 1).Count() == 0)
+
+        bool shouldSave = false;
+        int maxLevelDatas = newGameData.LevelDatas.Count() > LevelDatasMap.Count() ? newGameData.LevelDatas.Count() : LevelDatasMap.Count();
+        for (int i = 1; i <= maxLevelDatas; i++)
         {
-            _gameData.LevelDatas.Add(new LevelData(1, 0, 0));
+            LevelData currentLevelData = null;
+            LevelData levelDataExtern = newGameData.LevelDatas.Where(x => x.LevelNum == i).FirstOrDefault();
+            if (LevelDatasMap.TryGetValue(i, out currentLevelData))
+            {
+                if (levelDataExtern != null)
+                {
+                    if (currentLevelData.NumStars > levelDataExtern.NumStars)
+                    {
+                        shouldSave = true;
+                    }
+                    else
+                    {
+                        _gameData.LevelDatas.Remove(currentLevelData);
+                        _gameData.LevelDatas.Add(levelDataExtern);
+
+                        LevelDatasMap.Remove(i);
+                        LevelDatasMap.Add(i, levelDataExtern);
+                    }
+                }
+            }
+            else if (levelDataExtern != null)
+            {
+                _gameData.LevelDatas.Add(levelDataExtern);
+                LevelDatasMap.Add(i, levelDataExtern);
+            }
         }
 
-        foreach (var levelData in _gameData.LevelDatas)
+        if (_gameData.LevelDatas.Where(x => x.LevelNum == 1).Count() == 0 )
         {
-            LevelDatasMap.Add(levelData.LevelNum, levelData);
+            LevelData firstLevelData = new LevelData(1, 0, 0);
+            _gameData.LevelDatas.Add(firstLevelData);
+            LevelDatasMap.Add(1, firstLevelData);
         }
+
+#if UNITY_WEBGL
+        if (shouldSave)
+        {
+            Save();
+        }
+#endif
 
         onGameDataLoaded?.Invoke();
     }
@@ -114,6 +148,7 @@ public class GameData : MonoBehaviour
         {
             MuteSound = PlayerPrefs.GetInt("MuteSound") == 1 ? true : false;
         }
+        onGameDataLoaded?.Invoke();
     }
 
     private void LoadProgressFromFile(int levelCount)
@@ -125,9 +160,26 @@ public class GameData : MonoBehaviour
             {
                 string[] value = PlayerPrefs.GetString(levelNum).Split();
                 LevelData levelData = new LevelData(i, float.Parse(value[0]), int.Parse(value[1]));
-                LevelDatasMap.Add(i, levelData);
+                if (!LevelDatasMap.ContainsKey(i))
+                {
+                    LevelDatasMap.Add(i, levelData);
+                    _gameData.LevelDatas.Add(levelData);
+                }
+                else if (LevelDatasMap[i].NumStars < levelData.NumStars)
+                {
+                    LevelDatasMap[i].NumStars = levelData.NumStars;
+                }
             }
         }
+
+        if (!LevelDatasMap.ContainsKey(1))
+        {
+            LevelData levelData = new LevelData(1, 0, 0);
+            _gameData.LevelDatas.Add(levelData);
+            LevelDatasMap.Add(1, levelData);
+        }
+
+        onGameDataLoaded?.Invoke();
     }
 
     public void UpdateLevelData(float score, int numStars, int? level = null)
@@ -199,7 +251,7 @@ public class GameData : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Setting
+    public class Settings
     {
         public int LevelCount;
     }

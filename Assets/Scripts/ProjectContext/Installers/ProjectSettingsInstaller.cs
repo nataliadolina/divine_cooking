@@ -5,7 +5,7 @@ using Zenject;
 public class ProjectSettingsInstaller : ScriptableObjectInstaller<ProjectSettingsInstaller>
 {
     [SerializeField]
-    private GameData.Setting _gameSettings;
+    private GameData.Settings _gameSettings;
 
     public override void InstallBindings()
     {

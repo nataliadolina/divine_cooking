@@ -7,26 +7,39 @@ public class InternationalText : MonoBehaviour
     [SerializeField] private string en;
     [SerializeField] private string ru;
 
-    [Inject]
-    private Language language;
+    private TMP_Text _text;
+
+    private Language _language;
 
     [Inject]
-    private void Construct()
+    private void Construct(Language language)
     {
-        TMP_Text text = GetComponent<TMP_Text>();
-        if (language.CurrentLanguage == "en")
+        _text = GetComponent<TMP_Text>();
+        _language = language;
+        language.onSetLanguage += SetText;
+        SetText();
+    }
+
+    private void OnDestroy()
+    {
+        _language.onSetLanguage -= SetText;
+    }
+
+    private void SetText()
+    {
+        if (_language.CurrentLanguage == "en")
         {
-            text.text = en;
+            _text.text = en;
         }
 
-        else if (language.CurrentLanguage == "ru")
+        else if (_language.CurrentLanguage == "ru")
         {
-            text.text = ru;
+            _text.text = ru;
         }
 
         else
         {
-            text.text = en;
+            _text.text = en;
         }
     }
 }

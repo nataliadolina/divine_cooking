@@ -10,13 +10,13 @@ public class Language : MonoBehaviour
     [DllImport("__Internal")]
     private static extern string GetLang();
 
-    public string CurrentLanguage;
+    public string CurrentLanguage = "en";
 
-    [Inject]
-    private void Construct()
+    private void Start()
     {
 #if UNITY_WEBGL
         CurrentLanguage = GetLang();
+        onSetLanguage?.Invoke();
 #endif
     }
 }
