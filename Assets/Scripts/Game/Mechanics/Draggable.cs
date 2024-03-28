@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 [Flags]
 public enum DragType
@@ -14,37 +16,73 @@ public class Draggable : MonoBehaviour
     private DragType dragType;
     [SerializeField]
     private RectangleZone dragZone;
+    [SerializeField]
+    private RectangleZone dragTriggerZone;
 
-    private Vector3 offset;
+    [Inject]
+    private MobileTouchManager _mobileTouchManager;
 
-    void OnMouseDown()
+    private List<int> _touchIndexShouldMove = new List<int>();
+
+    [Inject]
+    private void Construct()
     {
-        offset = transform.position -
-            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        _mobileTouchManager.onMovedFinger += MoveToPosition;
+        _mobileTouchManager.oneEndedFingerTouch += RemoveFingerId;
     }
 
-    void OnMouseDrag()
+    private void OnDestroy()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        _mobileTouchManager.onMovedFinger -= MoveToPosition;
+        _mobileTouchManager.oneEndedFingerTouch -= RemoveFingerId;
+    }
+
+    private void Drag(MoveTouchArgs moveTouchArgs)
+    {
         Vector3 position = transform.position;
+        Vector3 mousePosition = new Vector2(position.x, position.y) + moveTouchArgs.Offset;
         Vector3 newPosition = new Vector3();
 
         if (dragType.HasFlag(DragType.Vertical) && dragType.HasFlag(DragType.Horizontal))
         {
-            newPosition = dragZone.ClampPosition(dragType, mousePosition + offset);
+            newPosition = dragZone.ClampPosition(dragType, new Vector3(mousePosition.x, mousePosition.y, position.z));
         }
         if (dragType.HasFlag(DragType.Horizontal))
         {
-            newPosition = dragZone.ClampPosition(dragType, new Vector3(mousePosition.x, position.y, position.z) + new Vector3(offset.x, 0, 0));
+            newPosition = dragZone.ClampPosition(dragType, new Vector3(mousePosition.x, position.y, position.z));
         }
         else if (dragType.HasFlag(DragType.Vertical))
         {
-            newPosition = dragZone.ClampPosition(dragType, new Vector3(position.x, mousePosition.y, position.z) + new Vector3(0, offset.y, 0));
+            newPosition = dragZone.ClampPosition(dragType, new Vector3(position.x, mousePosition.y, position.z));
         }
 
-        if (dragZone.IsPositionInsideZone(newPosition))
+        transform.position = newPosition;
+    }
+
+    private void MoveToPosition(Dictionary<int, MoveTouchArgs> positions)
+    {
+        foreach (int id in positions.Keys)
         {
-            transform.position = newPosition;
+            MoveTouchArgs value = positions[id];
+
+            if (_touchIndexShouldMove.Contains(value.TouchIndex))
+            {
+                Drag(value);
+            }
+
+            else if (dragTriggerZone.IsPositionInsideZone(value.StartPosition))
+            {
+                _touchIndexShouldMove.Add(value.TouchIndex);
+                Drag(value);
+            }
+        }
+    }
+
+    private void RemoveFingerId(int fingerId)
+    {
+        if (_touchIndexShouldMove.Contains(fingerId))
+        {
+            _touchIndexShouldMove.Remove(fingerId);
         }
     }
 }
