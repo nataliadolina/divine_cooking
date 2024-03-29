@@ -378,6 +378,10 @@ PrefabInstance:
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 1211594788}
+    - target: {fileID: 6060787173903821980, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: dragZone
+      value: 
+      objectReference: {fileID: 1211594788}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalScale.x
       value: -0.608859
@@ -1371,6 +1375,10 @@ PrefabInstance:
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 2105336394}
+    - target: {fileID: 6060787173903821980, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: dragZone
+      value: 
+      objectReference: {fileID: 2105336394}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1749,6 +1757,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1517114737}
     - target: {fileID: 4651361940753348621, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: dragZone
+      value: 
+      objectReference: {fileID: 1935974877}
+    - target: {fileID: 6060787173903821980, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 1935974877}
@@ -2428,7 +2440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 83c8f071824723147930077876beecfc, type: 2}
-  - {fileID: 11400000, guid: 0ec4a186ffc764d4fbf82b5dae5f16c8, type: 2}
+  - {fileID: 11400000, guid: 082152d3f8bffee489ba5da347d0471d, type: 2}
   _monoInstallers:
   - {fileID: 1564046841}
   _installerPrefabs: []

@@ -10706,7 +10706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 83c8f071824723147930077876beecfc, type: 2}
-  - {fileID: 11400000, guid: 0ec4a186ffc764d4fbf82b5dae5f16c8, type: 2}
+  - {fileID: 11400000, guid: 8461a36b45a26154db0eac4181c69331, type: 2}
   _monoInstallers:
   - {fileID: 1564046841}
   _installerPrefabs: []
@@ -14739,8 +14739,12 @@ PrefabInstance:
       value: 0.082566276
       objectReference: {fileID: 0}
     - target: {fileID: 2267123251028773235, guid: 17bf013b5e871404fa66134a0b2c56a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267123251028773235, guid: 17bf013b5e871404fa66134a0b2c56a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 2525057298417967497, guid: 17bf013b5e871404fa66134a0b2c56a2, type: 3}
       propertyPath: m_Name
@@ -14792,7 +14796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988033427017328807, guid: 17bf013b5e871404fa66134a0b2c56a2, type: 3}
       propertyPath: yLimitOffset
-      value: 2.63
+      value: 2.98
       objectReference: {fileID: 0}
     - target: {fileID: 6845692026751124618, guid: 17bf013b5e871404fa66134a0b2c56a2, type: 3}
       propertyPath: m_LocalPosition.x
