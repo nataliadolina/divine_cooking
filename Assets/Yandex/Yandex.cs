@@ -13,6 +13,6 @@ public class Yandex : MonoBehaviour
 
     public void RateGameButton()
     {
-        //RateGame();
+        RateGame();
     }
 }

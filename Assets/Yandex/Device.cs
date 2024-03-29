@@ -13,7 +13,7 @@ public class Device : MonoBehaviour
     private void Start()
     {
 #if UNITY_WEBGL
-        //Platform = GetPlatform();
+        Platform = GetPlatform();
 #endif
     }
 }

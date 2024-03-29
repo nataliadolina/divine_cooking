@@ -79,7 +79,7 @@ public class GameData : MonoBehaviour
         LoadMuteSettingsFromFile();
 
 #if UNITY_WEBGL
-        //LoadExtern();
+        LoadExtern();
 #endif
     }
 
@@ -135,7 +135,7 @@ public class GameData : MonoBehaviour
 #if UNITY_WEBGL
         if (shouldSave)
         {
-            //Save();
+            Save();
         }
 #endif
 
@@ -234,7 +234,7 @@ public class GameData : MonoBehaviour
 
         if (shouldSave)
         {
-            //Save();
+            Save();
         }
         
 #endif
