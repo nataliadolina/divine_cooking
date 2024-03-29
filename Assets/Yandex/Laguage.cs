@@ -1,6 +1,5 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
-using Zenject;
 using System;
 
 public class Language : MonoBehaviour
