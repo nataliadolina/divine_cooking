@@ -121,6 +121,11 @@ public abstract class Actor : MonoBehaviour, IActor
         }
     }
 
+    public void SetIsSlice(bool value)
+    {
+        _isSlice = value;
+    }
+
     public void SetInitialPhysicsType()
     {
         ChangePhysics(_initialPhysicsType);

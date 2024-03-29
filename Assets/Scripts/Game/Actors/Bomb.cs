@@ -57,6 +57,7 @@ public class Bomb : Actor, IBomb
         {
             item.gameObject.SetActive(false);
             item.Dispose();
+            item.SetIsSlice(false);
             item.SetInitialPhysicsType();
         }
     }

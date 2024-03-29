@@ -37,6 +37,11 @@ public class ActorRealisticPhysics : ActorPhysicsBase
         _actor.Rigidbody.velocity = direction * force;
     }
 
+    public override void OnDispose()
+    {
+        _actor.Rigidbody.velocity = new Vector2(0, 0);    
+    }
+
     public class Factory : PlaceholderFactory<ActorRealisticPhysics>
     {
 
