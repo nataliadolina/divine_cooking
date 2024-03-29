@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     PhysicsType: 7
-    PhysicsTypeAfterCut: 3
+    PhysicsTypeAfterCut: 11
     InitialPhysicsType: 4
-    InitialPhysicsTypeAfterCut: 3
+    InitialPhysicsTypeAfterCut: 8
   levelSettings:
     NumLevel: 5
     ActorScale: 0.7

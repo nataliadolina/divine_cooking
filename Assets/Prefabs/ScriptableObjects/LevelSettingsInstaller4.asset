@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LevelSettingsInstaller4
   m_EditorClassIdentifier: 
   settings:
-    PhysicsType: 9
-    PhysicsTypeAfterCut: 9
-    InitialPhysicsType: 8
-    InitialPhysicsTypeAfterCut: 8
+    PhysicsType: 7
+    PhysicsTypeAfterCut: 3
+    InitialPhysicsType: 4
+    InitialPhysicsTypeAfterCut: 3
   levelSettings:
     NumLevel: 4
-    ActorScale: 1
+    ActorScale: 0.7
