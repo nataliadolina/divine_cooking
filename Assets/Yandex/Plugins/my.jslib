@@ -77,6 +77,14 @@ mergeInto(LibraryManager.library, {
       return buffer;
   },
 
+  GetPlatform : function () {
+    var platform = ysdk.deviceInfo.type;
+    var bufferSize = lengthBytesUTF8(platform) + 1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(platform, buffer, bufferSize);
+    return buffer;
+  },
+
   ShowAdv : function () {
     ysdk.adv.showFullscreenAdv({
     callbacks: {

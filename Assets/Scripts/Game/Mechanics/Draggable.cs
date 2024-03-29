@@ -10,19 +10,20 @@ public enum DragType
     Horizontal = 2
 }
 
-public class Draggable : MonoBehaviour
+public class DraggableMobile : MonoBehaviour, IDraggable
 {
-    [SerializeField]
-    private DragType dragType;
-    [SerializeField]
-    private RectangleZone dragZone;
-    [SerializeField]
-    private RectangleZone dragTriggerZone;
+    private RectangleZone _dragTriggerZone;
+    private DragType _dragType;
+    private RectangleZone _dragZone;
 
     [Inject]
     private MobileTouchManager _mobileTouchManager;
 
     private List<int> _touchIndexShouldMove = new List<int>();
+
+    public DragType DragType { set => _dragType = value; }
+    public RectangleZone DragZone { set => _dragZone = value; }
+    public RectangleZone DragTriggerZone { set => _dragTriggerZone = value; }
 
     [Inject]
     private void Construct()
@@ -43,17 +44,17 @@ public class Draggable : MonoBehaviour
         Vector3 mousePosition = new Vector2(position.x, position.y) + moveTouchArgs.Offset;
         Vector3 newPosition = new Vector3();
 
-        if (dragType.HasFlag(DragType.Vertical) && dragType.HasFlag(DragType.Horizontal))
+        if (_dragType.HasFlag(DragType.Vertical) && _dragType.HasFlag(DragType.Horizontal))
         {
-            newPosition = dragZone.ClampPosition(dragType, new Vector3(mousePosition.x, mousePosition.y, position.z));
+            newPosition = _dragZone.ClampPosition(_dragType, new Vector3(mousePosition.x, mousePosition.y, position.z));
         }
-        if (dragType.HasFlag(DragType.Horizontal))
+        if (_dragType.HasFlag(DragType.Horizontal))
         {
-            newPosition = dragZone.ClampPosition(dragType, new Vector3(mousePosition.x, position.y, position.z));
+            newPosition = _dragZone.ClampPosition(_dragType, new Vector3(mousePosition.x, position.y, position.z));
         }
-        else if (dragType.HasFlag(DragType.Vertical))
+        else if (_dragType.HasFlag(DragType.Vertical))
         {
-            newPosition = dragZone.ClampPosition(dragType, new Vector3(position.x, mousePosition.y, position.z));
+            newPosition = _dragZone.ClampPosition(_dragType, new Vector3(position.x, mousePosition.y, position.z));
         }
 
         transform.position = newPosition;
@@ -70,7 +71,7 @@ public class Draggable : MonoBehaviour
                 Drag(value);
             }
 
-            else if (dragTriggerZone.IsPositionInsideZone(value.StartPosition))
+            else if (_dragTriggerZone.IsPositionInsideZone(value.StartPosition))
             {
                 _touchIndexShouldMove.Add(value.TouchIndex);
                 Drag(value);

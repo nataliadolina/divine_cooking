@@ -9,11 +9,14 @@ public class ProjectInstaller : MonoInstaller
     private Yandex yandex;
     [SerializeField]
     private Language language;
+    [SerializeField]
+    private Device device;
 
     public override void InstallBindings()
     {
         Container.BindInstance(gameData).AsSingle().NonLazy();
         Container.BindInstance(yandex).AsSingle().NonLazy();
         Container.BindInstance(language).AsSingle().NonLazy();
+        Container.BindInstance(device).AsSingle().NonLazy();
     }
 }

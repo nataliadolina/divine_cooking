@@ -8,7 +8,7 @@ public class SignInPanel : MonoBehaviour
 
     private void Start()
     {
-        CheckAuthorized();
+        //CheckAuthorized();
     }
 
     public void SetActiveGameObject()

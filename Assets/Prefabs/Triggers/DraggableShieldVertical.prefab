@@ -177,9 +177,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6668173483326634114}
-  - component: {fileID: 9210591214721468966}
   - component: {fileID: 8695115484955815432}
   - component: {fileID: 1018515640310485121}
+  - component: {fileID: 7728844573561495223}
   m_Layer: 0
   m_Name: DraggableShieldVertical
   m_TagString: Shield
@@ -206,21 +206,6 @@ Transform:
   - {fileID: 7040012377219178722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9210591214721468966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158271316257017265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec23fe0ea5b7f14783bc32560bde8d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dragType: 1
-  dragZone: {fileID: 0}
-  dragTriggerZone: {fileID: 4772876953491306336}
 --- !u!61 &8695115484955815432
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -281,6 +266,21 @@ MonoBehaviour:
   targetType: 0
   speed: 10
   aimTransform: {fileID: 0}
+--- !u!114 &7728844573561495223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6158271316257017265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0eef8a35140cb040a4784912a8e633a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragType: 1
+  dragZone: {fileID: 0}
+  dragTriggerZone: {fileID: 4772876953491306336}
 --- !u!1 &7659659855884692699
 GameObject:
   m_ObjectHideFlags: 0

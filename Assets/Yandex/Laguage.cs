@@ -15,7 +15,7 @@ public class Language : MonoBehaviour
     private void Start()
     {
 #if UNITY_WEBGL
-        CurrentLanguage = GetLang();
+        //CurrentLanguage = GetLang();
         onSetLanguage?.Invoke();
 #endif
     }
