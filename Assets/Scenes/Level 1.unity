@@ -464,10 +464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoseGamePanel
       objectReference: {fileID: 0}
-    - target: {fileID: 6653706665188863276, guid: 20650a2ea6a0c704fa54cc281c2b5c52, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8438955804107545223, guid: 20650a2ea6a0c704fa54cc281c2b5c52, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1758,10 +1754,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameResultPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 8060933068283040617, guid: dda55ca5438cbea4c92a67b1f2fe409d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2288,10 +2280,6 @@ PrefabInstance:
     - target: {fileID: 2222000489405375871, guid: a168ca802aa8874489b2b3889a1667a4, type: 3}
       propertyPath: m_Name
       value: PausePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 2222000489405375871, guid: a168ca802aa8874489b2b3889a1667a4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2525087557476154453, guid: a168ca802aa8874489b2b3889a1667a4, type: 3}
       propertyPath: m_Pivot.x

@@ -413,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   en: Sign in
   ru: "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
+  tr: "Giri\u015F yap"
 --- !u!1 &130421101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,6 +1397,7 @@ MonoBehaviour:
   ru: "\u0412\u043E\u0439\u0434\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B
     \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u043B\u0441\u044F
     \u043D\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0435 \u044F\u043D\u0434\u0435\u043A\u0441\u0430"
+  tr: "\u0130lerlemenin Yandex sunucusuna kaydedilmesi i\xE7in oturum a\xE7\u0131n"
 --- !u!114 &531518843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,7 +2301,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 61025675}
   m_HandleRect: {fileID: 61025674}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

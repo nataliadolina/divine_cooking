@@ -6,6 +6,7 @@ public class InternationalText : MonoBehaviour
 {
     [SerializeField] private string en;
     [SerializeField] private string ru;
+    [SerializeField] private string tr;
 
     private TMP_Text _text;
 
@@ -35,6 +36,11 @@ public class InternationalText : MonoBehaviour
         else if (_language.CurrentLanguage == "ru")
         {
             _text.text = ru;
+        }
+
+        else if (_language.CurrentLanguage == "tr")
+        {
+            _text.text = tr;
         }
 
         else
