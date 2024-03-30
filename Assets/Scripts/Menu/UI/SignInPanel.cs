@@ -8,7 +8,9 @@ public class SignInPanel : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_WEBGL
         CheckAuthorized();
+#endif
     }
 
     public void SetActiveGameObject()

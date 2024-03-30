@@ -97,7 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLevel: 1
   LastAdvShowTime: 0
-  NumSwitchedLevelsAfterAdvWasShown: 0
 --- !u!114 &8941513991314803697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,4 +134,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840b5d420c3278547af6134318758e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Platform: desktop
+  Platform: mobile

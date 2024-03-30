@@ -52,7 +52,6 @@ public class GameData : MonoBehaviour
     private bool _muteSound = false;
 
     public float LastAdvShowTime = 0f;
-    public int NumSwitchedLevelsAfterAdvWasShown = 0;
 
     [Inject]
     private Settings _settings;

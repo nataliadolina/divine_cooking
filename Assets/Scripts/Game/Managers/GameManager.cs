@@ -106,16 +106,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 #if UNITY_WEBGL
-        if (Time.time - gameData.LastAdvShowTime > 60f && gameData.NumSwitchedLevelsAfterAdvWasShown >= 1)
+        if (Time.time - gameData.LastAdvShowTime > 60f)
         {
             gameData.LastAdvShowTime = Time.time;
-            gameData.NumSwitchedLevelsAfterAdvWasShown = 0;
             soundManager.PauseMusic();
             ShowAdv();
         }
         else
         {
-            gameData.NumSwitchedLevelsAfterAdvWasShown++;
             StartCoroutine(WaitToSpawnNewPrefab());
         }
 #endif

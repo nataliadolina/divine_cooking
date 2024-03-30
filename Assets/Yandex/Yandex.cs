@@ -8,6 +8,8 @@ public class Yandex : MonoBehaviour
 
     public void RateGameButton()
     {
+#if UNITY_WEBGL
         RateGame();
+#endif
     }
 }

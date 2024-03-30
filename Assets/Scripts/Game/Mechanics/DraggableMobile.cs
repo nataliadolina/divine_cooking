@@ -16,7 +16,6 @@ public class DraggableMobile : MonoBehaviour, IDraggable
     private DragType _dragType;
     private RectangleZone _dragZone;
 
-    [Inject]
     private MobileTouchManager _mobileTouchManager;
 
     private List<int> _touchIndexShouldMove = new List<int>();
@@ -24,9 +23,9 @@ public class DraggableMobile : MonoBehaviour, IDraggable
     public DragType DragType { set => _dragType = value; }
     public RectangleZone DragZone { set => _dragZone = value; }
     public RectangleZone DragTriggerZone { set => _dragTriggerZone = value; }
+    public MobileTouchManager MobileTouchManager { set => _mobileTouchManager = value; }
 
-    [Inject]
-    private void Construct()
+    private void Start()
     {
         _mobileTouchManager.onMovedFinger += MoveToPosition;
         _mobileTouchManager.oneEndedFingerTouch += RemoveFingerId;
