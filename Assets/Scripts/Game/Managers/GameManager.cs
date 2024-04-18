@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private int _numStars = 0;
     private int _numFoodTotal = 0;
     private float _numFoodReleased = 0;
+    private bool _isPaused = false;
     public float AddNumFoodReleased
     { 
         set 
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
             _numFoodReleased+=value;
         }
     }
+
+    public bool IsSpawnActorsCoroutinePaused { get => _isPaused; set => _isPaused = value; }
 
     [Inject]
     private void Construct(ActorPoolFactory actorPoolFactory, UIManager uiManager, TotalScoreSlider totalScore, Food.FoodSettings[] foodSettings)
@@ -104,13 +107,21 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitToStartTime);
         foreach (var actorWaitTime in actorsSpawnerWaitTimeMap)
         {
-            ActorType actorType = actorWaitTime.ActorType;
-            ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
-            Vector3 spawnPosition = _spawnPositionsMap[actorWaitTime.SpawnSpotType];
-            _spawnersMap[actorGroupType].Spawn(actorType, spawnPosition);
-            float waitTime = actorWaitTime.WaitTimeSeconds;
+            if (!_isPaused)
+            {
+                ActorType actorType = actorWaitTime.ActorType;
+                ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
+                Vector3 spawnPosition = _spawnPositionsMap[actorWaitTime.SpawnSpotType];
+                _spawnersMap[actorGroupType].Spawn(actorType, spawnPosition);
+                float waitTime = actorWaitTime.WaitTimeSeconds;
 
-            yield return new WaitForSeconds(waitTime);
+                yield return new WaitForSeconds(waitTime);
+            }
+            
+            else
+            {
+                yield return new WaitUntil(() => !_isPaused);
+            }
         }
     }
 

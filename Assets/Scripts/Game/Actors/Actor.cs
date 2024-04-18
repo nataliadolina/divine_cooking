@@ -12,6 +12,7 @@ public enum PhysicsType
     Transperant = 2,
     Realistic = 4,
     FreezeRotation = 8,
+    Empty = 16,
 }
 
 public abstract class Actor : MonoBehaviour, IActor
