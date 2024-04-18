@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35346abbd1f0ee342908f88b9d63031e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLanguage: 
+  CurrentLanguage: en
 --- !u!114 &2148286471666655144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840b5d420c3278547af6134318758e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Platform: mobile
+  Platform: desktop
 --- !u!114 &3190461488290861833
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,8 +6,7 @@ public class Device : MonoBehaviour
     [DllImport("__Internal")]
     private static extern string GetPlatform();
 
-    [HideInInspector]
-    public string Platform = "mobile";
+    public string Platform = "desktop";
 
     private void Start()
     {
