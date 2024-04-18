@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 83c8f071824723147930077876beecfc, type: 2}
-  - {fileID: 11400000, guid: 082152d3f8bffee489ba5da347d0471d, type: 2}
+  - {fileID: 11400000, guid: ca5b7f56064df444e969eb7f59504312, type: 2}
   _monoInstallers:
   - {fileID: 1564046841}
   _installerPrefabs: []
@@ -2756,70 +2756,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1765531445
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2452189323666985827, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-  m_PrefabInstance: {fileID: 1945266896}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1765531448}
-  - component: {fileID: 1765531447}
-  - component: {fileID: 1765531446}
-  m_Layer: 0
-  m_Name: MobileTouchManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1765531446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6100216693837003371, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-  m_PrefabInstance: {fileID: 1945266896}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765531445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 1765531447}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 0
---- !u!114 &1765531447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1369229167690372516, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-  m_PrefabInstance: {fileID: 1945266896}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765531445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 448aa089804ce4b4e84663673f96e6e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movedFingerFlag: 0
---- !u!4 &1765531448
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-  m_PrefabInstance: {fileID: 1945266896}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765531445}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 658.1595, y: 244.59697, z: 14.225577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3242,63 +3178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8088fccef852e3641ba38aa961c3523b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1945266896
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 658.1595
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 244.59697
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.225577
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2091002549819897901, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2452189323666985827, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
-      propertyPath: m_Name
-      value: MobileTouchManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f5c77eb5acfac64458565f6bb4a7b750, type: 3}
 --- !u!114 &2105336394 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 630158162078974302, guid: 4e69fd77795e8a244904421fb9a4a20b, type: 3}
@@ -3482,4 +3361,3 @@ SceneRoots:
   - {fileID: 1014106758}
   - {fileID: 1157419584}
   - {fileID: 1423971181}
-  - {fileID: 1945266896}
