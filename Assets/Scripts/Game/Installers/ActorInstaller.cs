@@ -23,6 +23,10 @@ public class ActorInstaller : MonoInstaller
         Container.BindFactory<ActorFreezeRotationPhysics, ActorFreezeRotationPhysics.Factory>()
             .AsCached()
             .NonLazy();
+        Container.BindFactory<ActorEmptyPhysics, ActorEmptyPhysics.Factory>()
+            .AsCached()
+            .NonLazy();
+
         Container.Bind<ActorPhysicsFactory>().AsSingle().NonLazy();
     }
 }

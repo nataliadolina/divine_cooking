@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 using Zenject;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 [Serializable]
 public struct ActorSpawnerWaitTime
@@ -23,9 +22,6 @@ public struct ActorSpawnerWaitTime
 
 public class GameManager : MonoBehaviour
 {
-    [DllImport("__Internal")]
-    private static extern void ShowAdv();
-
     [SerializeField]
     private float waitToStartTime;
 
@@ -35,11 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SpawnSpotTypeMap[] spawnSpots;
 
-    [Inject]
-    private GameData gameData;
-
-    [Inject]
-    private SoundManager soundManager;
+    private Queue<ActorSpawnerWaitTime> _actorsSpawnerWaitTimeQueue = new Queue<ActorSpawnerWaitTime>();
 
     private Dictionary<SpawnSpotType, Vector3> _spawnPositionsMap = new Dictionary<SpawnSpotType, Vector3>();
     private Dictionary<ActorGroupType, IActorPoolSpawner> _spawnersMap = new Dictionary<ActorGroupType, IActorPoolSpawner>();
@@ -50,6 +42,7 @@ public class GameManager : MonoBehaviour
     private int _numStars = 0;
     private int _numFoodTotal = 0;
     private float _numFoodReleased = 0;
+    private bool _isPaused = false;
     public float AddNumFoodReleased
     { 
         set 
@@ -62,6 +55,8 @@ public class GameManager : MonoBehaviour
             _numFoodReleased+=value;
         }
     }
+
+    public bool IsSpawnActorsCoroutinePaused { get => _isPaused; set => _isPaused = value; }
 
     [Inject]
     private void Construct(ActorPoolFactory actorPoolFactory, UIManager uiManager, TotalScoreSlider totalScore, Food.FoodSettings[] foodSettings)
@@ -83,6 +78,7 @@ public class GameManager : MonoBehaviour
 
         foreach (ActorSpawnerWaitTime actorSpawnerWaitTime in actorsSpawnerWaitTimeMap)
         {
+            _actorsSpawnerWaitTimeQueue.Enqueue(actorSpawnerWaitTime);
             ActorType actorType = actorSpawnerWaitTime.ActorType;
             
             ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
@@ -105,25 +101,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_WEBGL
-        if (Time.time - gameData.LastAdvShowTime > 60f)
-        {
-            gameData.LastAdvShowTime = Time.time;
-            soundManager.PauseMusic();
-            ShowAdv();
-        }
-        else
-        {
-            StartCoroutine(WaitToSpawnNewPrefab());
-        }
-#endif
-#if UNITY_EDITOR
-        StartCoroutine(WaitToSpawnNewPrefab());
-#endif
-    }
-
-    public void StartGame()
-    {
         StartCoroutine(WaitToSpawnNewPrefab());
     }
 
@@ -131,15 +108,24 @@ public class GameManager : MonoBehaviour
     {
         _uiManager.ChangeGroupType(UIGroupType.Play);
         yield return new WaitForSeconds(waitToStartTime);
-        foreach (var actorWaitTime in actorsSpawnerWaitTimeMap)
+        while (_actorsSpawnerWaitTimeQueue.Count() > 0)
         {
-            ActorType actorType = actorWaitTime.ActorType;
-            ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
-            Vector3 spawnPosition = _spawnPositionsMap[actorWaitTime.SpawnSpotType];
-            _spawnersMap[actorGroupType].Spawn(actorType, spawnPosition);
-            float waitTime = actorWaitTime.WaitTimeSeconds;
+            if (!_isPaused)
+            {
+                var actorWaitTime = _actorsSpawnerWaitTimeQueue.Dequeue();
+                ActorType actorType = actorWaitTime.ActorType;
+                ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
+                Vector3 spawnPosition = _spawnPositionsMap[actorWaitTime.SpawnSpotType];
+                _spawnersMap[actorGroupType].Spawn(actorType, spawnPosition);
+                float waitTime = actorWaitTime.WaitTimeSeconds;
 
-            yield return new WaitForSeconds(waitTime);
+                yield return new WaitForSeconds(waitTime);
+            }
+
+            else
+            {
+                yield return new WaitUntil(() => !_isPaused);
+            }
         }
     }
 

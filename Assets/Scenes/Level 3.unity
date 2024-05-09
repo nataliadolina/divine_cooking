@@ -5219,6 +5219,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4675656256848840764, guid: 0e571ba3d39a4c541bcb1eeb72589d0a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.180054
+      objectReference: {fileID: 0}
     - target: {fileID: 5285963230999824124, guid: 0e571ba3d39a4c541bcb1eeb72589d0a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13517,12 +13521,24 @@ PrefabInstance:
       value: DraggableShieldVertical
       objectReference: {fileID: 0}
     - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5330515
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5330515
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5330515
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.21
+      value: 5.0227
       objectReference: {fileID: 0}
     - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.94
+      value: -6.9700003
       objectReference: {fileID: 0}
     - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13560,6 +13576,22 @@ PrefabInstance:
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 1206985403}
+    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Size.x
+      value: 5.725997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Size.y
+      value: 5.4444113
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Offset.x
+      value: -1.494555
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Offset.y
+      value: 2.6677947
+      objectReference: {fileID: 0}
     - target: {fileID: 9210591214721468966, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: dragZone
       value: 

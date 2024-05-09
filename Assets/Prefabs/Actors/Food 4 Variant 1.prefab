@@ -5,12 +5,23 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 823412118147059299, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: m_Name
       value: Food 4 Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1105748791777404460, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3595442972805487288, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3595442972805487288, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3867265628602193801, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: _scriptableObjectInstallers.Array.data[0]
@@ -23,6 +34,22 @@ PrefabInstance:
     - target: {fileID: 5003834876883302751, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: actorType
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685764414507606887, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685764414507606887, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685764414507606887, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685764414507606887, guid: 2e8164035c01b8045ac925b228636767, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5992876100018110353, guid: 2e8164035c01b8045ac925b228636767, type: 3}
       propertyPath: foodType
@@ -113,7 +140,4 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e8164035c01b8045ac925b228636767, type: 3}

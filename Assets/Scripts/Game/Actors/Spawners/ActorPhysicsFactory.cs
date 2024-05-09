@@ -9,18 +9,22 @@ public class ActorPhysicsFactory
     private ActorTransparentPhysics.Factory _transperantFactory;
     private ActorRealisticPhysics.Factory _realisticFactory;
     private ActorFreezeRotationPhysics.Factory _freezeRotationFactory;
+    private ActorEmptyPhysics.Factory _actorEmptyPhysicsFactory;
+
 
     public ActorPhysicsFactory(
         ActorSpringyPhysics.Factory springyFactory,
         ActorTransparentPhysics.Factory transperantFactory,
         ActorRealisticPhysics.Factory realisticFactory,
-        ActorFreezeRotationPhysics.Factory freezeRotationFactory
+        ActorFreezeRotationPhysics.Factory freezeRotationFactory,
+        ActorEmptyPhysics.Factory actorEmptyPhysicsFactory
         )
     {
         _springyFactory = springyFactory;
         _transperantFactory = transperantFactory;
         _realisticFactory = realisticFactory;
         _freezeRotationFactory = freezeRotationFactory;
+        _actorEmptyPhysicsFactory = actorEmptyPhysicsFactory;
     }
 
     public IActorPhysics CreatePhysics(PhysicsType type)
@@ -36,6 +40,8 @@ public class ActorPhysicsFactory
                 return _realisticFactory.Create();
             case PhysicsType.FreezeRotation:
                 return _freezeRotationFactory.Create();
+            case PhysicsType.Empty:
+                return _actorEmptyPhysicsFactory.Create();
         }
 
         throw Assert.CreateException();

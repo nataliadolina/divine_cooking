@@ -268,7 +268,8 @@ PrefabInstance:
       propertyPath: dragType
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1129659701580943654, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5059183612096657775, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
     m_AddedGameObjects:
@@ -279,7 +280,46 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6158271316257017265, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2242365185630833304}
+    - targetCorrespondingSourceObject: {fileID: 7659659855884692699, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 210343178989030198}
   m_SourcePrefab: {fileID: 100100000, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+--- !u!1 &2992444506794237905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1646398329977531898, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+  m_PrefabInstance: {fileID: 4566195797092299307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4651361940753348621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9210591214721468966, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+  m_PrefabInstance: {fileID: 4566195797092299307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7649629774686158746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec23fe0ea5b7f14783bc32560bde8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6130233536659250928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7659659855884692699, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+  m_PrefabInstance: {fileID: 4566195797092299307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &210343178989030198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130233536659250928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f7a4a38be4cde439c93321ee4f01bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  draggable: {fileID: 4651361940753348621}
+  minArror: {fileID: 1960816999393033413}
+  maxArror: {fileID: 2992444506794237905}
 --- !u!1 &7649629774686158746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6158271316257017265, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
@@ -298,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toType: 1
-  changeTypeOnlyOnce: 1
+  changeTypeOnlyOnce: 0
   changeTypeOnlyForFood: 0
 --- !u!4 &8579246230409463640 stripped
 Transform:

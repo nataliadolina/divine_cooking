@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: foodType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1400454877581325329, guid: e4191f7cfaf7fa84a9525424221eec8c, type: 3}
+      propertyPath: cookingActions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1926318473242390814, guid: e4191f7cfaf7fa84a9525424221eec8c, type: 3}
       propertyPath: m_Value
       value: 0

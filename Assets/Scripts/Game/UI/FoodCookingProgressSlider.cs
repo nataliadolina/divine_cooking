@@ -22,19 +22,6 @@ public class FoodCookingProgressSlider : MonoBehaviour
     [SerializeField]
     private Slider failureSlider;
 
-    [SerializeField]
-    private GameObject[] cookingActions;
-
-    private Dictionary<int, GameObject> _currentInstructions;
-
-    private void Start()
-    {
-        for (int i = 0; i < cookingActions.Length; i++)
-        {
-            _currentInstructions.Add(i, cookingActions[i]);
-        }
-    }
-
     public void Init(float maxScore)
     {
         successSlider.maxValue = maxScore;

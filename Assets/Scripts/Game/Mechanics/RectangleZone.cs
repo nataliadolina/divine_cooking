@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class RectangleZone : MonoBehaviour
 {
+    public event Action onLimitsCalculated;
     [SerializeField]
     private float xLimitOffset;
     [SerializeField]
@@ -14,6 +16,11 @@ public class RectangleZone : MonoBehaviour
     private float _minY;
     private float _maxY;
 
+    public float MinX => _minX;
+    public float MaxX => _maxX;
+    public float MinY => _minY;
+    public float MaxY => _maxY;
+
     private void Start()
     {
         Vector3 position = transform.position;
@@ -21,6 +28,8 @@ public class RectangleZone : MonoBehaviour
         _maxX = position.x + xLimitOffset;
         _minY = position.y - yLimitOffset;
         _maxY = position.y + yLimitOffset;
+
+        onLimitsCalculated?.Invoke();
     }
 
     private Vector2 GetUpLeft()
