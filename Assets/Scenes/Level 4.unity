@@ -593,6 +593,11 @@ PrefabInstance:
       addedObject: {fileID: 1012583734}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8da176282900f3141b3ef354ee820ce8, type: 3}
+--- !u!1 &532733387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1960816999393033413, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+  m_PrefabInstance: {fileID: 1162677113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &536804745
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.54999995
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalPosition.y
@@ -956,8 +961,8 @@ PrefabInstance:
       value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5892981025552121850, guid: 9faf4c29b0742324787689a88de09849, type: 3}
-    - {fileID: 5805159345544477035, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects:
     - {fileID: 8749287167503551300, guid: 9faf4c29b0742324787689a88de09849, type: 3}
     m_AddedGameObjects: []
@@ -1603,6 +1608,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 210343178989030198, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: maxArror
+      value: 
+      objectReference: {fileID: 532733387}
+    - target: {fileID: 210343178989030198, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: minArror
+      value: 
+      objectReference: {fileID: 1319500015}
     - target: {fileID: 2242365185630833304, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: changeTypeOnlyOnce
       value: 1
@@ -1617,7 +1630,7 @@ PrefabInstance:
       objectReference: {fileID: 1211594788}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.09
+      value: 2.31
       objectReference: {fileID: 0}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1848,6 +1861,11 @@ MonoBehaviour:
   ReferenceResolution: {x: 1080, y: 2400}
   Mode: 3
   MatchWidthOrHeight: 0.5
+--- !u!1 &1319500015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2992444506794237905, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+  m_PrefabInstance: {fileID: 1162677113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1355093976
 PrefabInstance:
   m_ObjectHideFlags: 0

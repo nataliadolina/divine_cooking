@@ -10,12 +10,17 @@ public enum DragType
 
 public class Draggable : MonoBehaviour
 {
+    public event Action onDrag;
+
     [SerializeField]
     private DragType dragType;
     [SerializeField]
     private RectangleZone dragZone;
 
     private Vector3 offset;
+
+    public RectangleZone DragZone => dragZone;
+    public DragType DragType => dragType;
 
     void OnMouseDown()
     {
@@ -46,5 +51,7 @@ public class Draggable : MonoBehaviour
         {
             transform.position = newPosition;
         }
+
+        onDrag?.Invoke();
     }
 }

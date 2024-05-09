@@ -1,10 +1,12 @@
-using System.Collections;
+using System;
 using UnityEngine;
 using DG.Tweening;
 using Zenject;
 
 public class SliceZone : MonoBehaviour
 {
+    public event Action onSlice;
+
     [SerializeField]
     private Transform gearWheel;
     [SerializeField]
@@ -49,6 +51,8 @@ public class SliceZone : MonoBehaviour
         {
             if (_rectZone.IsPositionInsideZone(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
             {
+                onSlice?.Invoke();
+
                 _soundManager.PlaySwordSound();
                 _rotateTween.Rewind();
                 _rotateTween.Play();

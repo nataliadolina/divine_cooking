@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class PauseSpawningActorsProcessTrigger : MonoBehaviour
 {
+    [SerializeField] private int numTriggersBeforeDestroy;
+
+    private int _currentNumTriggers = 0;
+
     [Inject]
     private GameManager _gameManager;
 
@@ -13,7 +15,12 @@ public class PauseSpawningActorsProcessTrigger : MonoBehaviour
         if (other.GetComponent<Actor>())
         {
             _gameManager.IsSpawnActorsCoroutinePaused = true;
-            Destroy(gameObject);
+            
+            if (_currentNumTriggers == numTriggersBeforeDestroy)
+            {
+                Destroy(gameObject);
+            }
+            _currentNumTriggers++;
         }
     }
 }

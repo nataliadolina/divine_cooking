@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SpawnSpotTypeMap[] spawnSpots;
 
+    private Queue<ActorSpawnerWaitTime> _actorsSpawnerWaitTimeQueue = new Queue<ActorSpawnerWaitTime>();
+
     private Dictionary<SpawnSpotType, Vector3> _spawnPositionsMap = new Dictionary<SpawnSpotType, Vector3>();
     private Dictionary<ActorGroupType, IActorPoolSpawner> _spawnersMap = new Dictionary<ActorGroupType, IActorPoolSpawner>();
 
@@ -76,6 +78,7 @@ public class GameManager : MonoBehaviour
 
         foreach (ActorSpawnerWaitTime actorSpawnerWaitTime in actorsSpawnerWaitTimeMap)
         {
+            _actorsSpawnerWaitTimeQueue.Enqueue(actorSpawnerWaitTime);
             ActorType actorType = actorSpawnerWaitTime.ActorType;
             
             ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
@@ -105,10 +108,11 @@ public class GameManager : MonoBehaviour
     {
         _uiManager.ChangeGroupType(UIGroupType.Play);
         yield return new WaitForSeconds(waitToStartTime);
-        foreach (var actorWaitTime in actorsSpawnerWaitTimeMap)
+        while (_actorsSpawnerWaitTimeQueue.Count() > 0)
         {
             if (!_isPaused)
             {
+                var actorWaitTime = _actorsSpawnerWaitTimeQueue.Dequeue();
                 ActorType actorType = actorWaitTime.ActorType;
                 ActorGroupType actorGroupType = actorType != ActorType.Bomb ? ActorGroupType.Food : ActorGroupType.Bomb;
                 Vector3 spawnPosition = _spawnPositionsMap[actorWaitTime.SpawnSpotType];
@@ -117,7 +121,7 @@ public class GameManager : MonoBehaviour
 
                 yield return new WaitForSeconds(waitTime);
             }
-            
+
             else
             {
                 yield return new WaitUntil(() => !_isPaused);
