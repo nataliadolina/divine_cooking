@@ -18,4 +18,5 @@ public interface IActor
     public void ChangePhysics(PhysicsType physics);
     public int RootInstanceId { get; }
     public float PartOfOne { get; }
+    public bool IsBlocked { get; set; }
 }

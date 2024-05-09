@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2796138088560871873}
   - component: {fileID: 4102399800217987256}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5677502502161467480}
   - component: {fileID: 342573924066550813}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arrow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 8695115484955815432}
   - component: {fileID: 1018515640310485121}
   - component: {fileID: 7728844573561495223}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DraggableShieldVertical
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5211219058434454899}
   - component: {fileID: 1129659701580943654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f7a4a38be4cde439c93321ee4f01bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  draggable: {fileID: 9210591214721468966}
+  draggableManager: {fileID: 0}
   minArror: {fileID: 5059183612096657775}
   maxArror: {fileID: 1646398329977531898}
 --- !u!1 &8687940278005949812
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7040012377219178722}
   - component: {fileID: 7528572063371257305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cloud3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,6 +427,10 @@ PrefabInstance:
       value: RicochetShield
       objectReference: {fileID: 0}
     - target: {fileID: 1416248125534315117, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416248125534315117, guid: 6db76ab4907df4743b2e9733c1dd586a, type: 3}
       propertyPath: m_TagString
       value: Shield
       objectReference: {fileID: 0}
@@ -501,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 5335605634949119892, guid: 4e69fd77795e8a244904421fb9a4a20b, type: 3}
       propertyPath: m_Name
       value: RectangleZone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335605634949119892, guid: 4e69fd77795e8a244904421fb9a4a20b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5722148645066265784, guid: 4e69fd77795e8a244904421fb9a4a20b, type: 3}
       propertyPath: m_LocalScale.x

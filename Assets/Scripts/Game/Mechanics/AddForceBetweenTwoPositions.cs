@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AddForceBetweenTwoPositions : MonoBehaviour
@@ -18,6 +16,11 @@ public class AddForceBetweenTwoPositions : MonoBehaviour
         IActor actor;
         if (collision.TryGetComponent(out actor))
         {
+            if (actor.IsBlocked)
+            {
+                return;
+            }
+            
             if (targetType == 0)
             {
                 foreach (var physics in actor.CurrentActorPhysics)

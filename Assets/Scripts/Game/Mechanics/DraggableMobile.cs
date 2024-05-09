@@ -12,6 +12,8 @@ public enum DragType
 
 public class DraggableMobile : MonoBehaviour, IDraggable
 {
+    public event Action onDrag;
+    
     private RectangleZone _dragTriggerZone;
     private DragType _dragType;
     private RectangleZone _dragZone;
@@ -19,7 +21,7 @@ public class DraggableMobile : MonoBehaviour, IDraggable
     private MobileTouchManager _mobileTouchManager;
 
     private List<int> _touchIndexShouldMove = new List<int>();
-
+    
     public DragType DragType { set => _dragType = value; }
     public RectangleZone DragZone { set => _dragZone = value; }
     public RectangleZone DragTriggerZone { set => _dragTriggerZone = value; }
@@ -57,6 +59,7 @@ public class DraggableMobile : MonoBehaviour, IDraggable
         }
 
         transform.position = newPosition;
+        onDrag?.Invoke();
     }
 
     private void MoveToPosition(Dictionary<int, MoveTouchArgs> positions)

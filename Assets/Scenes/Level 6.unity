@@ -1172,6 +1172,7 @@ GameObject:
   - component: {fileID: 960991517}
   - component: {fileID: 960991521}
   - component: {fileID: 960991520}
+  - component: {fileID: 960991522}
   m_Layer: 0
   m_Name: Colomn7
   m_TagString: Untagged
@@ -1333,6 +1334,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8236734, y: 11.371555}
   m_EdgeRadius: 0
+--- !u!114 &960991522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960991516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007ff3f80a1075440b15ed41911668ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &962171182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1636,6 +1649,7 @@ GameObject:
   - component: {fileID: 1149571273}
   - component: {fileID: 1149571277}
   - component: {fileID: 1149571276}
+  - component: {fileID: 1149571278}
   m_Layer: 0
   m_Name: Colomn8
   m_TagString: Untagged
@@ -1797,6 +1811,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5053723, y: 8.636574}
   m_EdgeRadius: 0
+--- !u!114 &1149571278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149571272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007ff3f80a1075440b15ed41911668ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1157419584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1874,6 +1900,18 @@ PrefabInstance:
       propertyPath: minArror
       value: 
       objectReference: {fileID: 967919606}
+    - target: {fileID: 210343178989030198, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: draggableManager
+      value: 
+      objectReference: {fileID: 1280934497}
+    - target: {fileID: 1959516143560170665, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960816999393033413, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2242365185630833304, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: changeTypeOnlyOnce
       value: 1
@@ -1882,18 +1920,34 @@ PrefabInstance:
       propertyPath: changeTypeOnlyForFood
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2992444506794237905, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3565756299821163178, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: aimTransform
       value: 
       objectReference: {fileID: 1517114737}
+    - target: {fileID: 4600405181234887553, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4651361940753348621, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 1935974877}
+    - target: {fileID: 5174531812596848479, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6060787173903821980, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 1935974877}
+    - target: {fileID: 6130233536659250928, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7193513689185356457, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1949,6 +2003,10 @@ PrefabInstance:
     - target: {fileID: 7649629774686158746, guid: 9faf4c29b0742324787689a88de09849, type: 3}
       propertyPath: m_Name
       value: DraggableShieldHorizontal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649629774686158746, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2091,6 +2149,17 @@ Transform:
   - {fileID: 1373709886}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1280934497 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6060787173903821980, guid: 9faf4c29b0742324787689a88de09849, type: 3}
+  m_PrefabInstance: {fileID: 1162677113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0eef8a35140cb040a4784912a8e633a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299484705
 GameObject:
   m_ObjectHideFlags: 0

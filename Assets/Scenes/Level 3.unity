@@ -13512,13 +13512,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 38719031771810218, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1018515640310485121, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: aimTransform
       value: 
       objectReference: {fileID: 1334104447}
+    - target: {fileID: 1646398329977531898, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625593559928893058, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059183612096657775, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6158271316257017265, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_Name
       value: DraggableShieldVertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158271316257017265, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6668173483326634114, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_LocalScale.x
@@ -13572,10 +13592,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7659659855884692699, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7728844573561495223, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: dragZone
       value: 
       objectReference: {fileID: 1206985403}
+    - target: {fileID: 8687940278005949812, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8695115484955815432, guid: fb10a03f6ff3be5459c84e74e2ead51b, type: 3}
       propertyPath: m_Size.x
       value: 5.725997

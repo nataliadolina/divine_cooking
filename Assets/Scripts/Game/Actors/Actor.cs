@@ -39,7 +39,7 @@ public abstract class Actor : MonoBehaviour, IActor
     private ActorPhysicsFactory _actorPhysicsFactory;
 
     protected float _partOfOne = 1;
-
+    protected bool _isBlocked = false;
     public ActorType ActorType { get => actorType; }
     public Rigidbody2D Rigidbody { get => _rigidbody; set => _rigidbody = value; }
     public Transform Transform => transform;
@@ -56,6 +56,18 @@ public abstract class Actor : MonoBehaviour, IActor
 
     public List<UnityEngine.Object> Ricochets { get => _ricochets; }
 
+    public bool IsBlocked {
+        get
+        {
+            return _isBlocked;
+        }
+        set
+        {
+            _isBlocked = value;
+        }
+    }
+    
+    
     private float _scale = 1;
 
     protected PhysicsType _initialPhysicsType;

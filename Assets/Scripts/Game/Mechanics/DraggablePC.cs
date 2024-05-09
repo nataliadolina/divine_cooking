@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class DraggablePC : MonoBehaviour, IDraggable
 {
+    public event Action onDrag;
+    
     private DragType _dragType;
     private RectangleZone _dragZone;
     private RectangleZone _dragTriggerZone;
@@ -43,5 +44,7 @@ public class DraggablePC : MonoBehaviour, IDraggable
         {
             transform.position = newPosition;
         }
+        
+        onDrag?.Invoke();
     }
 }
